@@ -2,6 +2,14 @@
 
 include_once "db.php";
 
+session_start();
+
+if (isset($_POST["logout"])) {
+    session_destroy();
+    header("Location: appdev.php");
+    exit();
+}
+
 print"
 Task Management System</br>
 <hr></hr>

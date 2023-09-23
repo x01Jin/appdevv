@@ -111,6 +111,9 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 <body>
     <header>
         <h1>Admin Dashboard</h1>
+        <form method="POST" action="appdev.php">
+            <button type="submit" name="logout">Logout</button>
+        </form>
     </header>
     <nav>
         <ul>
