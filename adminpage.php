@@ -64,15 +64,15 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }
 
         header {
-            background-color: rgba(51, 51, 51, 0.8);
-            color: #fff;
+            background-color: rgba(51, 51, 51, 0.5);
+            color: white;
             text-align: center;
             padding: 20px;
         }
 
         nav {
-            background-color: rgba(68, 68, 68, 0.8);
-            color: #fff;
+            background-color: rgba(20, 20, 20, 0.8);
+            color: white;
             padding: 10px;
         }
 
@@ -126,9 +126,10 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     </header>
     <nav>
         <ul>
-            <li><a href="#deploy">Deploy Task</a></li>
-            <li><a href="#employee-list">Employee List</a></li>
-            <li><a href="#task-list">Task List</a></li>
+            <li><a href="#deploy" style="color:white;">Deploy Task</a></li>
+            <li><a href="#employee-list" style="color:white;">Employee List</a></li>
+            <li><a href="#task-list" style="color:white;">Task List</a></li>
+            <li><a href="#add-employee" style="color:white;">Add Employee</a></li>
         </ul>
     </nav>
     <main>
