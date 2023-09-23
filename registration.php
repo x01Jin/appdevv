@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(2, $email, PDO::PARAM_STR);
         $stmt->bindParam(3, $hashedPassword, PDO::PARAM_STR);
         $stmt->bindParam(4, $role, PDO::PARAM_STR);
-        
+
         if ($stmt->execute()) {
             header("Location: appdev.php");
             exit();
@@ -97,4 +97,3 @@ body {
 }
 </style>
 ";
-?>
