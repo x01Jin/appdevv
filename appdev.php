@@ -21,19 +21,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION["user_id"] = $user["id"];
         $_SESSION["username"] = $user["username"];
-        $_SESSION["user_role"] = $user["role"]; // Store the user's role in the session
+        $_SESSION["user_role"] = $user["role"];
 
         if ($user["role"] == "admin") {
-            // Redirect to the admin dashboard
             header("Location: admindashboard.php");
             exit();
         } else {
-            // Redirect to the employee dashboard
             header("Location: employeedashboard.php");
             exit();
         }
     } else {
-        // Invalid credentials, display an error message
         $error_message = "Invalid username or password. Please try again.";
     }
 }
