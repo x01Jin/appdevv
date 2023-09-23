@@ -10,10 +10,9 @@ if (isset($_POST["logout"])) {
     exit();
 }
 
-print"
-Task Management System</br>
+echo '<span style="color: white;"><b>Task Management System</b></span></br>
 <hr></hr>
-</br>";
+</br></br></br></br></br></br></br></br></br>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
@@ -58,13 +57,13 @@ echo '<h1>Login</h1>
     <button type="submit">Log In</button>
 </form>';
 
-echo '<a href="registration.php">No Account? Register</br>';
+echo '<a href="registration.php" style="color:white;"><b>No Account? Register</b></br>';
 
 print"
 <style>
 
 body {
-    background-image: url('assets/vergil-grin.jpg');
+    background-image: url('assets/login.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
