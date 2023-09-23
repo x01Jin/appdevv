@@ -1,5 +1,7 @@
 # appdevv
 
+move this folder to htdocs first...
+
 Database structure
 
 MariaDB [appdevdb]> SHOW CREATE TABLE users
