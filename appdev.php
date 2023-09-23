@@ -24,10 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["user_role"] = $user["role"];
 
         if ($user["role"] == "admin") {
-            header("Location: admindashboard.php");
+            header("Location: adminpage.php");
             exit();
         } else {
-            header("Location: employeedashboard.php");
+            header("Location: employeepage.php");
             exit();
         }
     } else {
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 echo '<h1>Login</h1>
-<form action="login.php" method="POST">
+<form action="appdev.php" method="POST">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
     </br></br>
