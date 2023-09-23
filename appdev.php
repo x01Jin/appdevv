@@ -22,7 +22,7 @@ print"
 <style>
 
 body {
-    background-image: url('https://media.tenor.com/f3wDhPtHfEoAAAAC/vergil-grin.gif');
+    background-image: url('assets/vergil-grin.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
