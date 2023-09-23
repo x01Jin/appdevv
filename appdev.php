@@ -5,7 +5,18 @@ Task Management System</br>
 <hr></hr>
 </br>";
 
-echo '<a href="registration.html">Register<>';
+echo '<h1>Login</h1>
+<form action="login.php" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+    </br></br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    </br></br>
+    <button type="submit">Log In</button>
+</form>';
+
+echo '<a href="registration.php">No Account? Register</br>';
 
 print"
 <style>
