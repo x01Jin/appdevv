@@ -3,8 +3,9 @@
 print"
 Task Management System</br>
 <hr></hr>
+</br>";
 
-";
+echo"<a href="registration.html">Register<>";
 
 print"
 <style>
@@ -53,3 +54,5 @@ footer {
 
 </style>
 ";
+
+?>
