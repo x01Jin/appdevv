@@ -34,19 +34,35 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     <title>Admin Page</title>
     <style>
         body {
+            background-image: url('assets/vergil-grin.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
             font-family: Arial, sans-serif;
             text-align: center;
+            color: #fff;
+        }
+
+        table {
+            margin: 0 auto;
+        }
+
+        table th {
+            color: #fff;
+        }
+
+        table td {
+            color: #fff;
         }
 
         header {
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.8);
             color: #fff;
             text-align: center;
             padding: 20px;
         }
 
         nav {
-            background-color: #444;
+            background-color: rgba(68, 68, 68, 0.8);
             color: #fff;
             padding: 10px;
         }
@@ -57,7 +73,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }
 
         nav ul li {
-            display: inline;
+            display: inline-block;
             margin-right: 20px;
         }
 
@@ -66,7 +82,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }
 
         footer {
-            background-color: #333;
+            background-color: rgba(51, 51, 51, 0.8);
             color: #fff;
             text-align: center;
             padding: 10px;
@@ -75,16 +91,17 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         .task-preview {
             display: none;
             position: absolute;
-            background-color: #f9f9f9;
+            background-color: rgba(249, 249, 249, 0.8);
             border: 1px solid #ccc;
             padding: 10px;
             z-index: 1;
+            color: black;
         }
 
         .calendar-popup {
             display: none;
             position: absolute;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #ccc;
             padding: 10px;
             z-index: 1;
@@ -104,26 +121,26 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     </nav>
     <main>
         <section id="deploy">
-            <h2>Deploy Task</h2>
+        <hr></hr><h2>Deploy Task</h2><hr></hr>
             <form method="POST" action="adminpage.php">
                 <label for="task_description">Task Description:</label>
-                <input type="text" id="task_description" name="task_description" required>
+                <input type="text" id="task_description" name="task_description" required></br></br>
                 <label for="employee_id">Assign to Employee:</label>
-                <select id="employee_id" name="employee_id" required>
+                <select id="employee_id" name="employee_id" required></br></br>
                     <?php foreach ($employees as $employee): ?>
                         <option value="<?php echo $employee['id']; ?>"><?php echo $employee['username']; ?></option>
                     <?php endforeach; ?>
-                </select>
+                </select></br></br>
                 <label for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" required>
+                <input type="date" id="start_date" name="start_date" required></br></br>
                 <label for="deadline">Deadline:</label>
-                <input type="date" id="deadline" name="deadline" required>
+                <input type="date" id="deadline" name="deadline" required></br></br>
                 <button type="submit" name="deploy_task">Deploy Task</button>
             </form>
         </section>
 
         <section id="employee-list">
-            <h2>Employee List</h2>
+        <hr></hr><h2>Employee List</h2><hr></hr>
             <table border="1">
             <caption>List of employees</caption>
                 <tr>
@@ -140,7 +157,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         </section>
 
         <section id="task-list">
-            <h2>Task List</h2>
+        <hr></hr><h2>Task List</h2><hr></hr>
             <table border="1">
                 <caption>List of tasks</caption>
                 <tr>
@@ -184,10 +201,16 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             var deadline = $(this).data("deadline");
             var taskDescription = $(this).find("td:eq(1)").text();
             var taskPreview = "Task: " + taskDescription + "<br>Start Date: " + startDate + "<br>Deadline: " + deadline;
-            
+
+            var elementPosition = $(this).offset();
+            var elementHeight = $(this).height();
+
+            var popupTop = elementPosition.top - elementHeight - $(".task-preview").height() - 10;
+            var popupLeft = elementPosition.left;
+
             $(".task-preview").html(taskPreview).css({
-                "top": $(this).offset().top + $(this).height() + 10,
-                "left": $(this).offset().left
+                "top": popupTop,
+                "left": popupLeft
             }).show();
         }, function () {
             $(".task-preview").hide();
