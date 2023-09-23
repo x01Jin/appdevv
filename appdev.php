@@ -1,9 +1,42 @@
 <?php
 
+include_once "db.php";
+
 print"
 Task Management System</br>
 <hr></hr>
 </br>";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    $sql = "SELECT id, username, password, role FROM users WHERE username = ?";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute([$username]);
+
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user && password_verify($password, $user["password"])) {
+        session_start();
+        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["username"] = $user["username"];
+        $_SESSION["user_role"] = $user["role"]; // Store the user's role in the session
+
+        if ($user["role"] == "admin") {
+            // Redirect to the admin dashboard
+            header("Location: admindashboard.php");
+            exit();
+        } else {
+            // Redirect to the employee dashboard
+            header("Location: employeedashboard.php");
+            exit();
+        }
+    } else {
+        // Invalid credentials, display an error message
+        $error_message = "Invalid username or password. Please try again.";
+    }
+}
 
 echo '<h1>Login</h1>
 <form action="login.php" method="POST">
