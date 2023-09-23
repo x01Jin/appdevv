@@ -48,10 +48,10 @@ if (isset($error_message)) {
 
 echo '<h1>Login</h1>
 <form action="appdev.php" method="POST">
-    <label for="username">Username:</label>
+    <label for="username"><b>Username:</b></label></br>
     <input type="text" id="username" name="username" required>
     </br></br>
-    <label for="password">Password:</label>
+    <label for="password"><b>Password:</b></label></br>
     <input type="password" id="password" name="password" required>
     </br></br>
     <button type="submit">Log In</button>
