@@ -1,6 +1,7 @@
 # appdevv
 
 move this folder to htdocs first...
+Initialize appdev.php in browser localhost/appdevv/appdev.php
 
 Database structure
 
