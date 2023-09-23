@@ -35,6 +35,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+if (isset($error_message)) {
+    echo '<div style="color: red;">' . $error_message . '</div>';
+}
+
 echo '<h1>Login</h1>
 <form action="appdev.php" method="POST">
     <label for="username">Username:</label>

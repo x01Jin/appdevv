@@ -64,19 +64,19 @@ if (!empty($errors)) {
 }
 
 echo '<form action="registration.php" method="POST">
-    <label for="username">Username:</label>
+    <label for="username" style="color: white;">Username:</label>
     <input type="text" id="username" name="username" required>
     </br></br>
-    <label for="email">Email:</label>
+    <label for="email" style="color: white;">Email:</label>
     <input type="email" id="email" name="email" required>
     </br></br>
-    <label for="password">Password:</label>
+    <label for="password" style="color: white;">Password:</label>
     <input type="password" id="password" name="password" required>
     </br></br>
-    <label for="confirm_password">Confirm Password:</label>
+    <label for="confirm_password" style="color: white;">Confirm Password:</label>
     <input type="password" id="confirm_password" name="confirm_password" required>
     </br></br>
-    <label for="role">Role:</label>
+    <label for="role" style="color: white;">Role:</label>
     <select id="role" name="role" required>
         <option value="employee">Employee</option>
         <option value="admin">Admin</option>
