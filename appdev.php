@@ -10,10 +10,10 @@ print"
 <style>
 
 body {
+    background-image: url('https://media.tenor.com/f3wDhPtHfEoAAAAC/vergil-grin.gif');
+    background-size: cover;
+    background-repeat: no-repeat;
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: gray;
     text-align: center;
 }
 
