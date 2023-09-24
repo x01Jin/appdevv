@@ -53,13 +53,13 @@ $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $sql = "SELECT id, description, employee_id, start_date, deadline FROM tasks";
 $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-?>
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Page</title>
+    <title>Admin Dashboard</title>
     <style>
         body {
             background-image: url('assets/admin.jpg');
@@ -67,7 +67,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             background-repeat: no-repeat;
             font-family: Arial, sans-serif;
             text-align: center;
-            color: #fff;
+            color: white;
         }
 
         table {
@@ -75,11 +75,11 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
         }
 
         table th {
-            color: #fff;
+            color: white;
         }
 
         table td {
-            color: #fff;
+            color: white;
         }
 
         header {
@@ -111,7 +111,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
         footer {
             background-color: rgba(51, 51, 51, 0.8);
-            color: #fff;
+            color: white;
             text-align: center;
             padding: 10px;
         }
@@ -145,10 +145,10 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     </header>
     <nav>
         <ul>
-            <li><a href="#deploy" style="color:white;">Deploy Task</a></li>
-            <li><a href="#employee-list" style="color:white;">Employee List</a></li>
-            <li><a href="#task-list" style="color:white;">Task List</a></li>
-            <li><a href="#add-employee" style="color:white;">Add Employee</a></li>
+            <li><a href="#deploy" style="color:white;"><b>Deploy Task</b></a></li>
+            <li><a href="#employee-list" style="color:white;"><b>Employee List</b></a></li>
+            <li><a href="#task-list" style="color:white;"><b>Task List</b></a></li>
+            <li><a href="#add-employee" style="color:white;"><b>Add Employee</b></a></li>
         </ul>
     </nav>
     <main>
