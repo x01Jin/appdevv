@@ -4,7 +4,7 @@ include_once "db.php";
 print "
 Task Management System</br>
 <hr></hr>
-</br>";
+</br></br></br></br></br></br></br>";
 
 $errors = [];
 
@@ -64,19 +64,19 @@ if (!empty($errors)) {
 }
 
 echo '<form action="registration.php" method="POST">
-    <label for="username" style="color: white;">Username:</label>
+    <label for="username">Username:</label>
     <input type="text" id="username" name="username" required>
     </br></br>
-    <label for="email" style="color: white;">Email:</label>
+    <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
     </br></br>
-    <label for="password" style="color: white;">Password:</label>
+    <label for="password">Password:</label>
     <input type="password" id="password" name="password" required>
     </br></br>
-    <label for="confirm_password" style="color: white;">Confirm Password:</label>
+    <label for="confirm_password">Confirm Password:</label>
     <input type="password" id="confirm_password" name="confirm_password" required>
     </br></br>
-    <label for="role" style="color: white;">Role:</label>
+    <label for="role">Role:</label>
     <select id="role" name="role" required>
         <option value="employee">Employee</option>
         <option value="admin">Admin</option>
@@ -89,7 +89,7 @@ echo '<form action="registration.php" method="POST">
 print "
 <style>
 body {
-    background-image: url('assets/vergil.jpg');
+    background-image: url('assets/registration.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;

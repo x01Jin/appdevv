@@ -21,14 +21,14 @@ password: asdfghjk
 username: kalbo
 password: kalborithms
 
+username: edward
+password: edward69420
+
 Database structure---------------------------------------------
 
 MariaDB [appdevdb]> SHOW CREATE TABLE users
-    -> ;
 
-
-| Table | Create Table                                                                                                                                                                       
-
+| Table | Create Table                                                          
 
 | users | CREATE TABLE `users` (
 
@@ -46,6 +46,27 @@ MariaDB [appdevdb]> SHOW CREATE TABLE users
   
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci |
 
+
+1 row in set (0.001 sec)
+
+MariaDB [appdevdb]>
+
+----------------------------------------------------------------
+
+MariaDB [appdevdb]> show create table tasks
+
+| Table | Create Table
+
+| tasks | CREATE TABLE `tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` varchar(255) NOT NULL,
+  `employee_id` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `deadline` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `employee_id` (`employee_id`),
+  CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci |
 
 1 row in set (0.001 sec)
 

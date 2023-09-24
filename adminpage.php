@@ -7,28 +7,21 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
     exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $employeeUsername = $_POST["employee_username"];
-    $employeeEmail = $_POST["employee_email"];
-    $employeePassword = password_hash($_POST["employee_password"], PASSWORD_DEFAULT);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
+    $taskDescription = $_POST["task_description"];
+    $employeeId = $_POST["employee_id"];
+    $startDate = $_POST["start_date"];
+    $deadline = $_POST["deadline"];
 
-    $checkUserSql = "SELECT COUNT(*) FROM users WHERE username = ? OR email = ?";
-    $stmt = $pdo->prepare($checkUserSql);
-    $stmt->execute([$employeeUsername, $employeeEmail]);
-    $count = $stmt->fetchColumn();
-
-    if (isset($_POST["add_employee"]) && $count > 0) {
-        $errorMessage = "Username or email already exists. Please choose a different username or email.";
+    $insertTaskSql = "INSERT INTO tasks (description, employee_id, start_date, deadline) VALUES (?, ?, ?, ?)";
+    $stmt = $pdo->prepare($insertTaskSql);
+    if ($stmt->execute([$taskDescription, $employeeId, $startDate, $deadline])) {
+        $successMessage = "Task deployed successfully.";
     } else {
-        $insertEmployeeSql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'employee')";
-        $stmt = $pdo->prepare($insertEmployeeSql);
-        if ($stmt->execute([$employeeUsername, $employeeEmail, $employeePassword])) {
-            $successMessage = "Employee added successfully.";
-        } else {
-            $errorMessage = "Error adding employee. Please try again.";
-        }
+        $errorMessage = "Error deploying task: " . $stmt->errorInfo()[2];
     }
 }
+
 
 $sql = "SELECT id, username FROM users WHERE role = 'employee'";
 $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
