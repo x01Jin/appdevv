@@ -2,10 +2,17 @@
 
 include_once "db.php";
 
-print"
-Task Management System</br>
+session_start();
+
+if (isset($_POST["logout"])) {
+    session_destroy();
+    header("Location: appdev.php");
+    exit();
+}
+
+echo '<span style="color: white;"><b>Task Management System</b></span></br>
 <hr></hr>
-</br>";
+</br></br></br></br></br></br></br></br></br>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
@@ -41,22 +48,22 @@ if (isset($error_message)) {
 
 echo '<h1>Login</h1>
 <form action="appdev.php" method="POST">
-    <label for="username">Username:</label>
+    <label for="username"><b>Username:</b></label></br>
     <input type="text" id="username" name="username" required>
     </br></br>
-    <label for="password">Password:</label>
+    <label for="password"><b>Password:</b></label></br>
     <input type="password" id="password" name="password" required>
     </br></br>
     <button type="submit">Log In</button>
 </form>';
 
-echo '<a href="registration.php">No Account? Register</br>';
+echo '<a href="registration.php" style="color:white;"><b>No Account? Register</b></br>';
 
 print"
 <style>
 
 body {
-    background-image: url('assets/vergil-grin.jpg');
+    background-image: url('assets/login.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;

@@ -1,6 +1,27 @@
 # appdevv
 
-Database structure
+move this folder to htdocs first...
+Initialize appdev.php in browser localhost/appdevv/appdev.php
+
+current registered accounts:
+
+admins---------------
+
+username: admin
+password: qwertyui
+
+employees------------
+
+username: alex
+password: 12345678
+
+username: darreil
+password: asdfghjk
+
+username: kalbo
+password: kalborithms
+
+Database structure---------------------------------------------
 
 MariaDB [appdevdb]> SHOW CREATE TABLE users
     -> ;
