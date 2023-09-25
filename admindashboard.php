@@ -196,10 +196,10 @@ footer {
 ";
 
 echo '
-<div class="task-preview"></div>'; // Added the task-preview div
+<div class="task-preview"></div>';
 
 echo '
-<div class="calendar-popup"></div>'; // Added the calendar-popup div
+<div class="calendar-popup"></div>';
 
 echo '
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
