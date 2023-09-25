@@ -76,7 +76,7 @@ echo '
 <label for="start_date"><h2>Start Date</h2></label>
 <input type="date" id="start_date" name="start_date" required><br><hr>
 <label for="deadline"><h2>Deadline</h2></label>
-<input type="date" id="deadline" name="deadline" required>
+<input type="date" id="deadline" name="deadline" required><hr><br>
 <button type="submit" name="deploy_task">Deploy Task</button>
 </form><br><br>';
 

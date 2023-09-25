@@ -10,9 +10,11 @@ if (isset($_POST["logout"])) {
     exit();
 }
 
-echo '<span style="color: white;"><b>Task Management System</b></span></br>
-<hr></hr>
-</br></br></br></br></br></br></br></br></br>';
+echo "<title>TASK.it</title><br><br><br><br><br>";
+
+echo '<div class="logo">
+    <img src="assets/logo.png" alt="Company Logo">
+</div>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST["username"];
@@ -63,7 +65,7 @@ print"
 <style>
 
 body {
-    background-image: url('assets/login.jpg');
+    background-image: url('assets/taskitbg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
@@ -102,6 +104,16 @@ footer {
     color: #fff;
     text-align: center;
     padding: 10px;
+}
+
+.logo {
+    text-align: center; /* Center the logo horizontally */
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.logo img {
+    width: 700px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
 }
 
 </style>
