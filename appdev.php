@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["user_role"] = $user["role"];
 
         if ($user["role"] == "admin") {
-            header("Location: adminpage.php");
+            header("Location: admindashboard.php");
             exit();
         } else {
             header("Location: employeepage.php");
