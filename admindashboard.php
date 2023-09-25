@@ -18,6 +18,7 @@ $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 $sql = "SELECT id, description, employee_id, start_date, deadline FROM tasks";
 $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+echo "<title>(Admin)Dashboard</title>";
 
 echo '
 

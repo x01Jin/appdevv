@@ -30,6 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
 $sql = "SELECT id, username FROM users WHERE role = 'employee'";
 $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+echo "<title>(Admin)Task Deployer</title>";
+
 echo '
 
 <div class="content">

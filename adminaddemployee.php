@@ -1,3 +1,5 @@
 <?php
 
-echo "Add employee tab";
+echo "<title>(Admin)Add Employee</title>";
+
+echo "add eploye shit";
