@@ -50,7 +50,7 @@ echo '
 
 <li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
 <li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-<li><a href="#add-employee" style="color:white;"><b>Add Employee</b></a></li>
+<li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
 
 </ul>
 
