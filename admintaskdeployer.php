@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
     
     if ($stmt->execute([$taskDescription, $employeeId, $startDate, $deadline])) {
         $successMessage = "Task deployed successfully.";
-        header("Location: adminpage.php");
+        header("Location: admintaskdeployer.php");
     } else {
         $errorMessage = "Error deploying task: " . $stmt->errorInfo()[2];
     }
