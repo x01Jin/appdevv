@@ -20,76 +20,80 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 
 echo '
+
 <div class="content">
-    <header>
-        <h1>ADMIN DASHBOARD</h1>
-        <form method="POST" action="appdev.php">
-            <button type="submit" name="logout">Logout</button>
-        </form>
-    </header>';
+
+<header>
+<h1>ADMIN DASHBOARD</h1>
+<form method="POST" action="appdev.php">
+<button type="submit" name="logout">Logout</button>
+</form>
+</header>';
 
 echo '
-    <nav>
-        <ul>
-            <li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
-            <li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-            <li><a href="#add-employee" style="color:white;"><b>Add Employee</b></a></li>
-        </ul>
-    </nav>';
+<nav>
+<ul>
+<li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+<li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
+<li><a href="#add-employee" style="color:white;"><b>Add Employee</b></a></li>
+</ul>
+</nav>';
 
 echo '
-    <hr><h2>Employee List</h2><hr>
-    <table border="1">
-        <caption>List of employees</caption>
-        <tr>
-            <th>Employee ID</th>
-            <th>Username</th>
-        </tr>';
+<hr><h2>Employee List</h2><hr>
+<table border="1">
+<caption>List of employees</caption>
+<tr>
+<th>Employee ID</th>
+<th>Username</th>
+</tr>';
 
 foreach ($employees as $employee) {
-    echo '
-        <tr>
-            <td>' . $employee['id'] . '</td>
-            <td>' . $employee['username'] . '</td>
-        </tr>';
-}
-
-echo '</table>';
-
-echo '<section id="task-list">
-    <hr></hr><h2>Task List</h2><hr></hr>
-    <table border="1">
-        <caption>List of tasks</caption>
-        <tr>
-            <th>Task ID</th>
-            <th>Description</th>
-            <th>Employee ID</th>
-            <th>Start Date</th>
-            <th>Deadline</th>
-        </tr>';
-        
-foreach ($tasks as $task) {
-    echo '
-        <tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
-            <td>' .
-    $task['id'] . TD_SEPARATOR .
-    $task['description'] . TD_SEPARATOR .
-    $task['employee_id'] . TD_SEPARATOR .
-    $task['start_date'] . TD_SEPARATOR .
-    $task['deadline'] .
-    '</td>
-        </tr>';
+echo '
+<tr>
+<td>' . $employee['id'] . '</td>
+<td>' . $employee['username'] . '</td>
+</tr>';
 }
 
 echo '
-    </table>
+</table>';
+
+echo '<section id="task-list">
+<hr></hr><h2>Task List</h2><hr></hr>
+<table border="1">
+<caption>List of tasks</caption>
+<tr>
+<th>Task ID</th>
+<th>Description</th>
+<th>Employee ID</th>
+<th>Start Date</th>
+<th>Deadline</th>
+</tr>';
+
+foreach ($tasks as $task) {
+echo '
+<tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
+<td>' .
+$task['id'] . TD_SEPARATOR .
+$task['description'] . TD_SEPARATOR .
+$task['employee_id'] . TD_SEPARATOR .
+$task['start_date'] . TD_SEPARATOR .
+$task['deadline'] .
+'</td>
+</tr>';
+}
+
+echo '
+</table>
 </section>
 <br><br>';
 
 echo '
 <footer>
-    &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
+&copy; <?php echo date("Y"); ?> Task Management System By CroixTech
 </footer>
+
 </div>';
 
 echo "

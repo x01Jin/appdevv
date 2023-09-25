@@ -60,7 +60,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard(deprecated)</title>
     <style>
         body {
             background-image: url('assets/admin.jpg');
@@ -139,7 +139,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <header>
-        <h1>Admin Dashboard</h1>
+        <h1>Admin Dashboard (deprecated)</h1>
         <form method="POST" action="appdev.php">
             <button type="submit" name="logout">Logout</button>
         </form>
