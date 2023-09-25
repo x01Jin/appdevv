@@ -69,10 +69,12 @@ echo '
 <button type="submit" name="add_employee">Add Employee</button>
 </form>';
 
-if (!empty($successMessage)) {
-    echo '<div class="success-message">' . $successMessage . '</div>';
+if (isset($successMessage)) {
+    echo '<div style="color: green;">' . $successMessage . '</div>';
+    } else {
+        echo '<div style="color: red;">' . $errorMessage . '</div>';
 }
-    
+
 echo '
 <footer>
 &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
@@ -89,7 +91,7 @@ body {
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
     text-align: center;
-    color: white;
+    color: lightskyblue;
 }
 
 table {

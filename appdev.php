@@ -70,6 +70,7 @@ body {
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
     text-align: center;
+    color: white;
 }
 
 header {
@@ -107,13 +108,13 @@ footer {
 }
 
 .logo {
-    text-align: center; /* Center the logo horizontally */
-    margin-top: 20px; /* Adjust the margin as needed */
+    text-align: center;
+    margin-top: 20px;
 }
 
 .logo img {
-    width: 700px; /* Adjust the width as needed */
-    height: auto; /* Maintain aspect ratio */
+    width: 700px;
+    height: auto;
 }
 
 </style>

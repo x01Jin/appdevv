@@ -66,7 +66,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
             background-image: url('assets/admin.jpg');
             background-size: cover;
             background-repeat: no-repeat;
-            font-family: Arial, sans-serif;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align: center;
             color: white;
         }
