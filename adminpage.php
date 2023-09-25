@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare($insertTaskSql);
         if ($stmt->execute([$taskDescription, $employeeId, $startDate, $deadline])) {
             $successMessage = "Task deployed successfully.";
+            header("Location: adminpage.php");
         } else {
             $errorMessage = "Error deploying task: " . $stmt->errorInfo()[2];
         }
