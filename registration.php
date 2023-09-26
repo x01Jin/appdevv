@@ -1,10 +1,9 @@
 <?php
 include_once "db.php";
 
-print "
-Task Management System</br>
-<hr></hr>
-</br></br></br></br></br>";
+echo '<div class="logo">
+    <img src="assets/logo.png" alt="Company Logo">
+</div>';
 
 $errors = [];
 
@@ -115,5 +114,16 @@ body {
     text-align: center;
     color: white;
 }
+
+.logo {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logo img {
+    width: 500px;
+    height: auto;
+}
+
 </style>
 ";
