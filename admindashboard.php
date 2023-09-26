@@ -12,10 +12,10 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
 
 $errorMessage = $successMessage = "";
 
-$sql = "SELECT id, username FROM users WHERE role = 'employee'";
+$sql = "SELECT id, full_name, id_number FROM users WHERE role = 'employee'";
 $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT id, description, employee_id, start_date, deadline FROM tasks";
+$sql = "SELECT id, description, employee_name, start_date, deadline FROM tasks";
 $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 echo "<title>(Admin)Dashboard</title>";
@@ -45,15 +45,15 @@ echo '
 <table border="1">
 <caption>List of employees</caption>
 <tr>
-<th>Employee ID</th>
-<th>Username</th>
+<th>Full Name</th>
+<th>ID Number</th>
 </tr>';
 
 foreach ($employees as $employee) {
 echo '
 <tr>
-<td>' . $employee['id'] . '</td>
-<td>' . $employee['username'] . '</td>
+<td>' . $employee['full_name'] . '</td>
+<td>' . ($employee['id_number'] ? $employee['id_number'] : 'N/A') . '</td>
 </tr>';
 }
 
