@@ -4,19 +4,21 @@ include_once "db.php";
 print "
 Task Management System</br>
 <hr></hr>
-</br></br></br></br></br></br></br>";
+</br></br></br></br></br>";
 
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $full_name = $_POST["full_name"];
     $email = $_POST["email"];
     $password = $_POST["password"];
     $confirmPassword = $_POST["confirm_password"];
     $role = $_POST["role"];
+    $program = $_POST["program"];
+    $id_number = $_POST["id_number"];
 
-    if (empty($username)) {
-        $errors[] = "Username is required.";
+    if (empty($full_name)) {
+        $errors[] = "Full Name is required.";
     }
 
     if (empty($email)) {
@@ -36,13 +38,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
+        $sql = "
+        INSERT INTO users
+        (full_name, email, password, role, program, id_number)
+        VALUES (?, ?, ?, ?, ?, ?)";
+
         $stmt = $pdo->prepare($sql);
 
-        $stmt->bindParam(1, $username, PDO::PARAM_STR);
+        $stmt->bindParam(1, $full_name, PDO::PARAM_STR);
         $stmt->bindParam(2, $email, PDO::PARAM_STR);
         $stmt->bindParam(3, $hashedPassword, PDO::PARAM_STR);
         $stmt->bindParam(4, $role, PDO::PARAM_STR);
+        $stmt->bindParam(5, $program, PDO::PARAM_STR);
+        $stmt->bindParam(6, $id_number, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             header("Location: appdev.php");
@@ -63,37 +71,49 @@ if (!empty($errors)) {
     echo '</div>';
 }
 
-echo '<form action="registration.php" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
-    </br></br>
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    </br></br>
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    </br></br>
-    <label for="confirm_password">Confirm Password:</label>
-    <input type="password" id="confirm_password" name="confirm_password" required>
-    </br></br>
-    <label for="role">Role:</label>
-    <select id="role" name="role" required>
-        <option value="employee">Employee</option>
-        <option value="admin">Admin</option>
-    </select>
-    </br></br>
-    <button type="submit">Register</button>
+echo '
+<form action="registration.php" method="POST">
+<label for="full_name">Full Name:</label>
+<input type="text" id="full_name" name="full_name" required>
+</br></br>
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" required>
+</br></br>
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" required>
+</br></br>
+<label for="confirm_password">Confirm Password:</label>
+<input type="password" id="confirm_password" name="confirm_password" required>
+</br></br>
+<label for="role">Role:</label>
+<select id="role" name="role" required>
+    <option value="employee">Employee</option>
+    <option value="admin">Admin</option>
+</select>
+</br></br>
+<label for="program">Program:</label>
+<input type="text" id="program" name="program">
+</br></br>
+<label for="id_number">ID Number:</label>
+<input type="text" id="id_number" name="id_number">
+</br></br>
+<!-- Profile Picture Upload Field (for account settings) -->
+<label for="profile_picture">Profile Picture:</label>
+<input type="file" id="profile_picture" name="profile_picture">
+</br></br>
+<button type="submit">Register</button>
 </form>
 <a href="appdev.php">Have Account? Log in</a>';
 
-print "
+echo "
 <style>
 body {
-    background-image: url('assets/registration.jpg');
+    background-image: url('assets/taskitbg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
     text-align: center;
+    color: white;
 }
 </style>
 ";
