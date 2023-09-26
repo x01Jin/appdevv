@@ -1,5 +1,4 @@
 <?php
-
 include_once "db.php";
 
 session_start();
@@ -17,47 +16,47 @@ echo '<div class="logo">
 </div>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
+    $email = $_POST["email"]; // Use the "email" field
     $password = $_POST["password"];
 
-    $sql = "SELECT id, username, password, role FROM users WHERE username = ?";
+    $sql = "SELECT id, full_name, password, role FROM users WHERE email = ?"; // Use "email" column
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$username]);
+    $stmt->execute([$email]); // Bind email to the query
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user["password"])) {
         session_start();
         $_SESSION["user_id"] = $user["id"];
-        $_SESSION["username"] = $user["username"];
+        $_SESSION["username"] = $user["full_name"]; // Store full name if needed
         $_SESSION["user_role"] = $user["role"];
 
         if ($user["role"] == "admin") {
-            header("Location: admindashboard.php");
+            header("Location: admindashboard.php"); // Redirect to admin dashboard
             exit();
         } else {
-            header("Location: employeepage.php");
+            header("Location: employeepage.php"); // Redirect to employee page
             exit();
         }
     } else {
-        $error_message = "Invalid username or password. Please try again.";
+        $error_message = "Invalid email or password. Please try again.";
     }
-}
-
-if (isset($error_message)) {
-    echo '<div style="color: red;">' . $error_message . '</div>';
 }
 
 echo '<h1>Login</h1>
 <form action="appdev.php" method="POST">
-    <label for="username"><b>Username:</b></label></br>
-    <input type="text" id="username" name="username" required>
+    <label for="email"><b>Email:</b></label></br>
+    <input type="email" id="email" name="email" required> <!-- Use email input type -->
     </br></br>
     <label for="password"><b>Password:</b></label></br>
     <input type="password" id="password" name="password" required>
     </br></br>
     <button type="submit">Log In</button>
 </form>';
+
+if (isset($error_message)) {
+    echo '<div style="color: red;">' . $error_message . '</div>';
+}
 
 echo '<a href="registration.php" style="color:white;"><b>No Account? Register</b></br>';
 
