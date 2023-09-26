@@ -71,35 +71,45 @@ if (!empty($errors)) {
 }
 
 echo '
+
 <form action="registration.php" method="POST">
+
 <label for="full_name">Full Name:</label>
 <input type="text" id="full_name" name="full_name" required>
 </br></br>
+
 <label for="email">Email:</label>
 <input type="email" id="email" name="email" required>
 </br></br>
+
+<label for="program">Program:</label>
+<input type="text" id="program" name="program">
+</br></br>
+
+<label for="id_number">ID Number:</label>
+<input type="text" id="id_number" name="id_number">
+</br></br>
+
 <label for="password">Password:</label>
 <input type="password" id="password" name="password" required>
 </br></br>
+
 <label for="confirm_password">Confirm Password:</label>
 <input type="password" id="confirm_password" name="confirm_password" required>
 </br></br>
+
+<!-- Profile Picture Upload Field (for account settings) -->
+<label for="profile_picture">Profile Picture:</label>
+<input type="file" id="profile_picture" name="profile_picture">
+</br></br>
+
 <label for="role">Role:</label>
 <select id="role" name="role" required>
     <option value="employee">Employee</option>
     <option value="admin">Admin</option>
 </select>
 </br></br>
-<label for="program">Program:</label>
-<input type="text" id="program" name="program">
-</br></br>
-<label for="id_number">ID Number:</label>
-<input type="text" id="id_number" name="id_number">
-</br></br>
-<!-- Profile Picture Upload Field (for account settings) -->
-<label for="profile_picture">Profile Picture:</label>
-<input type="file" id="profile_picture" name="profile_picture">
-</br></br>
+
 <button type="submit">Register</button>
 </form>
 <a href="appdev.php">Have Account? Log in</a>';
