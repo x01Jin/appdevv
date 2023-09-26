@@ -16,26 +16,26 @@ echo '<div class="logo">
 </div>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"]; // Use the "email" field
+    $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $sql = "SELECT id, full_name, password, role FROM users WHERE email = ?"; // Use "email" column
+    $sql = "SELECT id, full_name, password, role FROM users WHERE email = ?";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$email]); // Bind email to the query
+    $stmt->execute([$email]);
 
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user["password"])) {
         session_start();
         $_SESSION["user_id"] = $user["id"];
-        $_SESSION["username"] = $user["full_name"]; // Store full name if needed
+        $_SESSION["username"] = $user["full_name"];
         $_SESSION["user_role"] = $user["role"];
 
         if ($user["role"] == "admin") {
-            header("Location: admindashboard.php"); // Redirect to admin dashboard
+            header("Location: admindashboard.php");
             exit();
         } else {
-            header("Location: employeepage.php"); // Redirect to employee page
+            header("Location: employeepage.php");
             exit();
         }
     } else {
