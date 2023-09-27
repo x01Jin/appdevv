@@ -1,6 +1,12 @@
 <?php
 include_once "db.php";
 
+$profilePictureDirectory = "profile_pictures/";
+
+if (!file_exists($profilePictureDirectory)) {
+    mkdir($profilePictureDirectory, 0755, true);
+}
+
 echo '<div class="logo">
     <img src="assets/logo.png" alt="Company Logo">
 </div>';
@@ -34,13 +40,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors[] = "Passwords do not match.";
     }
 
+    $profilePictureName = $_FILES["profile_picture"]["name"];
+    $profilePictureTmpName = $_FILES["profile_picture"]["tmp_name"];
+
+    if (!empty($profilePictureName)) {
+        $uniqueProfilePictureName = uniqid() . '_' . $profilePictureName;
+
+        $destinationPath = $profilePictureDirectory . $uniqueProfilePictureName;
+
+        if (move_uploaded_file($profilePictureTmpName, $destinationPath)) {
+            $profilePictureFileName = $uniqueProfilePictureName;
+        } else {
+            $errors[] = "Failed to upload the profile picture.";
+        }
+    } else {
+        $profilePictureFileName = null;
+    }
+
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $sql = "
         INSERT INTO users
-        (full_name, email, password, role, program, id_number)
-        VALUES (?, ?, ?, ?, ?, ?)";
+        (full_name, email, password, role, program, id_number, profile_picture)
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $pdo->prepare($sql);
 
@@ -50,6 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(4, $role, PDO::PARAM_STR);
         $stmt->bindParam(5, $program, PDO::PARAM_STR);
         $stmt->bindParam(6, $id_number, PDO::PARAM_STR);
+        $stmt->bindParam(7, $profilePictureFileName, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             header("Location: appdev.php");
@@ -71,46 +95,45 @@ if (!empty($errors)) {
 }
 
 echo '
+<form action="registration.php" method="POST" enctype="multipart/form-data">
 
-<form action="registration.php" method="POST">
+    <label for="full_name">Full Name:</label>
+    <input type="text" id="full_name" name="full_name" required>
+    </br></br>
 
-<label for="full_name">Full Name:</label>
-<input type="text" id="full_name" name="full_name" required>
-</br></br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    </br></br>
 
-<label for="email">Email:</label>
-<input type="email" id="email" name="email" required>
-</br></br>
+    <label for="program">Course:</label>
+    <input type="text" id="program" name="program">
+    </br></br>
 
-<label for="program">Course:</label>
-<input type="text" id="program" name="program">
-</br></br>
+    <label for="id_number">ID Number:</label>
+    <input type="text" id="id_number" name="id_number">
+    </br></br>
 
-<label for="id_number">ID Number:</label>
-<input type="text" id="id_number" name="id_number">
-</br></br>
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    </br></br>
 
-<label for="password">Password:</label>
-<input type="password" id="password" name="password" required>
-</br></br>
+    <label for="confirm_password">Confirm Password:</label>
+    <input type="password" id="confirm_password" name="confirm_password" required>
+    </br></br>
 
-<label for="confirm_password">Confirm Password:</label>
-<input type="password" id="confirm_password" name="confirm_password" required>
-</br></br>
+    <!-- Profile Picture Upload Field (for account settings) -->
+    <label for="profile_picture">Profile Picture:</label>
+    <input type="file" id="profile_picture" name="profile_picture">
+    </br></br>
 
-<!-- Profile Picture Upload Field (for account settings) -->
-<label for="profile_picture">Profile Picture:</label>
-<input type="file" id="profile_picture" name="profile_picture">
-</br></br>
+    <label for="role">Role:</label>
+    <select id="role" name="role" required>
+        <option value="employee">Employee</option>
+        <option value="admin">Admin</option>
+    </select>
+    </br></br>
 
-<label for="role">Role:</label>
-<select id="role" name="role" required>
-    <option value="employee">Employee</option>
-    <option value="admin">Admin</option>
-</select>
-</br></br>
-
-<button type="submit">Register</button>
+    <button type="submit">Register</button>
 </form>
 <a href="appdev.php">Have Account? Log in</a>';
 
@@ -137,3 +160,4 @@ body {
 
 </style>
 ";
+?>
