@@ -21,7 +21,6 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 echo "<title>(Admin)Dashboard</title>";
 
 echo '
-
 <div class="content">
 
 <header>
@@ -50,11 +49,11 @@ echo '
 </tr>';
 
 foreach ($employees as $employee) {
-echo '
-<tr>
-<td>' . $employee['full_name'] . '</td>
-<td>' . ($employee['id_number'] ? $employee['id_number'] : 'N/A') . '</td>
-</tr>';
+    echo '
+    <tr>
+    <td>' . $employee['full_name'] . '</td>
+    <td>' . ($employee['id_number'] ? $employee['id_number'] : 'N/A') . '</td>
+    </tr>';
 }
 
 echo '
@@ -67,22 +66,22 @@ echo '<section id="task-list">
 <tr>
 <th>Task ID</th>
 <th>Description</th>
-<th>Employee ID</th>
+<th>Employee Name</th>
 <th>Start Date</th>
 <th>Deadline</th>
 </tr>';
 
 foreach ($tasks as $task) {
-echo '
-<tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
-<td>' .
-$task['id'] . TD_SEPARATOR .
-$task['description'] . TD_SEPARATOR .
-$task['employee_id'] . TD_SEPARATOR .
-$task['start_date'] . TD_SEPARATOR .
-$task['deadline'] .
-'</td>
-</tr>';
+    echo '
+    <tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
+    <td>' .
+    $task['id'] . TD_SEPARATOR .
+    $task['description'] . TD_SEPARATOR .
+    $task['employee_name'] . TD_SEPARATOR .
+    $task['start_date'] . TD_SEPARATOR .
+    $task['deadline'] .
+    '</td>
+    </tr>';
 }
 
 echo '
