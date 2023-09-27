@@ -14,6 +14,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     $employeeUsername = $_POST["employee_username"];
     $employeeEmail = $_POST["employee_email"];
     $employeePassword = password_hash($_POST["employee_password"], PASSWORD_DEFAULT);
+    $employeeProgram = $_POST["employee_program"];
+    $employeeIdNumber = $_POST["employee_id_number"];
+
+    if (isset($_FILES["employee_profile_picture"]) && $_FILES["employee_profile_picture"]["error"] == 0) {
+        $uploadDir = "profile_pictures/";
+        $uploadFile = $uploadDir . basename($_FILES["employee_profile_picture"]["name"]);
+
+        if (move_uploaded_file($_FILES["employee_profile_picture"]["tmp_name"], $uploadFile)) {
+            $profilePicturePath = $uploadFile;
+        } else {
+            $errorMessage = "Error uploading profile picture.";
+        }
+    } else {
+        $profilePicturePath = "profile_pictures/default.jpg";
+    }
 
     $checkUserSql = "SELECT COUNT(*) FROM users WHERE username = ? OR email = ?";
     $stmt = $pdo->prepare($checkUserSql);
@@ -23,9 +38,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     if ($count > 0) {
         $errorMessage = "Username or email already exists. Please choose a different username or email.";
     } else {
-        $insertEmployeeSql = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, 'employee')";
+        $insertEmployeeSql = "
+        INSERT INTO users (username, email, password, role, program, id_number, profile_picture)
+        VALUES (?, ?, ?, 'employee', ?, ?, ?)";
         $stmt = $pdo->prepare($insertEmployeeSql);
-        if ($stmt->execute([$employeeUsername, $employeeEmail, $employeePassword])) {
+        if ($stmt->execute(
+            [$employeeUsername, $employeeEmail, $employeePassword,
+            $employeeProgram, $employeeIdNumber, $profilePicturePath])) {
+
             $successMessage = "Employee added successfully.";
             header("Location: adminaddemployee.php");
             exit();
@@ -36,6 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
 }
 
 echo "<title>(Admin)Add Employee</title>";
+
 
 echo '
 
@@ -59,20 +80,25 @@ echo '
 
 echo '
 <hr><h2>Add Employee</h2><hr>
-<form method="POST" action="adminaddemployee.php">
-<label for="employee_username">Username:</label><br><br>
-<input type="text" id="employee_username" name="employee_username" required><br><br>
+<form method="POST" action="adminaddemployee.php" enctype="multipart/form-data">
+<label for="employee_full_name">Full Name:</label><br><br>
+<input type="text" id="employee_full_name" name="employee_full_name" required><br><br>
 <label for="employee_email">Email:</label><br><br>
 <input type="email" id="employee_email" name="employee_email" required><br><br>
+<label for="employee_program">Program:</label><br><br>
+<input type="text" id="employee_program" name="employee_program" required><br><br>
+<label for="employee_id_number">ID Number:</label><br><br>
+<input type="text" id="employee_id_number" name="employee_id_number" required><br><br>
 <label for="employee_password">Password:</label><br><br>
 <input type="password" id="employee_password" name="employee_password" required><br><br>
+<label for="employee_profile_picture">Profile Picture:</label><br><br>
+<input type="file" id="employee_profile_picture" name="employee_profile_picture"><br><br>
 <button type="submit" name="add_employee">Add Employee</button>
 </form>';
-
 if (isset($successMessage)) {
     echo '<div style="color: green;">' . $successMessage . '</div>';
-    } else {
-        echo '<div style="color: red;">' . $errorMessage . '</div>';
+} else {
+    echo '<div style="color: red;">' . $errorMessage . '</div>';
 }
 
 echo '
