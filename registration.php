@@ -82,7 +82,7 @@ echo '
 <input type="email" id="email" name="email" required>
 </br></br>
 
-<label for="program">Program:</label>
+<label for="program">Course:</label>
 <input type="text" id="program" name="program">
 </br></br>
 
