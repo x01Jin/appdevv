@@ -60,13 +60,13 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Admin Dashboard</title>
+    <title>Admin Dashboard(deprecated)</title>
     <style>
         body {
             background-image: url('assets/admin.jpg');
             background-size: cover;
             background-repeat: no-repeat;
-            font-family: Arial, sans-serif;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             text-align: center;
             color: white;
         }
@@ -139,7 +139,7 @@ $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <header>
-        <h1>Admin Dashboard</h1>
+        <h1>Admin Dashboard (deprecated)</h1>
         <form method="POST" action="appdev.php">
             <button type="submit" name="logout">Logout</button>
         </form>
