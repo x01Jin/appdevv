@@ -5,6 +5,7 @@ include_once "db.php";
 echo "<title>(Admin)Dashboard</title>";
 
 echo '
+
 <div class="content">
 
 <header>
