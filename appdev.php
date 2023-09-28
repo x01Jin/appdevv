@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: admindashboard.php");
             exit();
         } else {
-            header("Location: employeepage.php");
+            header("Location: employeedashboard.php");
             exit();
         }
     } else {

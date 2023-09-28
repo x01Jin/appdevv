@@ -1,3 +1,0 @@
-<?php
-
-print "welcome employee";
