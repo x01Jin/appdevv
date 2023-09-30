@@ -41,20 +41,23 @@ echo '
 
 echo '<hr><h2>Your Tasks</h2><hr>';
 
+echo '<table border="1">';
+echo '<tr><th>Description</th><th>Start Date</th><th>Deadline</th></tr>';
+
 if (empty($tasks)) {
-    echo '<p>No tasks assigned yet.</p>';
+    echo '<tr><td colspan="3">No tasks assigned yet.</td></tr>';
 } else {
-    echo '<table border="1">';
-    echo '<tr><th>Description</th><th>Start Date</th><th>Deadline</th></tr>';
     foreach ($tasks as $task) {
-        echo '<tr>';
-        echo '<td>' . $task['description'] . '</td>';
-        echo '<td>' . $task['start_date'] . '</td>';
-        echo '<td>' . $task['deadline'] . '</td>';
-        echo '</tr>';
+        echo '
+        <tr>
+            <td>' . $task['description'] . '</td>
+            <td>' . $task['start_date'] . '</td>
+            <td>' . $task['deadline'] . '</td>
+        </tr>';
     }
-    echo '</table>';
 }
+
+echo '</table>';
 
 echo '
 <footer>
