@@ -16,16 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
     $startDate = $_POST["start_date"];
     $deadline = $_POST["deadline"];
 
-    $insertTaskSql = "INSERT INTO tasks (
-        description, employee_name, start_date, deadline, employee_id) VALUES (?, ?, ?, ?, ?)";
+    $insertTaskSql = "
+    INSERT INTO tasks (description, employee_name, start_date, deadline, employee_id) VALUES (?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($insertTaskSql);
 
-    $employeeNameSql = "SELECT full_name FROM users WHERE id = ?";
+    $employeeNameSql = "SELECT full_name FROM users WHERE id_number = ?";
     $employeeNameStmt = $pdo->prepare($employeeNameSql);
     $employeeNameStmt->execute([$employeeId]);
     $employeeName = $employeeNameStmt->fetchColumn();
 
-    if ($stmt->execute([$taskDescription, $employeeName, $startDate, $deadline])) {
+    if ($stmt->execute([$taskDescription, $employeeName, $startDate, $deadline, $employeeId])) {
         $successMessage = "Task deployed successfully.";
         header("Location: admintaskdeployer.php");
     } else {
