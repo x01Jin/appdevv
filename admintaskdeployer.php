@@ -16,15 +16,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
     $startDate = $_POST["start_date"];
     $deadline = $_POST["deadline"];
 
-    $insertTaskSql = "INSERT INTO tasks (description, employee_name, start_date, deadline) VALUES (?, ?, ?, ?)";
+    $insertTaskSql = "
+    INSERT INTO tasks (description, employee_name, start_date, deadline, employee_id) VALUES (?, ?, ?, ?, ?)";
     $stmt = $pdo->prepare($insertTaskSql);
 
-    $employeeNameSql = "SELECT full_name FROM users WHERE id = ?";
+    $employeeNameSql = "SELECT full_name FROM users WHERE id_number = ?";
     $employeeNameStmt = $pdo->prepare($employeeNameSql);
     $employeeNameStmt->execute([$employeeId]);
     $employeeName = $employeeNameStmt->fetchColumn();
 
-    if ($stmt->execute([$taskDescription, $employeeName, $startDate, $deadline])) {
+    if ($stmt->execute([$taskDescription, $employeeName, $startDate, $deadline, $employeeId])) {
         $successMessage = "Task deployed successfully.";
         header("Location: admintaskdeployer.php");
     } else {
@@ -32,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
     }
 }
 
-$sql = "SELECT id, full_name, id_number FROM users WHERE role = 'employee'";
+$sql = "SELECT id_number, full_name FROM users WHERE role = 'employee'";
 $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 echo "<title>(Admin)Task Deployer</title>";
@@ -73,7 +74,7 @@ echo '
 <select id="employee_id" name="employee_id" required>';
 
 foreach ($employees as $employee) {
-    echo '<option value="' . $employee['id'] . '">' . $employee['full_name'] . '</option>';
+    echo '<option value="' . $employee['id_number'] . '">' . $employee['full_name'] . '</option>';
 }
 
 echo '

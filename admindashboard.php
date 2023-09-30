@@ -12,7 +12,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
 
 $errorMessage = $successMessage = "";
 
-$sql = "SELECT id, full_name, id_number FROM users WHERE role = 'employee'";
+$sql = "SELECT id_number, full_name FROM users WHERE role = 'employee'";
 $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $sql = "SELECT id, description, employee_name, start_date, deadline FROM tasks";
