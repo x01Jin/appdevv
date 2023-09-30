@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    $sql = "SELECT id, full_name, password, role FROM users WHERE email = ?";
+    $sql = "SELECT id_number, full_name, password, role FROM users WHERE email = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$email]);
 
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($user && password_verify($password, $user["password"])) {
         session_start();
-        $_SESSION["user_id"] = $user["id"];
+        $_SESSION["user_id"] = $user["id_number"];
         $_SESSION["username"] = $user["full_name"];
         $_SESSION["user_role"] = $user["role"];
 
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 echo '<h1>Login</h1>
 <form action="appdev.php" method="POST">
     <label for="email"><b>Email:</b></label></br>
-    <input type="email" id="email" name="email" required> <!-- Use email input type -->
+    <input type="email" id="email" name="email" required>
     </br></br>
     <label for="password"><b>Password:</b></label></br>
     <input type="password" id="password" name="password" required>

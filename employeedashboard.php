@@ -2,7 +2,22 @@
 
 include_once "db.php";
 
-echo "<title>(Admin)Dashboard</title>";
+session_start();
+if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
+    header("Location: appdev.php");
+    exit();
+}
+
+$errorMessage = $successMessage = "";
+
+$userID = $_SESSION["user_id"];
+
+$sql = "SELECT id, description, start_date, deadline FROM tasks WHERE employee_id = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$userID]);
+$tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+echo "<title>(Employee)Dashboard</title>";
 
 echo '
 
@@ -24,11 +39,26 @@ echo '
 </ul>
 </nav>';
 
+echo '<hr><h2>Your Tasks</h2><hr>';
 
+if (empty($tasks)) {
+    echo '<p>No tasks assigned yet.</p>';
+} else {
+    echo '<table border="1">';
+    echo '<tr><th>Description</th><th>Start Date</th><th>Deadline</th></tr>';
+    foreach ($tasks as $task) {
+        echo '<tr>';
+        echo '<td>' . $task['description'] . '</td>';
+        echo '<td>' . $task['start_date'] . '</td>';
+        echo '<td>' . $task['deadline'] . '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+}
 
 echo '
 <footer>
-&copy; <?php echo date("Y"); ?> Task Management System By CroixTech
+&copy; ' . date("Y") . ' Task Management System By CroixTech
 </footer>
 
 </div>';

@@ -42,10 +42,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
         INSERT INTO users (username, email, password, role, program, id_number, profile_picture)
         VALUES (?, ?, ?, 'employee', ?, ?, ?)";
         $stmt = $pdo->prepare($insertEmployeeSql);
-        if ($stmt->execute(
-            [$employeeUsername, $employeeEmail, $employeePassword,
-            $employeeProgram, $employeeIdNumber, $profilePicturePath])) {
-
+        if ($stmt->execute([$employeeUsername, $employeeEmail,
+        $employeePassword, $employeeProgram,
+        $employeeIdNumber, $profilePicturePath])) {
             $successMessage = "Employee added successfully.";
             header("Location: adminaddemployee.php");
             exit();
