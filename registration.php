@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $profilePictureName = $_FILES["profile_picture"]["name"];
     $profilePictureTmpName = $_FILES["profile_picture"]["tmp_name"];
-    if (!empty($profilePictureName)) {
+    if (!empty($profilePictureName) && empty($errors) && empty($confirmPassword)) {
         $uniqueProfilePictureName = uniqid() . '_' . $profilePictureName;
         $destinationPath = $profilePictureDirectory . $uniqueProfilePictureName;
         if (move_uploaded_file($profilePictureTmpName, $destinationPath)) {
