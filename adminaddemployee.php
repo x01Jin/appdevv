@@ -16,25 +16,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     $employeePassword = password_hash($_POST["employee_password"], PASSWORD_DEFAULT);
     $employeeProgram = $_POST["employee_program"];
     $employeeIdNumber = $_POST["employee_id_number"];
-
-    if (isset($_FILES["employee_profile_picture"]) && $_FILES["employee_profile_picture"]["error"] == 0) {
-        $uploadDir = "profile_pictures/";
-        $uploadFile = $uploadDir . basename($_FILES["employee_profile_picture"]["name"]);
-        
-        if (move_uploaded_file($_FILES["employee_profile_picture"]["tmp_name"], $uploadFile)) {
-            $profilePicturePath = $uploadFile;
+    
+    $profilePictureDirectory = "profile_pictures/";
+    if (!file_exists($profilePictureDirectory)) {
+        mkdir($profilePictureDirectory, 0755, true);
+    }
+    
+    $profilePictureName = $_FILES["employee_profile_picture"]["name"];
+    $profilePictureTmpName = $_FILES["employee_profile_picture"]["tmp_name"];
+    
+    if (!empty($profilePictureName)) {
+        $uniqueProfilePictureName = uniqid() . '_' . $profilePictureName;
+        $destinationPath = $profilePictureDirectory . $uniqueProfilePictureName;
+        if (move_uploaded_file($profilePictureTmpName, $destinationPath)) {
+            $profilePicturePath = $destinationPath;
         } else {
             $errorMessage = "Error uploading profile picture.";
         }
     } else {
         $profilePicturePath = "profile_pictures/default.jpg";
     }
-
+    
     $checkUserSql = "SELECT COUNT(*) FROM users WHERE full_name = ? OR email = ?";
     $stmt = $pdo->prepare($checkUserSql);
     $stmt->execute([$employeeFullName, $employeeEmail]);
     $count = $stmt->fetchColumn();
-
     if ($count > 0) {
         $errorMessage = "Full name or email already exists. Please choose a different full name or email.";
     } else {
@@ -42,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
         INSERT INTO users (full_name, email, password, role, program, id_number, profile_picture)
         VALUES (?, ?, ?, 'employee', ?, ?, ?)";
         $stmt = $pdo->prepare($insertEmployeeSql);
-
         if ($stmt->execute([$employeeFullName, $employeeEmail,
         $employeePassword, $employeeProgram,
         $employeeIdNumber, $profilePicturePath])) {
@@ -56,6 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
 }
 
 echo "<title>(Admin)Add Employee</title>";
+
 echo '
 <div class="content">
 <header>
@@ -64,6 +70,7 @@ echo '
 <button type="submit" name="logout">Logout</button>
 </form>
 </header>';
+
 echo '
 <nav>
 <ul>
@@ -72,6 +79,7 @@ echo '
 <li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
 </ul>
 </nav>';
+
 echo '
 <hr><h2>Add Employee</h2><hr>
 <form method="POST" action="adminaddemployee.php" enctype="multipart/form-data">
@@ -189,8 +197,10 @@ footer {
 
 echo '
 <div class="task-preview"></div>';
+
 echo '
 <div class="calendar-popup"></div>';
+
 echo '
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

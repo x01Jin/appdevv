@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $profilePictureName = $_FILES["profile_picture"]["name"];
     $profilePictureTmpName = $_FILES["profile_picture"]["tmp_name"];
-    if (!empty($profilePictureName) && empty($errors) && empty($confirmPassword)) {
+    if (!empty($profilePictureName)) {
         $uniqueProfilePictureName = uniqid() . '_' . $profilePictureName;
         $destinationPath = $profilePictureDirectory . $uniqueProfilePictureName;
         if (move_uploaded_file($profilePictureTmpName, $destinationPath)) {
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $errors[] = "Failed to upload the profile picture.";
         }
     } else {
-        $profilePictureFileName = null;
+        $profilePictureFileName = "default.jpg";
     }
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -112,7 +112,6 @@ echo '
     <button type="submit">Register</button>
 </form>
 <a href="appdev.php">Have an Account? Log in</a>';
-
 echo "
 <style>
 body {
