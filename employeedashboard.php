@@ -17,31 +17,36 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$userID]);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+$sql = "SELECT profile_picture FROM users WHERE id_number = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$userID]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$profilePicture = $user['profile_picture'];
+
 echo "<title>(Employee)Dashboard</title>";
 
 echo '
-
 <div class="content">
-
-<header>
-<h1>EMPLOYEE DASHBOARD</h1>
-<form method="POST" action="appdev.php">
-<button type="submit" name="logout">Logout</button>
-</form>
-</header>';
+    <header>
+        <h1>EMPLOYEE DASHBOARD</h1>
+        <form method="POST" action="appdev.php">
+            <button type="submit" name="logout">Logout</button>
+        </form>
+    </header>';
 
 echo '
-<nav>
-<ul>
-<li><a href="employeedashboard.php" style="color:white;"><b>Employee Dashboard</b></a></li>
-<li><a href="filler.php" style="color:white;"><b>filler</b></a></li>
-<li><a href="filler.php" style="color:white;"><b>filler</b></a></li>
-</ul>
-</nav>';
-
+    <nav>
+    <img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+        <ul>
+            <li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
+            <li><a href="filler.php"><b>filler</b></a></li>
+            <li><a href="filler.php"><b>filler</b></a></li>
+        </ul>
+    </nav>';
 echo '<hr><h2>Your Tasks</h2><hr>';
 
 echo '<table border="1">';
+
 echo '<tr><th>Description</th><th>Start Date</th><th>Deadline</th></tr>';
 
 if (empty($tasks)) {
@@ -49,26 +54,24 @@ if (empty($tasks)) {
 } else {
     foreach ($tasks as $task) {
         echo '
-        <tr>
-            <td>' . $task['description'] . '</td>
-            <td>' . $task['start_date'] . '</td>
-            <td>' . $task['deadline'] . '</td>
-        </tr>';
+            <tr>
+                <td>' . $task['description'] . '</td>
+                <td>' . $task['start_date'] . '</td>
+                <td>' . $task['deadline'] . '</td>
+            </tr>';
     }
 }
 
 echo '</table>';
 
 echo '
-<footer>
-&copy; ' . date("Y") . ' Task Management System By CroixTech
-</footer>
-
+    <footer>
+        &copy; ' . date("Y") . ' Task Management System By CroixTech
+    </footer>
 </div>';
 
 echo "
 <style>
-
 body {
     background-image: url('assets/employee.jpg');
     background-size: cover;
@@ -78,16 +81,27 @@ body {
     color: white;
 }
 
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+}
+
 table {
     margin: 0 auto;
+    width: 80%;
+    color: white;
 }
 
 table th {
-    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
 }
 
 table td {
-    color: white;
+    padding: 10px;
 }
 
 header {
@@ -122,19 +136,14 @@ nav ul {
 }
 
 nav ul li {
-    display: ;
     margin-bottom: 10px;
 }
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: white;
     display: block;
     padding: 5px;
-}
-
-main {
-    padding: 20px;
 }
 
 footer {
@@ -144,32 +153,8 @@ footer {
     padding: 10px;
 }
 
-.task-preview {
-    display: none;
-    position: absolute;
-    background-color: rgba(249, 249, 249, 0.8);
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 1;
-    color: black;
-}
-
-.calendar-popup {
-    display: none;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 1;
-}
 </style>
 ";
-
-echo '
-<div class="task-preview"></div>';
-
-echo '
-<div class="calendar-popup"></div>';
 
 echo '
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
