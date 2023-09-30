@@ -65,6 +65,7 @@ if (empty($tasks)) {
 echo '</table>';
 
 echo '
+    <br><br>
     <footer>
         &copy; ' . date("Y") . ' Task Management System By CroixTech
     </footer>
