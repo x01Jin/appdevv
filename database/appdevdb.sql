@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 26, 2023 at 10:41 AM
+-- Generation Time: Sep 30, 2023 at 09:01 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -35,6 +35,14 @@ CREATE TABLE `tasks` (
   `employee_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `tasks`
+--
+
+INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `employee_name`) VALUES
+(7, 'create a system', '2023-09-27', '2023-09-30', 'Spongebob S. Squarepants'),
+(8, 'magpahaba ng buhok', '2023-09-28', '2025-12-31', 'Arnaldy Fortin');
+
 -- --------------------------------------------------------
 
 --
@@ -49,7 +57,7 @@ CREATE TABLE `users` (
   `password` varchar(255) NOT NULL,
   `program` varchar(255) DEFAULT NULL,
   `id_number` varchar(255) DEFAULT NULL,
-  `profile_picture` blob DEFAULT NULL
+  `profile_picture` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -58,10 +66,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role`, `full_name`, `email`, `password`, `program`, `id_number`, `profile_picture`) VALUES
 (1, 'admin', 'admin', 'admin@admin.com', '$2y$10$i6etcdTh7DbjbhKdmQjAIOA7jM4M0OjKpaXwnz/Q8t5.FAyTViXPO', NULL, NULL, NULL),
-(2, 'employee', 'alex', 'exg1082@gmail.com', '$2y$10$D/ib0IrFeh88ipnDaakdxuMeNQOY7qvb45.lE/7yJ3CbRSwsH1hnC', NULL, NULL, NULL),
-(3, 'employee', 'kalbo', 'kalbo@cisco.com', '$2y$10$u84.gpg69paxSx4gdPXk0eRHA6LOxajWz3wEAHhNfoSUMqO.nugn2', NULL, NULL, NULL),
-(4, 'employee', 'darreil', 'dar@email.com', '$2y$10$6NAD1GQKuXv/Kanf7VJq5OevYAgFNORnFGaWG6psV9aqq8OTY0aqi', NULL, NULL, NULL),
-(8, 'employee', 'Spongebob S. Squarepants', 'sponge123@email.com', '$2y$10$HDuxN4Y65KZ0Hxi/p08p.OOCEcztA13Mlo5I.ktsKVep6ZMcZ89Oe', 'BSHM', '69-6969-420', NULL);
+(8, 'employee', 'Spongebob S. Squarepants', 'sponge123@email.com', '$2y$10$HDuxN4Y65KZ0Hxi/p08p.OOCEcztA13Mlo5I.ktsKVep6ZMcZ89Oe', 'BSHM', '69-6969-420', NULL),
+(9, 'employee', 'patrick p. star', 'patrick@email.com', '$2y$10$TnmTHkCw1wLsX7ZwKTawLewyuiHqc8fziEhCJ2NamAaafdkvIRiZ.', 'BSHM', '92-1098-876', '65140e583ddf9_patrick.jpg'),
+(10, 'employee', 'Arnaldy Fortin', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '65157f559c80c_mrclean.jpg');
 
 --
 -- Indexes for dumped tables
@@ -87,13 +94,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
