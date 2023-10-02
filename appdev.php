@@ -58,7 +58,7 @@ if (isset($error_message)) {
     echo '<div style="color: red;">' . $error_message . '</div>';
 }
 
-echo '<a href="registration.php" style="color:white;"><b>No Account? Register</b></br>';
+echo '<a href="registration.php" style="color:white;"><b>No Account? Registers</b></br>';
 
 print"
 <style>
