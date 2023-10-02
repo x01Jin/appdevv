@@ -1,4 +1,5 @@
 <?php
+
 include_once "db.php";
 
 session_start();
@@ -42,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Invalid email or password. Please try again.";
     }
 }
-//change
+
 echo '
 <form action="appdev.php" method="POST">
     <label for="email"><b>Email:</b></label></br>
