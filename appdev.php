@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-echo '<h1>Login</h1>
+echo '
+<h1>Login</h1>
 <form action="appdev.php" method="POST">
     <label for="email"><b>Email:</b></label></br>
     <input type="email" id="email" name="email" required>
