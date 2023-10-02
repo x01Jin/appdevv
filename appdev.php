@@ -74,8 +74,8 @@ body {
 }
 
 header {
-    background-color: #333;
-    color: #fff;
+    background-color: white;
+    color: black;
     text-align: center;
     padding: 20px;
 }
