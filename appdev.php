@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Invalid email or password. Please try again.";
     }
 }
-//change
+//marlo design
 echo '
 <form action="appdev.php" method="POST">
     <label for="email"><b>Email:</b></label></br>
