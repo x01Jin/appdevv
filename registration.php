@@ -9,7 +9,7 @@ if (!file_exists($profilePictureDirectory)) {
 }
 
 echo '<div class="logo">
-    <img src="assets/logo.png" alt="Company Logo">
+<img src="assets/logo.png" alt="Company Logo">
 </div>';
 
 $errors = [];
@@ -79,6 +79,7 @@ if (!empty($errors)) {
     }
     echo '</div>';
 }
+
 echo '
 <form action="registration.php" method="POST" enctype="multipart/form-data">
     <label for="full_name">Full Name:</label>
@@ -111,9 +112,11 @@ echo '
     </br></br>
     <button type="submit">Register</button>
 </form>
-<a href="appdev.php">Have an Account? Log in</a>';
+<a href="appdev.php" style="color:white;"><b>Have an Account? Log in</b></a>';
+
 echo "
 <style>
+
 body {
     background-image: url('assets/taskitbg.jpg');
     background-size: cover;
@@ -122,13 +125,16 @@ body {
     text-align: center;
     color: white;
 }
+
 .logo {
     text-align: center;
     margin-top: 20px;
 }
+
 .logo img {
     width: 500px;
     height: auto;
 }
+
 </style>
 ";
