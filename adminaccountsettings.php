@@ -46,12 +46,13 @@ echo '
 <div class="account-info">
 <h2>Current Account Information:</h2>';
 
-echo '<p><strong>Role:</strong> ' . $accountInfo["role"] . '</p>';
-echo '<p><strong>ID Number:</strong> ' . $accountInfo["id_number"] . '</p>';
-echo '<p><strong>Full Name:</strong> ' . $accountInfo["full_name"] . '</p>';
-echo '<p><strong>Email:</strong> ' . $accountInfo["email"] . '</p>';
-echo '<p><strong>Program:</strong> ' . $accountInfo["program"] . '</p>';
-echo '<div>';
+echo
+'<p><strong>Role:</strong> ' . $accountInfo["role"] . '</p>' .
+'<p><strong>ID Number:</strong> ' . $accountInfo["id_number"] . '</p>' .
+'<p><strong>Full Name:</strong> ' . $accountInfo["full_name"] . '</p>' .
+'<p><strong>Email:</strong> ' . $accountInfo["email"] . '</p>' .
+'<p><strong>Program:</strong> ' . $accountInfo["program"] . '</p>' .
+'<div>';
 
 echo "
 <style>
