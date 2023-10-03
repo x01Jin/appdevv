@@ -42,14 +42,23 @@ echo '
 </form>
 </nav>';
 
+echo '
+<footer>
+&copy; <?php echo date("Y"); ?> Task Management System By CroixTech
+</footer>
+
+</div>';
+
 echo
 '<div class="account-info">' .
+
 '<h2>Current Account Information:</h2>' .
 '<p><strong>Role:</strong> ' . $accountInfo["role"] . '</p>' .
 '<p><strong>ID Number:</strong> ' . $accountInfo["id_number"] . '</p>' .
 '<p><strong>Full Name:</strong> ' . $accountInfo["full_name"] . '</p>' .
 '<p><strong>Email:</strong> ' . $accountInfo["email"] . '</p>' .
 '<p><strong>Program:</strong> ' . $accountInfo["program"] . '</p>' .
+
 '<div>';
 
 echo "
