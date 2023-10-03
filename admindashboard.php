@@ -18,6 +18,8 @@ $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 $sql = "SELECT id, description, employee_name, start_date, deadline FROM tasks";
 $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+$userID = $_SESSION["user_id"];
+
 $sql = "SELECT profile_picture FROM users WHERE id_number = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$userID]);
@@ -38,6 +40,7 @@ echo '
 
 echo '
 <nav>
+<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
 <li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
 <li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
@@ -112,6 +115,14 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     color: white;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
 }
 
 table {

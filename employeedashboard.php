@@ -10,12 +10,12 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
 
 $errorMessage = $successMessage = "";
 
-$userID = $_SESSION["user_id"];
-
 $sql = "SELECT id, description, start_date, deadline FROM tasks WHERE employee_id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$userID]);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$userID = $_SESSION["user_id"];
 
 $sql = "SELECT profile_picture FROM users WHERE id_number = ?";
 $stmt = $pdo->prepare($sql);
