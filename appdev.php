@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Invalid email or password. Please try again.";
     }
 }
-
+//marlo design part
 echo '
 <form action="appdev.php" method="POST">
 <label for="email"><b>Email:</b></label></br>
@@ -54,7 +54,7 @@ echo '
 </br></br>
 <button type="submit">Log In</button>
 </form>';
-
+//marlo design part
 if (isset($error_message)) {
     echo '<div style="color: red;">' . $error_message . '</div>';
 }
