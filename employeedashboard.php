@@ -21,11 +21,9 @@ echo "<title>(Employee)Dashboard</title>";
 
 echo '
 <div class="content">
+
 <header>
 <h1>EMPLOYEE DASHBOARD</h1>
-<form method="POST" action="appdev.php">
-<button type="submit" name="logout">Logout</button>
-</form>
 </header>';
 
 echo '
@@ -36,6 +34,9 @@ echo '
 <li><a href="filler.php"><b>filler</b></a></li>
 <li><a href="filler.php"><b>filler</b></a></li>
 </ul>
+<form method="POST" action="appdev.php">
+<button type="submit" name="logout">Logout</button>
+</form>
 </nav>';
 
 echo '<hr><h2>Your Tasks</h2><hr>';
