@@ -60,24 +60,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     }
 }
 
+include_once "pfpfunc.php" ;
+
 echo "<title>(Admin)Add Employee</title>";
 
 echo '
 <div class="content">
+
 <header>
 <h1>ADD EMPLOYEE</h1>
-<form method="POST" action="appdev.php">
-<button type="submit" name="logout">Logout</button>
-</form>
 </header>';
 
 echo '
 <nav>
+<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
 <li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
 <li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
 <li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
+<li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
+<form method="POST" action="appdev.php">
+<button type="submit" name="logout">Logout</button>
+</form>
 </nav>';
 
 echo '
@@ -120,27 +125,29 @@ body {
     text-align: center;
     color: lightskyblue;
 }
-table {
-    margin: 0 auto;
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
 }
-table th {
-    color: white;
-}
-table td {
-    color: white;
-}
+
 header {
     background-color: rgba(51, 51, 51, 0.5);
     color: white;
     text-align: center;
     padding: 20px;
 }
+
 .content {
     margin-left: 200px;
     padding: 20px;
     background-color: rgba(51, 51, 51, 0.5);
     color: white;
 }
+
 nav {
     background-color: rgba(20, 20, 20, 100);
     color: white;
@@ -152,29 +159,35 @@ nav {
     top: 0;
     left: 0;
 }
+
 nav ul {
     list-style: none;
     padding: 0;
 }
+
 nav ul li {
     display: ;
     margin-bottom: 10px;
 }
+
 nav ul li a {
     text-decoration: none;
     color: #333;
     display: block;
     padding: 5px;
 }
+
 main {
     padding: 20px;
 }
+
 footer {
     background-color: rgba(51, 51, 51, 0.8);
     color: white;
     text-align: center;
     padding: 10px;
 }
+
 .task-preview {
     display: none;
     position: absolute;
@@ -184,6 +197,7 @@ footer {
     z-index: 1;
     color: black;
 }
+
 .calendar-popup {
     display: none;
     position: absolute;
@@ -192,6 +206,7 @@ footer {
     padding: 10px;
     z-index: 1;
 }
+
 </style>
 ";
 
