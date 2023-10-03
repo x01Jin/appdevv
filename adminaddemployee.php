@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     }
 }
 
-include_once "pfpfunc.php" ;
+include_once "pfpfunc.php";
 
 echo "<title>(Admin)Add Employee</title>";
 
