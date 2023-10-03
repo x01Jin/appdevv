@@ -10,39 +10,35 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
 
 $errorMessage = $successMessage = "";
 
-$userID = $_SESSION["user_id"];
-
 $sql = "SELECT id, description, start_date, deadline FROM tasks WHERE employee_id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$userID]);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT profile_picture FROM users WHERE id_number = ?";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$userID]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-$profilePicture = $user['profile_picture'];
+include_once "pfpfunc.php" ;
 
 echo "<title>(Employee)Dashboard</title>";
 
 echo '
 <div class="content">
-    <header>
-        <h1>EMPLOYEE DASHBOARD</h1>
-        <form method="POST" action="appdev.php">
-            <button type="submit" name="logout">Logout</button>
-        </form>
-    </header>';
+
+<header>
+<h1>EMPLOYEE DASHBOARD</h1>
+</header>';
 
 echo '
-    <nav>
-    <img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
-        <ul>
-            <li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
-            <li><a href="filler.php"><b>filler</b></a></li>
-            <li><a href="filler.php"><b>filler</b></a></li>
-        </ul>
-    </nav>';
+<nav>
+<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+<ul>
+<li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
+<li><a href="filler.php"><b>filler</b></a></li>
+<li><a href="filler.php"><b>filler</b></a></li>
+</ul>
+<form method="POST" action="appdev.php">
+<button type="submit" name="logout">Logout</button>
+</form>
+</nav>';
+
 echo '<hr><h2>Your Tasks</h2><hr>';
 
 echo '<table border="1">';
@@ -65,10 +61,11 @@ if (empty($tasks)) {
 echo '</table>';
 
 echo '
-    <br><br>
-    <footer>
-        &copy; ' . date("Y") . ' Task Management System By CroixTech
-    </footer>
+<br><br>
+<footer>
+&copy; ' . date("Y") . ' Task Management System By CroixTech
+</footer>
+
 </div>';
 
 echo "

@@ -18,6 +18,8 @@ $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 $sql = "SELECT id, description, employee_name, start_date, deadline FROM tasks";
 $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+include_once "pfpfunc.php" ;
+
 echo "<title>(Admin)Dashboard</title>";
 
 echo '
@@ -25,18 +27,20 @@ echo '
 
 <header>
 <h1>ADMIN DASHBOARD</h1>
-<form method="POST" action="appdev.php">
-<button type="submit" name="logout">Logout</button>
-</form>
 </header>';
 
 echo '
 <nav>
+<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
 <li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
 <li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
 <li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
+<li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
+<form method="POST" action="appdev.php">
+<button type="submit" name="logout">Logout</button>
+</form>
 </nav>';
 
 echo '
@@ -108,16 +112,27 @@ body {
     color: white;
 }
 
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+}
+
 table {
     margin: 0 auto;
+    width: 80%;
+    color: white;
 }
 
 table th {
-    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
 }
 
 table td {
-    color: white;
+    padding: 10px;
 }
 
 header {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2023 at 10:41 AM
+-- Generation Time: Oct 03, 2023 at 08:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,9 +41,7 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `employee_name`, `employee_id`) VALUES
-(7, 'create a system', '2023-09-27', '2023-09-30', 'Spongebob S. Squarepants', ''),
-(8, 'magpahaba ng buhok', '2023-09-28', '2025-12-31', 'Arnaldy Fortin', ''),
-(9, 'asdadasdadasdasdasd', '2023-09-30', '2023-10-03', 'Arnaldy Fortin', '');
+(10, 'create stuff', '2023-09-30', '2023-10-07', 'Arnaldy Fortin', '12-3456-789');
 
 -- --------------------------------------------------------
 
@@ -66,7 +64,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_number`, `profile_picture`) VALUES
-('admin', 'admin', 'admin@admin.com', '$2y$10$i6etcdTh7DbjbhKdmQjAIOA7jM4M0OjKpaXwnz/Q8t5.FAyTViXPO', NULL, '', NULL),
+('admin', 'Mr. Admin', 'admin@admin.com', '$2y$10$Dqk0dPDeIimXO4zk2OEGN./zh3NbQSmZ8VIROOXG8LmBQBJEaS2C.', 'Admin', '00-0000-000', '651baf4903f97_admin.jpg'),
 ('employee', 'Arnaldy Fortin', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '65157f559c80c_mrclean.jpg'),
 ('employee', 'Spongebob S. Squarepants', 'sponge123@email.com', '$2y$10$HDuxN4Y65KZ0Hxi/p08p.OOCEcztA13Mlo5I.ktsKVep6ZMcZ89Oe', 'BSHM', '69-6969-420', NULL),
 ('employee', 'patrick p. star', 'patrick@email.com', '$2y$10$TnmTHkCw1wLsX7ZwKTawLewyuiHqc8fziEhCJ2NamAaafdkvIRiZ.', 'BSHM', '92-1098-876', '65140e583ddf9_patrick.jpg');
@@ -96,7 +94,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

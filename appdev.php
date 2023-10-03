@@ -1,4 +1,5 @@
 <?php
+
 include_once "db.php";
 
 session_start();
@@ -13,7 +14,7 @@ echo "<title>TASK.it</title><br><br><br><br><br>";
 
 echo '<div class="logo">
     <img src="assets/logo.png" alt="Company Logo">
-</div>';
+</div><br><br>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
@@ -42,16 +43,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Invalid email or password. Please try again.";
     }
 }
-//change darreil pogi sheesh
+
 echo '
 <form action="appdev.php" method="POST">
-    <label for="email"><b>Email:</b></label></br>
-    <input type="email" id="email" name="email" required>
-    </br></br>
-    <label for="password"><b>Password:</b></label></br>
-    <input type="password" id="password" name="password" required>
-    </br></br>
-    <button type="submit">Log In</button>
+<label for="email"><b>Email:</b></label></br>
+<input type="email" id="email" name="email" required>
+</br></br>
+<label for="password"><b>Password:</b></label></br>
+<input type="password" id="password" name="password" required>
+</br></br>
+<button type="submit">Log In</button>
 </form>';
 
 if (isset($error_message)) {
@@ -79,31 +80,8 @@ header {
     padding: 20px;
 }
 
-nav {
-    background-color: #444;
-    color: #fff;
-    padding: 10px;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 20px;
-}
-
 main {
     padding: 20px;
-}
-
-footer {
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    padding: 10px;
 }
 
 .logo {
