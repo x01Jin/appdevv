@@ -27,22 +27,23 @@ echo "<title>(Employee)Dashboard</title>";
 
 echo '
 <div class="content">
-    <header>
-        <h1>EMPLOYEE DASHBOARD</h1>
-        <form method="POST" action="appdev.php">
-            <button type="submit" name="logout">Logout</button>
-        </form>
-    </header>';
+<header>
+<h1>EMPLOYEE DASHBOARD</h1>
+<form method="POST" action="appdev.php">
+<button type="submit" name="logout">Logout</button>
+</form>
+</header>';
 
 echo '
-    <nav>
-    <img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
-        <ul>
-            <li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
-            <li><a href="filler.php"><b>filler</b></a></li>
-            <li><a href="filler.php"><b>filler</b></a></li>
-        </ul>
-    </nav>';
+<nav>
+<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+<ul>
+<li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
+<li><a href="filler.php"><b>filler</b></a></li>
+<li><a href="filler.php"><b>filler</b></a></li>
+</ul>
+</nav>';
+
 echo '<hr><h2>Your Tasks</h2><hr>';
 
 echo '<table border="1">';
@@ -65,10 +66,11 @@ if (empty($tasks)) {
 echo '</table>';
 
 echo '
-    <br><br>
-    <footer>
-        &copy; ' . date("Y") . ' Task Management System By CroixTech
-    </footer>
+<br><br>
+<footer>
+&copy; ' . date("Y") . ' Task Management System By CroixTech
+</footer>
+
 </div>';
 
 echo "

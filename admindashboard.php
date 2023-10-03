@@ -18,6 +18,12 @@ $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 $sql = "SELECT id, description, employee_name, start_date, deadline FROM tasks";
 $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
+$sql = "SELECT profile_picture FROM users WHERE id_number = ?";
+$stmt = $pdo->prepare($sql);
+$stmt->execute([$userID]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$profilePicture = $user['profile_picture'];
+
 echo "<title>(Admin)Dashboard</title>";
 
 echo '
