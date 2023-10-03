@@ -43,6 +43,24 @@ echo '
 </nav>';
 
 echo '
+<hr><h2>Change Profile Picture</h2><hr>
+<form method="POST" action="updatepfp.php" enctype="multipart/form-data">
+<input type="file" name="profile_picture" accept="image/*" required>
+<button type="submit" name="upload">Upload</button>
+</form>';
+
+echo '
+<div class="updatepfp">';
+
+if (!empty($errorMessage)) {
+    echo '<p class="error">' . $errorMessage . '</p>';
+} elseif (!empty($successMessage)) {
+    echo '<p class="success">' . $successMessage . '</p>';
+}
+
+echo '</div>';
+
+echo '
 <footer>
 &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
 </footer>
@@ -139,6 +157,13 @@ footer {
     padding: 10px;
 }
 
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
 </style>
 ";
 
