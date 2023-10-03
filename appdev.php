@@ -12,8 +12,9 @@ if (isset($_POST["logout"])) {
 
 echo "<title>TASK.it</title><br><br><br><br><br>";
 
-echo '<div class="logo">
-    <img src="assets/logo.png" alt="Company Logo">
+echo '
+<div class="logo">
+<img src="assets/logo.png" alt="Company Logo">
 </div><br><br>';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
