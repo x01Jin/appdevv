@@ -69,7 +69,8 @@ echo '
 
 <header>
 <h1>ADD EMPLOYEE</h1>
-</header>';
+</header>
+<br>';
 
 echo '
 <nav>
@@ -86,7 +87,6 @@ echo '
 </nav>';
 
 echo '
-<hr><h2>Add Employee</h2><hr>
 <form method="POST" action="adminaddemployee.php" enctype="multipart/form-data">
 <label for="employee_full_name">Full Name:</label><br><br>
 <input type="text" id="employee_full_name" name="employee_full_name" required><br><br>
