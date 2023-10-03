@@ -110,14 +110,17 @@ body {
 
 table {
     margin: 0 auto;
+    width: 80%;
+    color: white;
 }
 
 table th {
-    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
 }
 
 table td {
-    color: white;
+    padding: 10px;
 }
 
 header {
