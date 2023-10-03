@@ -110,18 +110,6 @@ body {
     display: block;
 }
 
-table {
-    margin: 0 auto;
-}
-
-table th {
-    color: white;
-}
-
-table td {
-    color: white;
-}
-
 header {
     background-color: rgba(51, 51, 51, 0.5);
     color: white;
