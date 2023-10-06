@@ -15,8 +15,13 @@ $errorMessage = $successMessage = "";
 $sql = "SELECT id_number, full_name FROM users WHERE role = 'employee'";
 $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT id, description, employee_name, start_date, deadline, status FROM tasks";
-$tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$sqlOngoing = "SELECT id, description, employee_name, start_date, deadline,
+                status FROM tasks WHERE status IN ('ongoing', 'overdue')";
+$ongoingTasks = $pdo->query($sqlOngoing)->fetchAll(PDO::FETCH_ASSOC);
+
+$sqlFinished = "SELECT id, description, employee_name, start_date, deadline,
+                status FROM tasks WHERE status = 'finished'";
+$finishedTasks = $pdo->query($sqlFinished)->fetchAll(PDO::FETCH_ASSOC);
 
 include_once "pfpfunc.php" ;
 
@@ -63,10 +68,11 @@ foreach ($employees as $employee) {
 echo '
 </table>';
 
-echo '<section id="task-list">
-    <hr><h2>Task List</h2><hr></hr>
+echo '
+<section id="ongoing-tasks">
+    <hr><h2>Ongoing Tasks</h2><hr></hr>
     <table border="1">
-        <caption>List of tasks</caption>
+        <caption>List of ongoing tasks</caption>
         <tr>
             <th>Task ID</th>
             <th>Description</th>
@@ -76,7 +82,39 @@ echo '<section id="task-list">
             <th>Status</th>
         </tr>';
 
-foreach ($tasks as $task) {
+foreach ($ongoingTasks as $task) {
+    echo '
+        <tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
+            <td>' .
+                $task['id'] . TD_SEPARATOR .
+                $task['description'] . TD_SEPARATOR .
+                $task['employee_name'] . TD_SEPARATOR .
+                $task['start_date'] . TD_SEPARATOR .
+                $task['deadline'] . TD_SEPARATOR .
+                $task['status'] .
+            '</td>
+        </tr>';
+}
+
+echo '
+    </table>
+</section>';
+
+echo '
+<section id="finished-tasks">
+    <hr><h2>Finished Tasks</h2><hr></hr>
+    <table border="1">
+        <caption>List of finished tasks</caption>
+        <tr>
+            <th>Task ID</th>
+            <th>Description</th>
+            <th>Employee Name</th>
+            <th>Start Date</th>
+            <th>Deadline</th>
+            <th>Status</th>
+        </tr>';
+
+foreach ($finishedTasks as $task) {
     echo '
         <tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
             <td>' .
