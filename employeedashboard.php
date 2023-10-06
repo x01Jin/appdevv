@@ -9,8 +9,10 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
 }
 
 $errorMessage = $successMessage = "";
+
 $user_id = $_SESSION["user_id"];
-$sql = "SELECT id, description, start_date, deadline FROM tasks WHERE employee_id = ?";
+
+$sql = "SELECT id, description, status, start_date, deadline FROM tasks WHERE employee_id = ?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id]);
 $tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -43,17 +45,22 @@ echo '<hr><h2>Your Tasks</h2><hr>';
 
 echo '<table border="1">';
 
-echo '<tr><th>Description</th><th>Start Date</th><th>Deadline</th></tr>';
+echo '<tr><th>Description</th><th>Status</th><th>Start Date</th><th>Deadline</th></tr>';
 
 if (empty($tasks)) {
     echo '<tr><td colspan="3">No tasks assigned yet.</td></tr>';
 } else {
+    define('TD_SEPARATOR', '</td><td>');
     foreach ($tasks as $task) {
         echo '
             <tr>
-                <td>' . $task['description'] . '</td>
-                <td>' . $task['start_date'] . '</td>
-                <td>' . $task['deadline'] . '</td>
+                <td>' .
+                $task['description'] . TD_SEPARATOR .
+                $task['status'] . TD_SEPARATOR .
+                $task['start_date'] .
+                TD_SEPARATOR .
+                $task['deadline'] .
+                '</td>
             </tr>';
     }
 }
