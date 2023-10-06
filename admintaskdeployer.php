@@ -25,10 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
         employee_id,
         status) VALUES (?, ?, ?, ?, ?, ?)";
 
-    $dueDate = date('Y-m-d', strtotime($deadline . ' +3 days'));
-
-    $initialStatus = ($dueDate >= date('Y-m-d')) ? 'ongoing' : 'overdue';
-
     $stmt = $pdo->prepare($insertTaskSql);
 
     $employeeNameSql = "SELECT full_name FROM users WHERE id_number = ?";
@@ -36,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
     $employeeNameStmt->execute([$employeeId]);
     $employeeName = $employeeNameStmt->fetchColumn();
 
-    if ($stmt->execute([$taskDescription, $employeeName, $startDate, $deadline, $employeeId, $initialStatus])) {
+    if ($stmt->execute([$taskDescription, $employeeName, $startDate, $deadline, $employeeId, 'ongoing'])) {
         $successMessage = "Task deployed successfully.";
         header("Location: admintaskdeployer.php");
     } else {

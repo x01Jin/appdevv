@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2023 at 02:45 PM
+-- Generation Time: Oct 06, 2023 at 04:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,7 +34,7 @@ CREATE TABLE `tasks` (
   `deadline` date NOT NULL,
   `employee_name` varchar(255) NOT NULL,
   `employee_id` varchar(255) NOT NULL,
-  `status` enum('ongoing','finished','overdue','expired') NOT NULL DEFAULT 'ongoing'
+  `status` enum('ongoing','finished') NOT NULL DEFAULT 'ongoing'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -42,7 +42,9 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `employee_name`, `employee_id`, `status`) VALUES
-(10, 'create stuff', '2023-09-30', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing');
+(10, 'create stuff', '2023-09-30', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing'),
+(12, 'kagaguhan', '2023-10-06', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing'),
+(13, 'asdwdwada', '2023-10-06', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing');
 
 -- --------------------------------------------------------
 
@@ -95,7 +97,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
