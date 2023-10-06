@@ -57,8 +57,7 @@ if (empty($tasks)) {
                 <td>' .
                 $task['description'] . TD_SEPARATOR .
                 $task['status'] . TD_SEPARATOR .
-                $task['start_date'] .
-                TD_SEPARATOR .
+                $task['start_date'] . TD_SEPARATOR .
                 $task['deadline'] .
                 '</td>
             </tr>';
