@@ -81,7 +81,7 @@ echo
 echo "
 <style>
 body {
-    background-image: url('assets/admin.jpg');
+    background-image: url('assets/employee.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
