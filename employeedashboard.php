@@ -57,8 +57,8 @@ echo '
     <img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
     <ul>
         <li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
-        <li><a href="filler.php"><b>filler</b></a></li>
-        <li><a href="filler.php"><b>filler</b></a></li>
+        <li><a href="employeeaccountsettings.php"><b>Account settings</b></a></li>
+        <li><a href="employeedashboard.php"><b>filler</b></a></li>
     </ul>
     <form method="POST" action="appdev.php">
         <button type="submit" name="logout">Logout</button>

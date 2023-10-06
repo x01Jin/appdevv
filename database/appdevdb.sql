@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2023 at 04:43 PM
+-- Generation Time: Oct 06, 2023 at 05:47 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,17 +34,18 @@ CREATE TABLE `tasks` (
   `deadline` date NOT NULL,
   `employee_name` varchar(255) NOT NULL,
   `employee_id` varchar(255) NOT NULL,
-  `status` enum('ongoing','finished') NOT NULL DEFAULT 'ongoing'
+  `status` enum('ongoing','finished') NOT NULL DEFAULT 'ongoing',
+  `completion_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `employee_name`, `employee_id`, `status`) VALUES
-(10, 'create stuff', '2023-09-30', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing'),
-(12, 'kagaguhan', '2023-10-06', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing'),
-(13, 'asdwdwada', '2023-10-06', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing');
+INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `employee_name`, `employee_id`, `status`, `completion_date`) VALUES
+(10, 'create stuff', '2023-09-30', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'finished', '2023-10-06'),
+(12, 'kagaguhan', '2023-10-06', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'finished', '2023-10-06'),
+(13, 'asdwdwada', '2023-10-06', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,7 +69,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_number`, `profile_picture`) VALUES
 ('admin', 'Mr. Admin', 'admin@admin.com', '$2y$10$Dqk0dPDeIimXO4zk2OEGN./zh3NbQSmZ8VIROOXG8LmBQBJEaS2C.', 'Admin', '00-0000-000', '651fed5084197_administrator.jpg'),
-('employee', 'Arnaldy Fortin', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '65157f559c80c_mrclean.jpg'),
+('employee', 'Arnaldy Fortin', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '65202bba1bd7d_saitama.jpg'),
 ('employee', 'Spongebob S. Squarepants', 'sponge123@email.com', '$2y$10$HDuxN4Y65KZ0Hxi/p08p.OOCEcztA13Mlo5I.ktsKVep6ZMcZ89Oe', 'BSHM', '69-6969-420', NULL),
 ('employee', 'patrick p. star', 'patrick@email.com', '$2y$10$TnmTHkCw1wLsX7ZwKTawLewyuiHqc8fziEhCJ2NamAaafdkvIRiZ.', 'BSHM', '92-1098-876', '65140e583ddf9_patrick.jpg');
 
