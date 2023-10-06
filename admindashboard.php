@@ -15,7 +15,7 @@ $errorMessage = $successMessage = "";
 $sql = "SELECT id_number, full_name FROM users WHERE role = 'employee'";
 $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-$sql = "SELECT id, description, employee_name, start_date, deadline FROM tasks";
+$sql = "SELECT id, description, employee_name, start_date, deadline, status FROM tasks";
 $tasks = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 include_once "pfpfunc.php" ;
@@ -64,32 +64,34 @@ echo '
 </table>';
 
 echo '<section id="task-list">
-<hr></hr><h2>Task List</h2><hr></hr>
-<table border="1">
-<caption>List of tasks</caption>
-<tr>
-<th>Task ID</th>
-<th>Description</th>
-<th>Employee Name</th>
-<th>Start Date</th>
-<th>Deadline</th>
-</tr>';
+    <hr><h2>Task List</h2><hr></hr>
+    <table border="1">
+        <caption>List of tasks</caption>
+        <tr>
+            <th>Task ID</th>
+            <th>Description</th>
+            <th>Employee Name</th>
+            <th>Start Date</th>
+            <th>Deadline</th>
+            <th>Status</th>
+        </tr>';
 
 foreach ($tasks as $task) {
     echo '
-    <tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
-    <td>' .
-    $task['id'] . TD_SEPARATOR .
-    $task['description'] . TD_SEPARATOR .
-    $task['employee_name'] . TD_SEPARATOR .
-    $task['start_date'] . TD_SEPARATOR .
-    $task['deadline'] .
-    '</td>
-    </tr>';
+        <tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
+            <td>' .
+                $task['id'] . TD_SEPARATOR .
+                $task['description'] . TD_SEPARATOR .
+                $task['employee_name'] . TD_SEPARATOR .
+                $task['start_date'] . TD_SEPARATOR .
+                $task['deadline'] . TD_SEPARATOR .
+                $task['status'] .
+            '</td>
+        </tr>';
 }
 
 echo '
-</table>
+    </table>
 </section>
 <br><br>';
 
