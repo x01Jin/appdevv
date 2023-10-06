@@ -8,6 +8,21 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
     exit();
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["turn_in_task"])) {
+    $taskId = $_POST["task_id"];
+    $completionDate = date('Y-m-d');
+
+    $updateTaskSql = "UPDATE tasks SET status = 'finished', completion_date = ? WHERE id = ?";
+    $stmt = $pdo->prepare($updateTaskSql);
+
+    if ($stmt->execute([$completionDate, $taskId])) {
+        header("Location: employeedashboard.php");
+        $successMessage = "Task turned in successfully.";
+    } else {
+        $errorMessage = "Error turning in task: " . $stmt->errorInfo()[2];
+    }
+}
+
 $errorMessage = $successMessage = "";
 
 $user_id = $_SESSION["user_id"];
@@ -43,6 +58,9 @@ echo '
 
 echo '<hr><h2>Your Tasks</h2><hr>';
 
+echo '<div style="color: green;">' . $successMessage . '</div>';
+echo '<div style="color: red;">' . $errorMessage . '</div>';
+
 echo '<table border="1">';
 
 echo '<tr><th>Description</th><th>Status</th><th>Start Date</th><th>Deadline</th></tr>';
@@ -58,9 +76,17 @@ if (empty($tasks)) {
                 $task['description'] . TD_SEPARATOR .
                 $task['status'] . TD_SEPARATOR .
                 $task['start_date'] . TD_SEPARATOR .
-                $task['deadline'] .
-                '</td>
-            </tr>';
+                $task['deadline'];
+    
+        if ($task['status'] === 'ongoing') {
+            echo '
+                <form method="POST" action="employeedashboard.php">
+                    <input type="hidden" name="task_id" value="' . $task['id'] . '">
+                    <button type="submit" name="turn_in_task">Turn In</button>
+                </form>';
+        }
+    
+        echo '</td></tr>';
     }
 }
 
