@@ -27,12 +27,21 @@ $errorMessage = $successMessage = "";
 
 $user_id = $_SESSION["user_id"];
 
-$sql = "SELECT id, description, status, start_date, deadline FROM tasks WHERE employee_id = ?";
-$stmt = $pdo->prepare($sql);
-$stmt->execute([$user_id]);
-$tasks = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$sqlOngoing = "SELECT id, description, status, start_date,
+                deadline FROM tasks WHERE employee_id = ? AND status = 'ongoing'";
+$stmtOngoing = $pdo->prepare($sqlOngoing);
+$stmtOngoing->execute([$user_id]);
+$ongoingTasks = $stmtOngoing->fetchAll(PDO::FETCH_ASSOC);
+
+$sqlFinished = "SELECT id, description, status, start_date,
+                deadline, completion_date FROM tasks WHERE employee_id = ? AND status = 'finished'";
+$stmtFinished = $pdo->prepare($sqlFinished);
+$stmtFinished->execute([$user_id]);
+$finishedTasks = $stmtFinished->fetchAll(PDO::FETCH_ASSOC);
 
 include_once "pfpfunc.php";
+
+define('TD_SEPARATOR', '</td><td>');
 
 echo "<title>(Employee)Dashboard</title>";
 
@@ -40,53 +49,75 @@ echo '
 <div class="content">
 
 <header>
-<h1>EMPLOYEE DASHBOARD</h1>
+    <h1>EMPLOYEE DASHBOARD</h1>
 </header>';
 
 echo '
 <nav>
-<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
-<ul>
-<li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
-<li><a href="filler.php"><b>filler</b></a></li>
-<li><a href="filler.php"><b>filler</b></a></li>
-</ul>
-<form method="POST" action="appdev.php">
-<button type="submit" name="logout">Logout</button>
-</form>
+    <img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+    <ul>
+        <li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
+        <li><a href="filler.php"><b>filler</b></a></li>
+        <li><a href="filler.php"><b>filler</b></a></li>
+    </ul>
+    <form method="POST" action="appdev.php">
+        <button type="submit" name="logout">Logout</button>
+    </form>
 </nav>';
 
-echo '<hr><h2>Your Tasks</h2><hr>';
+echo '<hr><h2>Ongoing Tasks</h2><hr>';
 
 echo '<div style="color: green;">' . $successMessage . '</div>';
 echo '<div style="color: red;">' . $errorMessage . '</div>';
 
 echo '<table border="1">';
 
-echo '<tr><th>Description</th><th>Status</th><th>Start Date</th><th>Deadline</th></tr>';
+echo '<tr><th>Description</th><th>Status</th><th>Start Date</th><th>Deadline</th><th>Actions</th></tr>';
 
-if (empty($tasks)) {
-    echo '<tr><td colspan="3">No tasks assigned yet.</td></tr>';
+if (empty($ongoingTasks)) {
+    echo '<tr><td colspan="4">No ongoing tasks.</td></tr>';
 } else {
-    define('TD_SEPARATOR', '</td><td>');
-    foreach ($tasks as $task) {
+    foreach ($ongoingTasks as $task) {
         echo '
             <tr>
                 <td>' .
                 $task['description'] . TD_SEPARATOR .
                 $task['status'] . TD_SEPARATOR .
                 $task['start_date'] . TD_SEPARATOR .
-                $task['deadline'];
-    
-        if ($task['status'] === 'ongoing') {
-            echo '
-                <form method="POST" action="employeedashboard.php">
-                    <input type="hidden" name="task_id" value="' . $task['id'] . '">
-                    <button type="submit" name="turn_in_task">Turn In</button>
-                </form>';
-        }
-    
-        echo '</td></tr>';
+                $task['deadline'] .
+                '</td>
+                <td>
+                    <form method="POST" action="employeedashboard.php">
+                        <input type="hidden" name="task_id" value="' . $task['id'] . '">
+                        <button type="submit" name="turn_in_task">Turn In</button>
+                    </form>
+                </td>
+            </tr>';
+    }
+}
+
+echo '</table>';
+
+echo '<hr><h2>Finished Tasks</h2><hr>';
+
+echo '<table border="1">';
+
+echo '<tr><th>Description</th><th>Status</th><th>Start Date</th><th>Deadline</th><th>Completion Date</th></tr>';
+
+if (empty($finishedTasks)) {
+    echo '<tr><td colspan="5">No finished tasks.</td></tr>';
+} else {
+    foreach ($finishedTasks as $task) {
+        echo '
+            <tr>
+                <td>' .
+                $task['description'] . TD_SEPARATOR .
+                $task['status'] . TD_SEPARATOR .
+                $task['start_date'] . TD_SEPARATOR .
+                $task['deadline'] . TD_SEPARATOR .
+                $task['completion_date'] .
+                '</td>
+            </tr>';
     }
 }
 
@@ -95,7 +126,7 @@ echo '</table>';
 echo '
 <br><br>
 <footer>
-&copy; ' . date("Y") . ' Task Management System By CroixTech
+    &copy; ' . date("Y") . ' Task Management System By CroixTech
 </footer>
 
 </div>';
