@@ -55,32 +55,36 @@ echo '
 <tr>
 <th>Full Name</th>
 <th>ID Number</th>
+<th>Action</th>
 </tr>';
 
 foreach ($employees as $employee) {
     echo '
-    <tr>
-    <td>' . $employee['full_name'] . '</td>
-    <td>' . ($employee['id_number'] ? $employee['id_number'] : 'N/A') . '</td>
-    </tr>';
+        <tr>
+        <td>' . $employee['full_name'] . '</td>
+        <td>' . ($employee['id_number'] ? $employee['id_number'] : 'N/A') . '</td>
+        <td>
+        <button class="remove-employee" data-id="' . $employee['id_number'] . '">Remove</button>
+        </td>
+        </tr>';
 }
 
-echo '
-</table>';
+echo '</table>';
 
 echo '
 <section id="ongoing-tasks">
-    <hr><h2>Ongoing Tasks</h2><hr></hr>
-    <table border="1">
-        <caption>List of ongoing tasks</caption>
-        <tr>
-            <th>Task ID</th>
-            <th>Description</th>
-            <th>Employee Name</th>
-            <th>Start Date</th>
-            <th>Deadline</th>
-            <th>Status</th>
-        </tr>';
+<hr><h2>Ongoing Tasks</h2><hr></hr>
+<table border="1">
+<caption>List of ongoing tasks</caption>
+<tr>
+<th>Task ID</th>
+<th>Description</th>
+<th>Employee Name</th>
+<th>Start Date</th>
+<th>Deadline</th>
+<th>Status</th>
+<th>Action</th>
+</tr>';
 
 foreach ($ongoingTasks as $task) {
     echo '
@@ -93,6 +97,9 @@ foreach ($ongoingTasks as $task) {
                 $task['deadline'] . TD_SEPARATOR .
                 $task['status'] .
             '</td>
+            <td>
+                <button class="cancel-task" data-id="' . $task['id'] . '">Cancel</button>
+            </td>
         </tr>';
 }
 
@@ -102,17 +109,18 @@ echo '
 
 echo '
 <section id="finished-tasks">
-    <hr><h2>Finished Tasks</h2><hr></hr>
-    <table border="1">
-        <caption>List of finished tasks</caption>
-        <tr>
-            <th>Task ID</th>
-            <th>Description</th>
-            <th>Employee Name</th>
-            <th>Start Date</th>
-            <th>Deadline</th>
-            <th>Status</th>
-        </tr>';
+<hr><h2>Finished Tasks</h2><hr></hr>
+<table border="1">
+<caption>List of finished tasks</caption>
+<tr>
+<th>Task ID</th>
+<th>Description</th>
+<th>Employee Name</th>
+<th>Start Date</th>
+<th>Deadline</th>
+<th>Status</th>
+<th>Action</th>
+</tr>';
 
 foreach ($finishedTasks as $task) {
     echo '
@@ -125,6 +133,9 @@ foreach ($finishedTasks as $task) {
                 $task['deadline'] . TD_SEPARATOR .
                 $task['status'] .
             '</td>
+            <td>
+                <button class="delete-finished-task" data-id="' . $task['id'] . '">Delete</button>
+            </td>
         </tr>';
 }
 
@@ -256,7 +267,70 @@ echo '
 echo '
 <div class="calendar-popup"></div>';
 
-echo '
+?>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="script.js"></script>';
+<script src="script.js"></script>
+<script>
+    $(document).ready(function() {
+    $(".remove-employee").on("click", function() {
+        var employeeId = $(this).data("id");
+        if (confirm("Are you sure you want to remove this employee and its tasks?")) {
+            $.ajax({
+                url: 'Actions/Admin/RemoveEmployee.php',
+                method: 'POST',
+                data: { employee_id: employeeId },
+                success: function(response) {
+                    alert(response);
+                    location.reload();
+                },
+                error: function(error) {
+                    console.error(error);
+                    alert("An error occurred while removing the employee.");
+                }
+            });
+        }
+    });
+});
+
+$(document).ready(function() {
+$(".cancel-task").on("click", function() {
+    var taskId = $(this).data("id");
+    if (confirm("Are you sure you want to cancel this task?")) {
+        $.ajax({
+            url: 'Actions/Admin/CancelTask.php',
+            method: 'POST',
+            data: { task_id: taskId },
+            success: function(response) {
+                alert(response);
+                location.reload();
+            },
+            error: function(error) {
+                console.error(error);
+                alert("An error occurred while canceling the task.");
+            }
+        });
+    }
+});
+
+$(".delete-finished-task").on("click", function() {
+    var taskId = $(this).data("id");
+        if (confirm("Are you sure you want to delete this finished task?")) {
+            $.ajax({
+                url: 'Actions/Admin/DeleteFinished.php',
+                method: 'POST',
+                data: { task_id: taskId },
+                success: function(response) {
+                    alert(response);
+                    location.reload();
+                },
+                error: function(error) {
+                    console.error(error);
+                    alert("An error occurred while deleting the finished task.");
+                }
+            });
+        }
+    });
+});
+</script>
