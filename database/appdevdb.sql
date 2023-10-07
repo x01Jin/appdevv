@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2023 at 05:47 PM
+-- Generation Time: Oct 08, 2023 at 01:22 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,8 +44,10 @@ CREATE TABLE `tasks` (
 
 INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `employee_name`, `employee_id`, `status`, `completion_date`) VALUES
 (10, 'create stuff', '2023-09-30', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'finished', '2023-10-06'),
-(12, 'kagaguhan', '2023-10-06', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'finished', '2023-10-06'),
-(13, 'asdwdwada', '2023-10-06', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'ongoing', NULL);
+(17, 'adsadzzxcdfgnnhhnhn', '2023-10-07', '2023-10-14', 'Arnaldy Fortin', '12-3456-789', 'ongoing', NULL),
+(25, 'o9o9o9o9o9o', '2023-10-08', '2023-10-24', 'Arnaldy Fortin', '12-3456-789', '', NULL),
+(26, 'kalayaan', '2023-10-08', '2023-10-09', 'employee1', '11-1111-111', 'finished', '2023-10-08'),
+(27, 'katipunan', '2023-10-10', '2023-10-11', 'employee1', '11-1111-111', 'ongoing', NULL);
 
 -- --------------------------------------------------------
 
@@ -69,9 +71,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_number`, `profile_picture`) VALUES
 ('admin', 'Mr. Admin', 'admin@admin.com', '$2y$10$Dqk0dPDeIimXO4zk2OEGN./zh3NbQSmZ8VIROOXG8LmBQBJEaS2C.', 'Admin', '00-0000-000', '651fed5084197_administrator.jpg'),
-('employee', 'Arnaldy Fortin', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '65202bba1bd7d_saitama.jpg'),
-('employee', 'Spongebob S. Squarepants', 'sponge123@email.com', '$2y$10$HDuxN4Y65KZ0Hxi/p08p.OOCEcztA13Mlo5I.ktsKVep6ZMcZ89Oe', 'BSHM', '69-6969-420', NULL),
-('employee', 'patrick p. star', 'patrick@email.com', '$2y$10$TnmTHkCw1wLsX7ZwKTawLewyuiHqc8fziEhCJ2NamAaafdkvIRiZ.', 'BSHM', '92-1098-876', '65140e583ddf9_patrick.jpg');
+('employee', 'employee1', 'emp1@email.com', '$2y$10$qF0XXoeJYIXn.Lp.uxvBruoV.Egl.32HM7xU1X1QR3SiNJ9qi3GFm', 'emp', '11-1111-111', '6521e72607f5e_emp1.jpg'),
+('employee', 'Arnaldy Fortin', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '65202bba1bd7d_saitama.jpg');
 
 --
 -- Indexes for dumped tables
@@ -98,7 +99,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
