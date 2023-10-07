@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["turn_in_task"])) {
     $stmt = $pdo->prepare($updateTaskSql);
 
     if ($stmt->execute([$completionDate, $taskId])) {
-        header("Location: employeedashboard.php");
+        header("Location: EmployeeDashboard.php");
         $successMessage = "Task turned in successfully.";
     } else {
         $errorMessage = "Error turning in task: " . $stmt->errorInfo()[2];
@@ -39,7 +39,7 @@ $stmtFinished = $pdo->prepare($sqlFinished);
 $stmtFinished->execute([$user_id]);
 $finishedTasks = $stmtFinished->fetchAll(PDO::FETCH_ASSOC);
 
-include_once "../../Settings/pfpfunc.php";
+include_once "../../Settings/PfpFunc.php";
 
 define('TD_SEPARATOR', '</td><td>');
 
@@ -56,9 +56,9 @@ echo '
 <nav>
     <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
     <ul>
-        <li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
-        <li><a href="employeeaccountsettings.php"><b>Account settings</b></a></li>
-        <li><a href="employeedashboard.php"><b>Filler</b></a></li>
+        <li><a href="EmployeeDashboard.php"><b>Employee Dashboard</b></a></li>
+        <li><a href="EmployeeAccSettings.php"><b>Account settings</b></a></li>
+        <li><a href="EmployeeDashboard.php"><b>Filler</b></a></li>
     </ul>
     <form method="POST" action="../../index.php">
         <button type="submit" name="logout">Logout</button>
@@ -87,7 +87,7 @@ if (empty($ongoingTasks)) {
                 $task['deadline'] .
                 '</td>
                 <td>
-                    <form method="POST" action="employeedashboard.php">
+                    <form method="POST" action="EmployeeDashboard.php">
                         <input type="hidden" name="task_id" value="' . $task['id'] . '">
                         <button type="submit" name="turn_in_task">Turn In</button>
                     </form>

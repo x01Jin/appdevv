@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
 
     if ($stmt->execute([$taskDescription, $employeeName, $startDate, $deadline, $employeeId, 'ongoing'])) {
         $successMessage = "Task deployed successfully.";
-        header("Location: admintaskdeployer.php");
+        header("Location: TaskDeployer.php");
     } else {
         $errorMessage = "Error deploying task: " . $stmt->errorInfo()[2];
     }
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
 $sql = "SELECT id_number, full_name FROM users WHERE role = 'employee'";
 $employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-include_once "../../Settings/pfpfunc.php" ;
+include_once "../../Settings/PfpFunc.php" ;
 
 echo "<title>(Admin)Task Deployer</title>";
 
@@ -59,10 +59,10 @@ echo '
 <nav>
 <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
-<li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
-<li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-<li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
-<li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
+<li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+<li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
+<li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+<li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
 <form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
@@ -71,7 +71,7 @@ echo '
 
 echo '
 
-<form method="POST" action="admintaskdeployer.php">
+<form method="POST" action="TaskDeployer.php">
 
 <label for="task_description"><h2>Task Description</h2></label>
 <input type="text" id="task_description" name="task_description" required><hr>

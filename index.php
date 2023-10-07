@@ -34,10 +34,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["user_role"] = $user["role"];
 
         if ($user["role"] == "admin") {
-            header("Location: AccountPages/Admin/admindashboard.php");
+            header("Location: AccountPages/Admin/AdminDashboard.php");
             exit();
         } else {
-            header("Location: AccountPages/Employee/employeedashboard.php");
+            header("Location: AccountPages/Employee/EmployeeDashboard.php");
             exit();
         }
     } else {

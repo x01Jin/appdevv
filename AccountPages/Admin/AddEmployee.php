@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
         $employeePassword, $employeeProgram,
         $employeeIdNumber, $profilePicturePath])) {
             $successMessage = "Employee added successfully.";
-            header("Location: adminaddemployee.php");
+            header("Location: AddEmployee.php");
             exit();
         } else {
             $errorMessage = "Error adding employee. Please try again.";
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     }
 }
 
-include_once "../../Settings/pfpfunc.php";
+include_once "../../Settings/PfpFunc.php";
 
 echo "<title>(Admin)Add Employee</title>";
 
@@ -76,10 +76,10 @@ echo '
 <nav>
 <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
-<li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
-<li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-<li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
-<li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
+<li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+<li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
+<li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+<li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
 <form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
@@ -87,7 +87,7 @@ echo '
 </nav>';
 
 echo '
-<form method="POST" action="adminaddemployee.php" enctype="multipart/form-data">
+<form method="POST" action="AddEmployee.php" enctype="multipart/form-data">
 <label for="employee_full_name">Full Name:</label><br><br>
 <input type="text" id="employee_full_name" name="employee_full_name" required><br><br>
 <label for="employee_email">Email:</label><br><br>

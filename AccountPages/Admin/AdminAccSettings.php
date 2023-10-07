@@ -17,7 +17,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id]);
 $accountInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
-include_once "../../Settings/pfpfunc.php" ;
+include_once "../../Settings/PfpFunc.php" ;
 
 echo "<title>(Admin)Account Settings</title>";
 
@@ -32,10 +32,10 @@ echo '
 <nav>
 <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
-<li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
-<li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-<li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
-<li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
+<li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+<li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
+<li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+<li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
 <form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
@@ -44,13 +44,13 @@ echo '
 
 echo '
 <hr><h2>Change Profile Picture</h2><hr>
-<form method="POST" action="../../Settings/updatepfp.php" enctype="multipart/form-data">
+<form method="POST" action="../../Settings/UpdatePfp.php" enctype="multipart/form-data">
 <input type="file" name="profile_picture" accept="image/*" required>
 <button type="submit" name="upload">Upload</button>
 </form>';
 
 echo '
-<div class="updatepfp">';
+<div class="UpdatePfp">';
 
 if (!empty($errorMessage)) {
     echo '<p class="error">' . $errorMessage . '</p>';

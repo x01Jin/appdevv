@@ -49,6 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-header("Location: ../AccountPages/Admin/employeeaccountsettings.php");
+header("Location: ../AccountPages/Admin/EmployeeAccSettings.php");
 
 exit();

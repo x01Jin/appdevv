@@ -23,7 +23,7 @@ $sqlFinished = "SELECT id, description, employee_name, start_date, deadline,
                 status FROM tasks WHERE status = 'finished'";
 $finishedTasks = $pdo->query($sqlFinished)->fetchAll(PDO::FETCH_ASSOC);
 
-include_once "../../Settings/pfpfunc.php" ;
+include_once "../../Settings/PfpFunc.php" ;
 
 echo "<title>(Admin)Dashboard</title>";
 
@@ -38,10 +38,10 @@ echo '
 <nav>
 <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
-<li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
-<li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-<li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
-<li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
+<li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+<li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
+<li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+<li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
 <form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
