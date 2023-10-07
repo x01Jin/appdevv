@@ -1,10 +1,10 @@
 <?php
 
-include_once "db.php";
+include_once "../../db.php";
 
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
@@ -39,7 +39,7 @@ $stmtFinished = $pdo->prepare($sqlFinished);
 $stmtFinished->execute([$user_id]);
 $finishedTasks = $stmtFinished->fetchAll(PDO::FETCH_ASSOC);
 
-include_once "pfpfunc.php";
+include_once "../../Settings/pfpfunc.php";
 
 define('TD_SEPARATOR', '</td><td>');
 
@@ -54,13 +54,13 @@ echo '
 
 echo '
 <nav>
-    <img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+    <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
     <ul>
         <li><a href="employeedashboard.php"><b>Employee Dashboard</b></a></li>
         <li><a href="employeeaccountsettings.php"><b>Account settings</b></a></li>
         <li><a href="employeedashboard.php"><b>Filler</b></a></li>
     </ul>
-    <form method="POST" action="index.php">
+    <form method="POST" action="../../index.php">
         <button type="submit" name="logout">Logout</button>
     </form>
 </nav>';
@@ -98,11 +98,10 @@ if (empty($ongoingTasks)) {
 
 echo '</table>';
 
-echo '<hr><h2>Finished Tasks</h2><hr>';
-
-echo '<table border="1">';
-
-echo '<tr><th>Description</th><th>Status</th><th>Start Date</th><th>Deadline</th><th>Completion Date</th></tr>';
+echo '
+<hr><h2>Finished Tasks</h2><hr>
+<table border="1">
+<tr><th>Description</th><th>Status</th><th>Start Date</th><th>Deadline</th><th>Completion Date</th></tr>';
 
 if (empty($finishedTasks)) {
     echo '<tr><td colspan="5">No finished tasks.</td></tr>';
@@ -134,7 +133,7 @@ echo '
 echo "
 <style>
 body {
-    background-image: url('assets/employee.jpg');
+    background-image: url('../../assets/employee.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
@@ -208,4 +207,4 @@ footer {
 echo '
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="script.js"></script>';
+<script src="../../script.js"></script>';

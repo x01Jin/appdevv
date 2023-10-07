@@ -1,10 +1,10 @@
 <?php
 
-include_once "db.php";
+include_once "../../db.php";
 
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
@@ -17,7 +17,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id]);
 $accountInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
-include_once "pfpfunc.php" ;
+include_once "../../Settings/pfpfunc.php" ;
 
 echo "<title>(Employee)Account Settings</title>";
 
@@ -30,13 +30,13 @@ echo '
 
 echo '
 <nav>
-<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
 <li><a href="employeedashboard.php" style="color:white;"><b>Employee Dashboard</b></a></li>
 <li><a href="employeeaccountsettings.php" style="color:white;"><b>Account settings</b></a></li>
 <li><a href="employeedashboard.php" style="color:white;"><b>Filler</b></a></li>
 </ul>
-<form method="POST" action="index.php">
+<form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
 </form>
 </nav>';
@@ -81,7 +81,7 @@ echo
 echo "
 <style>
 body {
-    background-image: url('assets/employee.jpg');
+    background-image: url('../../assets/employee.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
@@ -169,4 +169,4 @@ footer {
 echo '
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="script.js"></script>';
+<script src="../../script.js"></script>';

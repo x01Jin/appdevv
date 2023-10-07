@@ -1,12 +1,12 @@
 <?php
 
-include_once "db.php";
+include_once "../../db.php";
 
 define('TD_SEPARATOR', '</td><td>');
 
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
@@ -23,7 +23,7 @@ $sqlFinished = "SELECT id, description, employee_name, start_date, deadline,
                 status FROM tasks WHERE status = 'finished'";
 $finishedTasks = $pdo->query($sqlFinished)->fetchAll(PDO::FETCH_ASSOC);
 
-include_once "pfpfunc.php" ;
+include_once "../../Settings/pfpfunc.php" ;
 
 echo "<title>(Admin)Dashboard</title>";
 
@@ -36,14 +36,14 @@ echo '
 
 echo '
 <nav>
-<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
 <li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
 <li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
 <li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
 <li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
-<form method="POST" action="index.php">
+<form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
 </form>
 </nav>';
@@ -155,7 +155,7 @@ echo "
 <style>
 
 body {
-    background-image: url('assets/admin.jpg');
+    background-image: url('../../assets/admin.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
@@ -271,14 +271,14 @@ echo '
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="script.js"></script>
+<script src="../../script.js"></script>
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     $(".remove-employee").on("click", function() {
         var employeeId = $(this).data("id");
         if (confirm("Are you sure you want to remove this employee and its tasks?")) {
             $.ajax({
-                url: 'Actions/Admin/RemoveEmployee.php',
+                url: '../../Actions/Admin/RemoveEmployee.php',
                 method: 'POST',
                 data: { employee_id: employeeId },
                 success: function(response) {
@@ -299,7 +299,7 @@ $(".cancel-task").on("click", function() {
     var taskId = $(this).data("id");
     if (confirm("Are you sure you want to cancel this task?")) {
         $.ajax({
-            url: 'Actions/Admin/CancelTask.php',
+            url: '../../Actions/Admin/CancelTask.php',
             method: 'POST',
             data: { task_id: taskId },
             success: function(response) {
@@ -318,7 +318,7 @@ $(".delete-finished-task").on("click", function() {
     var taskId = $(this).data("id");
         if (confirm("Are you sure you want to delete this finished task?")) {
             $.ajax({
-                url: 'Actions/Admin/DeleteFinished.php',
+                url: '../../Actions/Admin/DeleteFinished.php',
                 method: 'POST',
                 data: { task_id: taskId },
                 success: function(response) {

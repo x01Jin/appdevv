@@ -1,10 +1,10 @@
 <?php
 
-include_once "db.php";
+include_once "../../db.php";
 
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
@@ -17,7 +17,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id]);
 $accountInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
-include_once "pfpfunc.php" ;
+include_once "../../Settings/pfpfunc.php" ;
 
 echo "<title>(Admin)Account Settings</title>";
 
@@ -30,21 +30,21 @@ echo '
 
 echo '
 <nav>
-<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
 <li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
 <li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
 <li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
 <li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
-<form method="POST" action="index.php">
+<form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
 </form>
 </nav>';
 
 echo '
 <hr><h2>Change Profile Picture</h2><hr>
-<form method="POST" action="updatepfp.php" enctype="multipart/form-data">
+<form method="POST" action="../../Settings/updatepfp.php" enctype="multipart/form-data">
 <input type="file" name="profile_picture" accept="image/*" required>
 <button type="submit" name="upload">Upload</button>
 </form>';
@@ -82,7 +82,7 @@ echo
 echo "
 <style>
 body {
-    background-image: url('assets/admin.jpg');
+    background-image: url('../../assets/admin.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
@@ -170,4 +170,4 @@ footer {
 echo '
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="script.js"></script>';
+<script src="../../script.js"></script>';

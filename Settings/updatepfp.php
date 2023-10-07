@@ -3,12 +3,12 @@
 include_once "db.php";
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 
 $user_id = $_SESSION["user_id"];
-$profilePictureDirectory = "profile_pictures/";
+$profilePictureDirectory = "../profile_pictures/";
 if (!file_exists($profilePictureDirectory)) {
     mkdir($profilePictureDirectory, 0755, true);
 }
@@ -47,5 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-header("Location: adminaccountsettings.php");
+header("Location: ../AccountPages/Admin/adminaccountsettings.php");
+
 exit();

@@ -71,7 +71,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+
 echo '<h1>Registration</h1>';
+
 if (!empty($errors)) {
     echo '<div style="color: red;">';
     foreach ($errors as $error) {

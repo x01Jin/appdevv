@@ -1,10 +1,10 @@
 <?php
 
-include_once "db.php";
+include_once "../../db.php";
 
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
-    header("Location: index.php");
+    header("Location: ../../index.php");
     exit();
 }
 
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     $employeeProgram = $_POST["employee_program"];
     $employeeIdNumber = $_POST["employee_id_number"];
     
-    $profilePictureDirectory = "profile_pictures/";
+    $profilePictureDirectory = "../../profile_pictures/";
     if (!file_exists($profilePictureDirectory)) {
         mkdir($profilePictureDirectory, 0755, true);
     }
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
             $errorMessage = "Error uploading profile picture.";
         }
     } else {
-        $profilePicturePath = "profile_pictures/default.jpg";
+        $profilePicturePath = "../../profile_pictures/default.jpg";
     }
     
     $checkUserSql = "SELECT COUNT(*) FROM users WHERE full_name = ? OR email = ?";
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     }
 }
 
-include_once "pfpfunc.php";
+include_once "../../Settings/pfpfunc.php";
 
 echo "<title>(Admin)Add Employee</title>";
 
@@ -74,14 +74,14 @@ echo '
 
 echo '
 <nav>
-<img src="profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
 <li><a href="admindashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
 <li><a href="admintaskdeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
 <li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
 <li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
-<form method="POST" action="index.php">
+<form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
 </form>
 </nav>';
@@ -118,7 +118,7 @@ echo '
 echo "
 <style>
 body {
-    background-image: url('assets/admin.jpg');
+    background-image: url('../../assets/admin.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
@@ -219,4 +219,4 @@ echo '
 echo '
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="script.js"></script>';
+<script src="../../script.js"></script>';
