@@ -4,7 +4,7 @@ include_once "db.php";
 
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
-    header("Location: appdev.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -81,7 +81,7 @@ echo '
 <li><a href="adminaddemployee.php" style="color:white;"><b>Add Employee</b></a></li>
 <li><a href="adminaccountsettings.php" style="color:white;"><b>Account Settings</b></a></li>
 </ul>
-<form method="POST" action="appdev.php">
+<form method="POST" action="index.php">
 <button type="submit" name="logout">Logout</button>
 </form>
 </nav>';

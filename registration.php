@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bindParam(6, $id_number, PDO::PARAM_STR);
         $stmt->bindParam(7, $profilePictureFileName, PDO::PARAM_STR);
         if ($stmt->execute()) {
-            header("Location: appdev.php");
+            header("Location: index.php");
             exit();
         } else {
             $errors[] = "Registration failed. Please try again later.";
@@ -112,7 +112,7 @@ echo '
     </br></br>
     <button type="submit">Register</button>
 </form>
-<a href="appdev.php" style="color:white;"><b>Have an Account? Log in</b></a>';
+<a href="index.php" style="color:white;"><b>Have an Account? Log in</b></a>';
 
 echo "
 <style>

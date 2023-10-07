@@ -6,7 +6,7 @@ session_start();
 
 if (isset($_POST["logout"])) {
     session_destroy();
-    header("Location: appdev.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 echo '
-<form action="appdev.php" method="POST">
+<form action="index.php" method="POST">
 <label for="email"><b>Email:</b></label></br>
 <input type="email" id="email" name="email" required>
 </br></br>

@@ -4,7 +4,7 @@ include_once "db.php";
 
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
-    header("Location: appdev.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -60,7 +60,7 @@ echo '
         <li><a href="employeeaccountsettings.php"><b>Account settings</b></a></li>
         <li><a href="employeedashboard.php"><b>Filler</b></a></li>
     </ul>
-    <form method="POST" action="appdev.php">
+    <form method="POST" action="index.php">
         <button type="submit" name="logout">Logout</button>
     </form>
 </nav>';
