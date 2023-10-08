@@ -22,13 +22,18 @@ include_once "../../Settings/PfpFunc.php" ;
 echo "<title>(Employee)Account Settings</title>";
 
 echo '
-<div class="content">
+<div class="thebox">
 
 <header>
 <h1>ACCOUNT SETTINGS</h1>
-</header>';
+</header>
+
+</div>';
 
 echo '
+
+<div class="content">
+
 <nav>
 <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
 <ul>
@@ -59,21 +64,23 @@ if (!empty($errorMessage)) {
 
 echo '</div>';
 
-echo '
+?>
+
 <footer>
 &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
 </footer>
 
-</div>';
+<?php
+
+echo '</div>';
 
 echo
 '<div class="account-info">' .
-
-'<h2>Current Account Information:</h2>' .
-'<p><strong>Role:</strong> ' . $accountInfo["role"] . '</p>' .
-'<p><strong>ID Number:</strong> ' . $accountInfo["id_number"] . '</p>' .
-'<p><strong>Full Name:</strong> ' . $accountInfo["full_name"] . '</p>' .
-'<p><strong>Email:</strong> ' . $accountInfo["email"] . '</p>' .
+'<h2>Current Account Information:</h2><br><br>' .
+'<p><strong>Role:</strong> ' . $accountInfo["role"] . '</p>' . '<br>' .
+'<p><strong>ID Number:</strong> ' . $accountInfo["id_number"] . '</p>' . '<br>' .
+'<p><strong>Full Name:</strong> ' . $accountInfo["full_name"] . '</p>' . '<br>' .
+'<p><strong>Email:</strong> ' . $accountInfo["email"] . '</p>' . '<br>' .
 '<p><strong>Program:</strong> ' . $accountInfo["program"] . '</p>' .
 
 '<div>';
@@ -91,12 +98,14 @@ body {
 
 .account-info {
     text-align: left;
-    margin-top: 50px;
-    float: right;
     width: 300px;
+    height: 100%;
     padding: 20px;
-    background-color: rgba(51, 51, 51, 0.8);
+    background-color: rgba(51, 51, 51, 0.5);
     color: white;
+    position: fixed;
+    top: 168px;
+    right: 0;
 }
 
 .profile-picture {
@@ -114,8 +123,16 @@ header {
     padding: 20px;
 }
 
+.thebox {
+    margin-left: 200px;
+    padding: 20px;
+    background-color: rgba(51, 51, 51, 0.5);
+    color: white;
+}
+
 .content {
     margin-left: 200px;
+    margin-right: 332px;
     padding: 20px;
     background-color: rgba(51, 51, 51, 0.5);
     color: white;
