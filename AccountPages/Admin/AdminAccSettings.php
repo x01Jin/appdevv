@@ -63,6 +63,18 @@ if (!empty($errorMessage)) {
     echo '<p class="success">' . $successMessage . '</p>';
 }
 
+echo '
+<hr><h2>Update Account Information</h2><hr>
+<form method="POST" action="../../Settings/UpdateAccount.php">
+    <label for="full_name">Full Name:</label><br><br>
+    <input type="text" name="full_name" value="' . $accountInfo["full_name"] . '" required><br>
+    <br>
+    <label for="email">Email:</label><br><br>
+    <input type="email" name="email" value="' . $accountInfo["email"] . '" required><br>
+    <br>
+    <button type="submit" name="update_account">Update Account</button>
+</form>';
+
 echo '</div>';
 
 ?>
