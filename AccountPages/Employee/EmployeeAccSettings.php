@@ -98,14 +98,14 @@ body {
 
 .account-info {
     text-align: left;
-    width: 300px;
+    width: 292px;
     height: 100%;
     padding: 20px;
     background-color: rgba(51, 51, 51, 0.5);
     color: white;
     position: fixed;
-    top: 168px;
-    right: 0;
+    top: 167px;
+    right: 8;
 }
 
 .profile-picture {
