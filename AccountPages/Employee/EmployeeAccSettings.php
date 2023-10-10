@@ -74,8 +74,10 @@ echo '</div>';
 
 if (!empty($errorMessage)) {
     echo '<div id="dialog" title="Error">' . $errorMessage . '</div>';
+    unset($_SESSION["errorMessage"]);
 } elseif (!empty($successMessage)) {
     echo '<div id="dialog" title="Success">' . $successMessage . '</div>';
+    unset($_SESSION["successMessage"]);
 }
 
 ?>
