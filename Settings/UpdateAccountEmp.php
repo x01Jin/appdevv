@@ -13,9 +13,9 @@ if (isset($_POST["update_account"])) {
     $stmt = $pdo->prepare($sql);
 
     if ($stmt->execute([$full_name, $email, $user_id])) {
-        $successMessage = "Account information updated successfully.";
+        $_SESSION["successMessage"] = "Account information updated successfully.";
     } else {
-        $errorMessage = "Failed to update account information.";
+        $_SESSION["errorMessage"] = "Failed to update account information.";
     }
 }
 
