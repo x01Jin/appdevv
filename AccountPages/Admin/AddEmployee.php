@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
         if ($stmt->execute([$employeeFullName, $employeeEmail,
         $employeePassword, $employeeProgram,
         $employeeIdNumber, $profilePicturePath])) {
-            $successMessage = "Employee added successfully.";
+            $_SESSION["successMessage"] = "Employee added successfully.";
             header("Location: AddEmployee.php");
             exit();
         } else {
@@ -86,6 +86,13 @@ echo '
 </form>
 </nav>';
 
+if (isset($_SESSION["successMessage"])) {
+    echo '<div style="color: green;">' . $_SESSION["successMessage"] . '</div>';
+    unset($_SESSION["successMessage"]);
+} elseif (isset($errorMessage)) {
+    echo '<div style="color: red;">' . $errorMessage . '</div>';
+}
+
 echo '
 <form method="POST" action="AddEmployee.php" enctype="multipart/form-data">
 <label for="employee_full_name">Full Name:</label><br><br>
@@ -103,17 +110,13 @@ echo '
 <button type="submit" name="add_employee">Add Employee</button>
 </form>';
 
-if (isset($successMessage)) {
-    echo '<div style="color: green;">' . $successMessage . '</div>';
-} else {
-    echo '<div style="color: red;">' . $errorMessage . '</div>';
-}
+?>
 
-echo '
 <footer>
-&copy; ' . date("Y") . ' Task Management System By CroixTech
+&copy; <?php echo date("Y"); ?> Task Management System By CroixTech
 </footer>
-</div>';
+
+<?php
 
 echo "
 <style>
@@ -172,7 +175,7 @@ nav ul li {
 
 nav ul li a {
     text-decoration: none;
-    color: #333;
+    color: dark charcoal;
     display: block;
     padding: 5px;
 }
@@ -186,25 +189,6 @@ footer {
     color: white;
     text-align: center;
     padding: 10px;
-}
-
-.task-preview {
-    display: none;
-    position: absolute;
-    background-color: rgba(249, 249, 249, 0.8);
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 1;
-    color: black;
-}
-
-.calendar-popup {
-    display: none;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 1;
 }
 
 </style>

@@ -186,13 +186,6 @@ footer {
     padding: 10px;
 }
 
-.error {
-    color: red;
-}
-
-.success {
-    color: green;
-}
 </style>
 ";
 
