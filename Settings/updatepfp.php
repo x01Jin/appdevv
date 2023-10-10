@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
 
-            $successMessage = "Profile picture updated successfully.";
+            $_SESSION["successMessage"] = "Profile picture updated successfully.";
         } else {
             $errors[] = "Failed to upload the profile picture.";
         }

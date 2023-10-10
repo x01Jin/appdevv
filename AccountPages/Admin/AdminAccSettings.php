@@ -3,12 +3,14 @@
 include_once "../../db.php";
 
 session_start();
+
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
     header("Location: ../../index.php");
     exit();
 }
 
-$errorMessage = $successMessage = "";
+$successMessage = $_SESSION["successMessage"] ?? "";
+$errorMessage = $_SESSION["errorMessage"] ?? "";
 
 $user_id = $_SESSION["user_id"];
 
@@ -57,12 +59,6 @@ echo '
 echo '
 <div class="UpdatePfp">';
 
-if (!empty($errorMessage)) {
-    echo '<p class="error">' . $errorMessage . '</p>';
-} elseif (!empty($successMessage)) {
-    echo '<p class="success">' . $successMessage . '</p>';
-}
-
 echo '
 <hr><h2>Update Account Information</h2><hr>
 <form method="POST" action="../../Settings/UpdateAccount.php">
@@ -76,6 +72,12 @@ echo '
 </form>';
 
 echo '</div>';
+
+if (!empty($errorMessage)) {
+    echo '<div id="dialog" title="Error">' . $errorMessage . '</div>';
+} elseif (!empty($successMessage)) {
+    echo '<div id="dialog" title="Success">' . $successMessage . '</div>';
+}
 
 ?>
 
@@ -186,10 +188,72 @@ footer {
     padding: 10px;
 }
 
+#dialog {
+    display: none;
+    padding: 10px;
+    background-color: #333;
+}
+
+.ui-dialog {
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.2);
+}
+
+.ui-widget-overlay {
+    background-color: rgba(10, 10, 10, 0.9) !important;
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+    float: none;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+    text-align: center;
+    padding: 5px;
+}
+
+.ui-dialog-buttonset button {
+    background-color: white;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
 </style>
 ";
 
-echo '
+?>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../../script.js"></script>';
+<script src="../../script.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#dialog").dialog({
+      autoOpen: false,
+      modal: true,
+      width: '400',
+      height: '100',
+      position: {
+        my: "center",
+        at: "center",
+        of: window
+      },
+      buttons: {
+        Close: function() {
+          $(this).dialog("close");
+        }
+      }
+    });
+
+    <?php if (!empty($errorMessage) || !empty($successMessage)) : ?>
+      $("#dialog").html('<?php echo addslashes($errorMessage . $successMessage); ?>');
+      $("#dialog").dialog("option", "title", '<?php echo (!empty($errorMessage)) ? "Error" : "Success!"; ?>');
+      $("#dialog").dialog("open");
+      $(".ui-dialog-titlebar-close").remove();
+    <?php endif; ?>
+  });
+</script>
