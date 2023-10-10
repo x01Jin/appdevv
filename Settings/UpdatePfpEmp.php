@@ -11,6 +11,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "employee") {
 
 $user_id = $_SESSION["user_id"];
 $profilePictureDirectory = "../profile_pictures/";
+
 if (!file_exists($profilePictureDirectory)) {
     mkdir($profilePictureDirectory, 0755, true);
 }
@@ -40,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             }
 
-            $successMessage = "Profile picture updated successfully.";
+            $_SESSION["successMessage"] = "Profile picture updated successfully.";
         } else {
             $errors[] = "Failed to upload the profile picture.";
         }
@@ -49,6 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-header("Location: ../AccountPages/Admin/EmployeeAccSettings.php");
+header("Location: ../AccountPages/Employee/EmployeeAccSettings.php");
 
 exit();
