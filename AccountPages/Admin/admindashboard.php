@@ -23,20 +23,20 @@ $sqlFinished = "SELECT id, description, employee_name, start_date, deadline,
                 status FROM tasks WHERE status = 'finished'";
 $finishedTasks = $pdo->query($sqlFinished)->fetchAll(PDO::FETCH_ASSOC);
 
-include_once "../../Settings/PfpFunc.php" ;
+include_once "../../Settings/PfpFunc.php";
 
-echo "<title>(Admin)Dashboard</title>";
+?>
 
-echo '
+<title>(Admin)Dashboard</title>
+
 <div class="content">
 
 <header>
 <h1>ADMIN DASHBOARD</h1>
-</header>';
+</header>
 
-echo '
 <nav>
-<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
+<?php echo '<img src="../../profile_pictures/' . $profilePicture  . '" alt="Profile Picture" class="profile-picture">' ?>
 <ul>
 <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
 <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
@@ -46,9 +46,8 @@ echo '
 <form method="POST" action="../../index.php">
 <button type="submit" name="logout">Logout</button>
 </form>
-</nav>';
+</nav>
 
-echo '
 <hr><h2>Employee List</h2><hr>
 <table border="1">
 <caption>List of employees</caption>
@@ -56,7 +55,9 @@ echo '
 <th>Full Name</th>
 <th>ID Number</th>
 <th>Action</th>
-</tr>';
+</tr>
+
+<?php
 
 foreach ($employees as $employee) {
     echo '
@@ -69,9 +70,10 @@ foreach ($employees as $employee) {
         </tr>';
 }
 
-echo '</table>';
+?>
 
-echo '
+</table>
+
 <section id="ongoing-tasks">
 <hr><h2>Ongoing Tasks</h2><hr></hr>
 <table border="1">
@@ -84,7 +86,9 @@ echo '
 <th>Deadline</th>
 <th>Status</th>
 <th>Action</th>
-</tr>';
+</tr>
+
+<?php
 
 foreach ($ongoingTasks as $task) {
     echo '
@@ -103,11 +107,11 @@ foreach ($ongoingTasks as $task) {
         </tr>';
 }
 
-echo '
-    </table>
-</section>';
+?>
 
-echo '
+</table>
+</section>
+
 <section id="finished-tasks">
 <hr><h2>Finished Tasks</h2><hr></hr>
 <table border="1">
@@ -120,7 +124,9 @@ echo '
 <th>Deadline</th>
 <th>Status</th>
 <th>Action</th>
-</tr>';
+</tr>
+
+<?php
 
 foreach ($finishedTasks as $task) {
     echo '
@@ -139,19 +145,19 @@ foreach ($finishedTasks as $task) {
         </tr>';
 }
 
-echo '
-    </table>
-</section>
-<br><br>';
+?>
 
-echo '
+</table>
+</section>
+
+<br><br>
+
 <footer>
 &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
 </footer>
 
-</div>';
+</div>
 
-echo "
 <style>
 
 body {
@@ -218,7 +224,6 @@ nav ul {
 }
 
 nav ul li {
-    display: ;
     margin-bottom: 10px;
 }
 
@@ -259,15 +264,10 @@ footer {
     z-index: 1;
 }
 </style>
-";
 
-echo '
-<div class="task-preview"></div>';
+<div class="task-preview"></div>
 
-echo '
-<div class="calendar-popup"></div>';
-
-?>
+<div class="calendar-popup"></div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
