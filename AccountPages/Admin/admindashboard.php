@@ -30,239 +30,237 @@ include_once "../../Settings/PfpFunc.php";
 <title>(Admin)Dashboard</title>
 
 <div class="content">
+    <header>
+    <h1>ADMIN DASHBOARD</h1>
+    </header>
 
-<header>
-<h1>ADMIN DASHBOARD</h1>
-</header>
+    <nav>
+        <?php
+        echo '<img src="../../profile_pictures/' . $profilePicture  . '" alt="Profile Picture" class="profile-picture">'
+        ?>
+        <ul>
+            <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+            <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
+            <li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+            <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
+        </ul>
+        <form method="POST" action="../../index.php">
+            <button type="submit" name="logout">Logout</button>
+        </form>
+    </nav>
 
-<nav>
-<?php echo '<img src="../../profile_pictures/' . $profilePicture  . '" alt="Profile Picture" class="profile-picture">' ?>
-<ul>
-<li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
-<li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-<li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
-<li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
-</ul>
-<form method="POST" action="../../index.php">
-<button type="submit" name="logout">Logout</button>
-</form>
-</nav>
-
-<hr><h2>Employee List</h2><hr>
-<table border="1">
-<caption>List of employees</caption>
-<tr>
-<th>Full Name</th>
-<th>ID Number</th>
-<th>Action</th>
-</tr>
-
-<?php
-
-foreach ($employees as $employee) {
-    echo '
+    <hr><h2>Employee List</h2><hr>
+    <table border="1">
+        <caption>List of employees</caption>
         <tr>
-        <td>' . $employee['full_name'] . '</td>
-        <td>' . ($employee['id_number'] ? $employee['id_number'] : 'N/A') . '</td>
-        <td>
-        <button class="remove-employee" data-id="' . $employee['id_number'] . '">Remove</button>
-        </td>
-        </tr>';
-}
+            <th>Full Name</th>
+            <th>ID Number</th>
+            <th>Action</th>
+        </tr>
 
-?>
+        <?php
 
-</table>
+        foreach ($employees as $employee) {
+            echo '
+                <tr>
+                <td>' . $employee['full_name'] . '</td>
+                <td>' . ($employee['id_number'] ? $employee['id_number'] : 'N/A') . '</td>
+                <td>
+                <button class="remove-employee" data-id="' . $employee['id_number'] . '">Remove</button>
+                </td>
+                </tr>';
+        }
 
-<section id="ongoing-tasks">
-<hr><h2>Ongoing Tasks</h2><hr></hr>
-<table border="1">
-<caption>List of ongoing tasks</caption>
-<tr>
-<th>Task ID</th>
-<th>Description</th>
-<th>Employee Name</th>
-<th>Start Date</th>
-<th>Deadline</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
+        ?>
+    </table>
 
-<?php
+    <section id="ongoing-tasks">
+        <hr><h2>Ongoing Tasks</h2><hr></hr>
+        <table border="1">
+            <caption>List of ongoing tasks</caption>
+            <tr>
+                <th>Task ID</th>
+                <th>Description</th>
+                <th>Employee Name</th>
+                <th>Start Date</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
 
-foreach ($ongoingTasks as $task) {
-    echo '
-        <tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
-            <td>' .
-                $task['id'] . TD_SEPARATOR .
-                $task['description'] . TD_SEPARATOR .
-                $task['employee_name'] . TD_SEPARATOR .
-                $task['start_date'] . TD_SEPARATOR .
-                $task['deadline'] . TD_SEPARATOR .
-                $task['status'] .
-            '</td>
-            <td>
-                <button class="cancel-task" data-id="' . $task['id'] . '">Cancel</button>
-            </td>
-        </tr>';
-}
+            <?php
 
-?>
+            foreach ($ongoingTasks as $task) {
+                echo '
+                    <tr class="task-row" data-start-date="' .
+                    $task['start_date'] . '" data-deadline="' .
+                    $task['deadline'] . '">
+                        <td>' .
+                            $task['id'] . TD_SEPARATOR .
+                            $task['description'] . TD_SEPARATOR .
+                            $task['employee_name'] . TD_SEPARATOR .
+                            $task['start_date'] . TD_SEPARATOR .
+                            $task['deadline'] . TD_SEPARATOR .
+                            $task['status'] .
+                        '</td>
+                        <td>
+                            <button class="cancel-task" data-id="' . $task['id'] . '">Cancel</button>
+                        </td>
+                    </tr>';
+            }
 
-</table>
-</section>
+            ?>
+        </table>
+    </section>
 
-<section id="finished-tasks">
-<hr><h2>Finished Tasks</h2><hr></hr>
-<table border="1">
-<caption>List of finished tasks</caption>
-<tr>
-<th>Task ID</th>
-<th>Description</th>
-<th>Employee Name</th>
-<th>Start Date</th>
-<th>Deadline</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
+    <section id="finished-tasks">
+        <hr><h2>Finished Tasks</h2><hr></hr>
+        <table border="1">
+            <caption>List of finished tasks</caption>
+            <tr>
+                <th>Task ID</th>
+                <th>Description</th>
+                <th>Employee Name</th>
+                <th>Start Date</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
 
-<?php
+            <?php
 
-foreach ($finishedTasks as $task) {
-    echo '
-        <tr class="task-row" data-start-date="' . $task['start_date'] . '" data-deadline="' . $task['deadline'] . '">
-            <td>' .
-                $task['id'] . TD_SEPARATOR .
-                $task['description'] . TD_SEPARATOR .
-                $task['employee_name'] . TD_SEPARATOR .
-                $task['start_date'] . TD_SEPARATOR .
-                $task['deadline'] . TD_SEPARATOR .
-                $task['status'] .
-            '</td>
-            <td>
-                <button class="delete-finished-task" data-id="' . $task['id'] . '">Delete</button>
-            </td>
-        </tr>';
-}
+            foreach ($finishedTasks as $task) {
+                echo '
+                    <tr class="task-row" data-start-date="' .
+                    $task['start_date'] . '" data-deadline="' .
+                    $task['deadline'] . '">
+                        <td>' .
+                            $task['id'] . TD_SEPARATOR .
+                            $task['description'] . TD_SEPARATOR .
+                            $task['employee_name'] . TD_SEPARATOR .
+                            $task['start_date'] . TD_SEPARATOR .
+                            $task['deadline'] . TD_SEPARATOR .
+                            $task['status'] .
+                        '</td>
+                        <td>
+                            <button class="delete-finished-task" data-id="' . $task['id'] . '">Delete</button>
+                        </td>
+                    </tr>';
+            }
 
-?>
-
-</table>
-</section>
-
-<br><br>
-
-<footer>
-&copy; <?php echo date("Y"); ?> Task Management System By CroixTech
-</footer>
-
+            ?>
+        </table>
+    </section>
+    <br><br>
+    <footer>
+        &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
+    </footer>
 </div>
 
 <style>
+    body {
+        background-image: url('../../assets/admin.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+    }
 
-body {
-    background-image: url('../../assets/admin.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: white;
-}
+    .profile-picture {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 20px auto;
+        display: block;
+    }
 
-.profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: 20px auto;
-    display: block;
-}
+    table {
+        margin: 0 auto;
+        width: 80%;
+        color: white;
+    }
 
-table {
-    margin: 0 auto;
-    width: 80%;
-    color: white;
-}
+    table th {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+    }
 
-table th {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-}
+    table td {
+        padding: 10px;
+    }
 
-table td {
-    padding: 10px;
-}
+    header {
+        background-color: rgba(51, 51, 51, 0.5);
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
 
-header {
-    background-color: rgba(51, 51, 51, 0.5);
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
+    .content {
+        margin-left: 200px;
+        padding: 20px;
+        background-color: rgba(51, 51, 51, 0.5);
+        color: white;
+    }
 
-.content {
-    margin-left: 200px;
-    padding: 20px;
-    background-color: rgba(51, 51, 51, 0.5);
-    color: white;
-}
+    nav {
+        background-color: rgba(20, 20, 20, 100);
+        color: white;
+        padding: 10px;
+        float: left;
+        width: 200px;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
 
-nav {
-    background-color: rgba(20, 20, 20, 100);
-    color: white;
-    padding: 10px;
-    float: left;
-    width: 200px;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
+    nav ul {
+        list-style: none;
+        padding: 0;
+    }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-}
+    nav ul li {
+        margin-bottom: 10px;
+    }
 
-nav ul li {
-    margin-bottom: 10px;
-}
+    nav ul li a {
+        text-decoration: none;
+        color: #333;
+        display: block;
+        padding: 5px;
+    }
 
-nav ul li a {
-    text-decoration: none;
-    color: #333;
-    display: block;
-    padding: 5px;
-}
+    main {
+        padding: 20px;
+    }
 
-main {
-    padding: 20px;
-}
+    footer {
+        background-color: rgba(51, 51, 51, 0.8);
+        color: white;
+        text-align: center;
+        padding: 10px;
+    }
 
-footer {
-    background-color: rgba(51, 51, 51, 0.8);
-    color: white;
-    text-align: center;
-    padding: 10px;
-}
+    .task-preview {
+        display: none;
+        position: absolute;
+        background-color: rgba(249, 249, 249, 0.8);
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 1;
+        color: black;
+    }
 
-.task-preview {
-    display: none;
-    position: absolute;
-    background-color: rgba(249, 249, 249, 0.8);
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 1;
-    color: black;
-}
-
-.calendar-popup {
-    display: none;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid #ccc;
-    padding: 10px;
-    z-index: 1;
-}
+    .calendar-popup {
+        display: none;
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid #ccc;
+        padding: 10px;
+        z-index: 1;
+    }
 </style>
 
 <div class="task-preview"></div>
@@ -273,52 +271,33 @@ footer {
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="../../script.js"></script>
 <script>
-$(document).ready(function() {
-    $(".remove-employee").on("click", function() {
-        var employeeId = $(this).data("id");
-        if (confirm("Are you sure you want to remove this employee and its tasks?")) {
-            $.ajax({
-                url: '../../Actions/Admin/RemoveEmployee.php',
-                method: 'POST',
-                data: { employee_id: employeeId },
-                success: function(response) {
-                    alert(response);
-                    location.reload();
-                },
-                error: function(error) {
-                    console.error(error);
-                    alert("An error occurred while removing the employee.");
-                }
-            });
-        }
-    });
-});
-
-$(document).ready(function() {
-$(".cancel-task").on("click", function() {
-    var taskId = $(this).data("id");
-    if (confirm("Are you sure you want to cancel this task?")) {
-        $.ajax({
-            url: '../../Actions/Admin/CancelTask.php',
-            method: 'POST',
-            data: { task_id: taskId },
-            success: function(response) {
-                alert(response);
-                location.reload();
-            },
-            error: function(error) {
-                console.error(error);
-                alert("An error occurred while canceling the task.");
+    $(document).ready(function() {
+        $(".remove-employee").on("click", function() {
+            var employeeId = $(this).data("id");
+            if (confirm("Are you sure you want to remove this employee and its tasks?")) {
+                $.ajax({
+                    url: '../../Actions/Admin/RemoveEmployee.php',
+                    method: 'POST',
+                    data: { employee_id: employeeId },
+                    success: function(response) {
+                        alert(response);
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.error(error);
+                        alert("An error occurred while removing the employee.");
+                    }
+                });
             }
         });
-    }
-});
+    });
 
-$(".delete-finished-task").on("click", function() {
-    var taskId = $(this).data("id");
-        if (confirm("Are you sure you want to delete this finished task?")) {
+    $(document).ready(function() {
+    $(".cancel-task").on("click", function() {
+        var taskId = $(this).data("id");
+        if (confirm("Are you sure you want to cancel this task?")) {
             $.ajax({
-                url: '../../Actions/Admin/DeleteFinished.php',
+                url: '../../Actions/Admin/CancelTask.php',
                 method: 'POST',
                 data: { task_id: taskId },
                 success: function(response) {
@@ -327,10 +306,29 @@ $(".delete-finished-task").on("click", function() {
                 },
                 error: function(error) {
                     console.error(error);
-                    alert("An error occurred while deleting the finished task.");
+                    alert("An error occurred while canceling the task.");
                 }
             });
         }
     });
-});
+
+    $(".delete-finished-task").on("click", function() {
+        var taskId = $(this).data("id");
+            if (confirm("Are you sure you want to delete this finished task?")) {
+                $.ajax({
+                    url: '../../Actions/Admin/DeleteFinished.php',
+                    method: 'POST',
+                    data: { task_id: taskId },
+                    success: function(response) {
+                        alert(response);
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.error(error);
+                        alert("An error occurred while deleting the finished task.");
+                    }
+                });
+            }
+        });
+    });
 </script>
