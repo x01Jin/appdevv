@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2023 at 01:22 AM
+-- Generation Time: Oct 19, 2023 at 01:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -56,7 +56,7 @@ INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `employee_na
 --
 
 CREATE TABLE `users` (
-  `role` enum('admin','employee') NOT NULL DEFAULT 'employee',
+  `role` enum('adviser','student','headoffice') NOT NULL DEFAULT 'student',
   `full_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -70,9 +70,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_number`, `profile_picture`) VALUES
-('admin', 'Mr. Admin', 'admin@admin.com', '$2y$10$Dqk0dPDeIimXO4zk2OEGN./zh3NbQSmZ8VIROOXG8LmBQBJEaS2C.', 'Admin', '00-0000-000', '651fed5084197_administrator.jpg'),
-('employee', 'employee1', 'emp1@email.com', '$2y$10$qF0XXoeJYIXn.Lp.uxvBruoV.Egl.32HM7xU1X1QR3SiNJ9qi3GFm', 'emp', '11-1111-111', '6521e72607f5e_emp1.jpg'),
-('employee', 'Arnaldy Fortin', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '65202bba1bd7d_saitama.jpg');
+('adviser', 'Ms. Administrator', 'admin@admin.com', '$2y$10$zxysxERJOxqVibfSe9ltDer/DzTaW6nltjfbB.Sz7LbTaEcuz58Ei', 'Admin', '00-0000-000', '651fed5084197_administrator.jpg'),
+('student', 'employee1', 'emp1@email.com', '$2y$10$qF0XXoeJYIXn.Lp.uxvBruoV.Egl.32HM7xU1X1QR3SiNJ9qi3GFm', 'emp', '11-1111-111', '6521e72607f5e_emp1.jpg'),
+('headoffice', 'Mr. Marlo', 'Marlo@reg.com', '$2y$10$DjAEDkHFIAJuFfZZItyFwuWDEmB1OfrzuX4YdTWY8Y6F5MFRdvJZK', 'Registrar', '11-2222-333', '6531041397834_marlo.jpg'),
+('student', 'Arnaldy', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '652feb9745184_download.jpg'),
+('student', 'employee2', 'emp2@email.com', '$2y$10$p8KwrrcvA7Ai.fT2i/PjV.qhMcj.A4UDXFiN6wX0U/9dn696.0HjW', 'emp', '22-2222-222', '../../profile_pictures/default.jpg');
 
 --
 -- Indexes for dumped tables

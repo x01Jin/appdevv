@@ -110,6 +110,7 @@ echo '
     <select id="role" name="role" required>
         <option value="employee">Employee</option>
         <option value="admin">Admin</option>
+        <option value="headoffice">Head Office</option>
     </select>
     </br></br>
     <button type="submit">Register</button>
