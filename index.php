@@ -33,11 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["username"] = $user["full_name"];
         $_SESSION["user_role"] = $user["role"];
 
-        if ($user["role"] == "admin") {
+        if ($user["role"] == "adviser") {
             header("Location: AccountPages/Admin/AdminDashboard.php");
             exit();
-        } else {
+        } elseif ($user["role"] == "student") {
             header("Location: AccountPages/Employee/EmployeeDashboard.php");
+            exit();
+        } else {
+            header("Location: AccountPages/HeadOffice/HeadOfficeDashboard.php");
             exit();
         }
     } else {

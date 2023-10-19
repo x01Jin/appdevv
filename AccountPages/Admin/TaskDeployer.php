@@ -3,7 +3,7 @@
 include_once "../../db.php";
 
 session_start();
-if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
+if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "adviser") {
     header("Location: ../../index.php");
     exit();
 }
@@ -12,7 +12,7 @@ $errorMessage = $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
     $taskDescription = $_POST["task_description"];
-    $employeeId = $_POST["employee_id"];
+    $StudentID = $_POST["employee_id"];
     $startDate = $_POST["start_date"];
     $deadline = $_POST["deadline"];
 
@@ -29,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
 
     $employeeNameSql = "SELECT full_name FROM users WHERE id_number = ?";
     $employeeNameStmt = $pdo->prepare($employeeNameSql);
-    $employeeNameStmt->execute([$employeeId]);
-    $employeeName = $employeeNameStmt->fetchColumn();
+    $employeeNameStmt->execute([$StudentID]);
+    $StudentName = $employeeNameStmt->fetchColumn();
 
-    if ($stmt->execute([$taskDescription, $employeeName, $startDate, $deadline, $employeeId, 'ongoing'])) {
+    if ($stmt->execute([$taskDescription, $StudentName, $startDate, $deadline, $StudentID, 'ongoing'])) {
         $successMessage = "Task deployed successfully.";
         header("Location: TaskDeployer.php");
     } else {
@@ -40,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
     }
 }
 
-$sql = "SELECT id_number, full_name FROM users WHERE role = 'employee'";
-$employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
+$students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 include_once "../../Settings/PfpFunc.php" ;
 
@@ -78,8 +78,8 @@ echo '
 <label for="employee_id"><h2>Assign to Employee</h2></label>
 <select id="employee_id" name="employee_id" required>';
 
-foreach ($employees as $employee) {
-    echo '<option value="' . $employee['id_number'] . '">' . $employee['full_name'] . '</option>';
+foreach ($students as $student) {
+    echo '<option value="' . $student['id_number'] . '">' . $student['full_name'] . '</option>';
 }
 
 echo '

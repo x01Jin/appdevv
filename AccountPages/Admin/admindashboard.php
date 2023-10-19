@@ -5,15 +5,15 @@ include_once "../../db.php";
 define('TD_SEPARATOR', '</td><td>');
 
 session_start();
-if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
+if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "adviser") {
     header("Location: ../../index.php");
     exit();
 }
 
 $errorMessage = $successMessage = "";
 
-$sql = "SELECT id_number, full_name FROM users WHERE role = 'employee'";
-$employees = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+$sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
+$students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $sqlOngoing = "SELECT id, description, employee_name, start_date, deadline,
                 status FROM tasks WHERE status IN ('ongoing', 'overdue')";
@@ -60,13 +60,13 @@ include_once "../../Settings/PfpFunc.php";
 
         <?php
 
-        foreach ($employees as $employee) {
+        foreach ($students as $student) {
             echo '
                 <tr>
-                <td>' . $employee['full_name'] . '</td>
-                <td>' . ($employee['id_number'] ? $employee['id_number'] : 'N/A') . '</td>
+                <td>' . $student['full_name'] . '</td>
+                <td>' . ($student['id_number'] ? $student['id_number'] : 'N/A') . '</td>
                 <td>
-                <button class="remove-employee" data-id="' . $employee['id_number'] . '">Remove</button>
+                <button class="remove-employee" data-id="' . $student['id_number'] . '">Remove</button>
                 </td>
                 </tr>';
         }

@@ -3,7 +3,7 @@
 include_once "../../db.php";
 
 session_start();
-if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "admin") {
+if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "adviser") {
     header("Location: ../../index.php");
     exit();
 }
