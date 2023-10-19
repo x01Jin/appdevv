@@ -16,7 +16,7 @@ $sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
 $students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $sqlOngoing = "SELECT id, description, employee_name, start_date, deadline,
-                status FROM tasks WHERE status IN ('ongoing', 'overdue')";
+                status FROM tasks WHERE status IN ('ongoing')";
 $ongoingTasks = $pdo->query($sqlOngoing)->fetchAll(PDO::FETCH_ASSOC);
 
 $sqlFinished = "SELECT id, description, employee_name, start_date, deadline,
