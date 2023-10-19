@@ -81,10 +81,10 @@ if (empty($ongoingTasks)) {
         echo '
             <tr>
                 <td>' .
-                $task['description'] . TD_SEPARATOR .
-                $task['status'] . TD_SEPARATOR .
-                $task['start_date'] . TD_SEPARATOR .
-                $task['deadline'] .
+                    $task['description'] . TD_SEPARATOR .
+                    $task['status'] . TD_SEPARATOR .
+                    $task['start_date'] . TD_SEPARATOR .
+                    $task['deadline'] .
                 '</td>
                 <td>
                     <form method="POST" action="EmployeeDashboard.php">

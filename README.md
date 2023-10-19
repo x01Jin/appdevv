@@ -15,14 +15,8 @@ Unlimited Blade Works."
 
 -Shiro Emiya
 
-MariaDB [(none)]> use appdevdb
-Database changed
-MariaDB [appdevdb]> show create table users;
-
-| Table | Create Table     
-
 | users | CREATE TABLE `users` (
-  `role` enum('admin','employee') NOT NULL DEFAULT 'employee',
+  `role` enum('adviser','student','headoffice') NOT NULL DEFAULT 'student',
   `full_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -30,13 +24,7 @@ MariaDB [appdevdb]> show create table users;
   `id_number` varchar(255) NOT NULL,
   `profile_picture` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci |
-
-1 row in set (0.000 sec)
-
-MariaDB [appdevdb]> show create table tasks;
-
-| Table | Create Table
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci 
 
 | tasks | CREATE TABLE `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -50,8 +38,4 @@ MariaDB [appdevdb]> show create table tasks;
   PRIMARY KEY (`id`),
   KEY `tasks_ibfk_1` (`employee_id`),
   CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `users` (`id_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci |
-
-1 row in set (0.001 sec)
-
-MariaDB [appdevdb]>
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci 

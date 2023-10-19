@@ -16,7 +16,7 @@ $sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
 $students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
 $sqlOngoing = "SELECT id, description, employee_name, start_date, deadline,
-                status FROM tasks WHERE status IN ('ongoing', 'overdue')";
+                status FROM tasks WHERE status IN ('ongoing')";
 $ongoingTasks = $pdo->query($sqlOngoing)->fetchAll(PDO::FETCH_ASSOC);
 
 $sqlFinished = "SELECT id, description, employee_name, start_date, deadline,
@@ -77,7 +77,8 @@ include_once "../../Settings/PfpFunc.php";
                             $task['status'] .
                         '</td>
                         <td>
-                            <button class="cancel-task" data-id="' . $task['id'] . '">Cancel</button>
+                            <button class="cancel-task" data-id="' . $task['id'] . '">Ongoing</button>
+                            <button class="cancel-task" data-id="' . $task['id'] . '">Finalize</button>
                         </td>
                     </tr>';
             }
@@ -206,65 +207,3 @@ include_once "../../Settings/PfpFunc.php";
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="../../script.js"></script>
-<script>
-    $(document).ready(function() {
-        $(".remove-employee").on("click", function() {
-            var employeeId = $(this).data("id");
-            if (confirm("Are you sure you want to remove this employee and its tasks?")) {
-                $.ajax({
-                    url: '../../Actions/Admin/RemoveEmployee.php',
-                    method: 'POST',
-                    data: { employee_id: employeeId },
-                    success: function(response) {
-                        alert(response);
-                        location.reload();
-                    },
-                    error: function(error) {
-                        console.error(error);
-                        alert("An error occurred while removing the employee.");
-                    }
-                });
-            }
-        });
-    });
-
-    $(document).ready(function() {
-    $(".cancel-task").on("click", function() {
-        var taskId = $(this).data("id");
-        if (confirm("Are you sure you want to cancel this task?")) {
-            $.ajax({
-                url: '../../Actions/Admin/CancelTask.php',
-                method: 'POST',
-                data: { task_id: taskId },
-                success: function(response) {
-                    alert(response);
-                    location.reload();
-                },
-                error: function(error) {
-                    console.error(error);
-                    alert("An error occurred while canceling the task.");
-                }
-            });
-        }
-    });
-
-    $(".delete-finished-task").on("click", function() {
-        var taskId = $(this).data("id");
-            if (confirm("Are you sure you want to delete this finished task?")) {
-                $.ajax({
-                    url: '../../Actions/Admin/DeleteFinished.php',
-                    method: 'POST',
-                    data: { task_id: taskId },
-                    success: function(response) {
-                        alert(response);
-                        location.reload();
-                    },
-                    error: function(error) {
-                        console.error(error);
-                        alert("An error occurred while deleting the finished task.");
-                    }
-                });
-            }
-        });
-    });
-</script>
