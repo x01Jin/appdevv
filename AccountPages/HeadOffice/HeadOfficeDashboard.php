@@ -87,6 +87,10 @@ include_once "../../Settings/PfpFunc.php";
     </footer>
 </div>
 
+<div class="task-preview"></div>
+
+<div class="calendar-popup"></div>
+
 <style>
     body {
         background-image: url('../../assets/admin.jpg');
@@ -193,10 +197,6 @@ include_once "../../Settings/PfpFunc.php";
     }
 </style>
 
-<div class="task-preview"></div>
-
-<div class="calendar-popup"></div>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="../../script.js"></script>
@@ -214,7 +214,7 @@ include_once "../../Settings/PfpFunc.php";
                     location.reload();
                 },
                 error: function(xhr, status, error) {
-                    
+
                 }
             });
         });
