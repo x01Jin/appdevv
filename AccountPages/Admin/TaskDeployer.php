@@ -52,8 +52,7 @@ include_once "../../Settings/PfpFunc.php" ;
 <div class="content">
     <header>
     <h1>REQUEST TASK</h1>
-    </header>';
-
+    </header>
 
     <nav>
         <?php
