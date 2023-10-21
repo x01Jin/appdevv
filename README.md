@@ -18,7 +18,7 @@ Unlimited Blade Works."
 | Table | Create Table
 
 | users | CREATE TABLE `users` (
-  `role` enum('adviser','student','headoffice', 'placeholder') NOT NULL DEFAULT 'student',
+  `role` enum('adviser','student','headoffice','placeholder') NOT NULL DEFAULT 'student',
   `full_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -42,4 +42,4 @@ Unlimited Blade Works."
   PRIMARY KEY (`id`),
   KEY `tasks_ibfk_1` (`student_id`),
   CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`id_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci |
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci |
