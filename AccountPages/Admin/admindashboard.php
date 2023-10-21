@@ -85,7 +85,6 @@ include_once "../../Settings/PfpFunc.php";
                 <th>Start Date</th>
                 <th>Deadline</th>
                 <th>Status</th>
-                <th>Action</th>
             </tr>
 
             <?php
@@ -103,9 +102,6 @@ include_once "../../Settings/PfpFunc.php";
                             $task['deadline'] . TD_SEPARATOR .
                             $task['status'] .
                         '</td>
-                        <td>
-                            <button class="cancel-task" data-id="' . $task['id'] . '">Cancel</button>
-                        </td>
                     </tr>';
             }
 
@@ -242,34 +238,10 @@ include_once "../../Settings/PfpFunc.php";
         text-align: center;
         padding: 10px;
     }
-
-    .task-preview {
-        display: none;
-        position: absolute;
-        background-color: rgba(249, 249, 249, 0.8);
-        border: 1px solid #ccc;
-        padding: 10px;
-        z-index: 1;
-        color: black;
-    }
-
-    .calendar-popup {
-        display: none;
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.8);
-        border: 1px solid #ccc;
-        padding: 10px;
-        z-index: 1;
-    }
 </style>
-
-<div class="task-preview"></div>
-
-<div class="calendar-popup"></div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../../script.js"></script>
 <script>
     $(document).ready(function() {
         $(".remove-employee").on("click", function() {
@@ -293,25 +265,6 @@ include_once "../../Settings/PfpFunc.php";
     });
 
     $(document).ready(function() {
-    $(".cancel-task").on("click", function() {
-        var taskId = $(this).data("id");
-        if (confirm("Are you sure you want to cancel this task?")) {
-            $.ajax({
-                url: '../../Actions/Admin/CancelTask.php',
-                method: 'POST',
-                data: { task_id: taskId },
-                success: function(response) {
-                    alert(response);
-                    location.reload();
-                },
-                error: function(error) {
-                    console.error(error);
-                    alert("An error occurred while canceling the task.");
-                }
-            });
-        }
-    });
-
     $(".delete-finished-task").on("click", function() {
         var taskId = $(this).data("id");
             if (confirm("Are you sure you want to delete this finished task?")) {

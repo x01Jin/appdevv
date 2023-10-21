@@ -70,8 +70,9 @@ include_once "../../Settings/PfpFunc.php";
                             $task['status'] .
                         '</td>
                         <td>
-                            <button class="update-task" data-id="' . $task['id'] . '">Ongoing</button>
-                            <button class="update-task" data-id="' . $task['id'] . '">Finalize</button>
+                            <button class="update-task" data-id="' . $task['id'] . '">Ongoing</button><br><br>
+                            <button class="update-task" data-id="' . $task['id'] . '">Finished</button><br><br>
+                            <button class="cancel-task" data-id="' . $task['id'] . '">Cancel</button>
                         </td>
                     </tr>';
             }
@@ -87,13 +88,9 @@ include_once "../../Settings/PfpFunc.php";
     </footer>
 </div>
 
-<div class="task-preview"></div>
-
-<div class="calendar-popup"></div>
-
 <style>
     body {
-        background-image: url('../../assets/admin.jpg');
+        background-image: url('../../assets/taskitbg.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         font-family: Arial, sans-serif;
@@ -176,47 +173,51 @@ include_once "../../Settings/PfpFunc.php";
         text-align: center;
         padding: 10px;
     }
-
-    .task-preview {
-        display: none;
-        position: absolute;
-        background-color: rgba(249, 249, 249, 0.8);
-        border: 1px solid #ccc;
-        padding: 10px;
-        z-index: 1;
-        color: black;
-    }
-
-    .calendar-popup {
-        display: none;
-        position: absolute;
-        background-color: rgba(255, 255, 255, 0.8);
-        border: 1px solid #ccc;
-        padding: 10px;
-        z-index: 1;
-    }
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../../script.js"></script>
 <script>
     $(document).ready(function() {
         $(".update-task").click(function() {
             var taskId = $(this).data("id");
             var action = $(this).text();
-
+        if (confirm("Are you sure you want to update the status of this task?")) {
             $.ajax({
                 url: "../../Actions/HeadOffice/UpdateTaskStatus.php",
                 method: "POST",
                 data: { taskId: taskId, action: action },
-                success: function(data) {
+                success: function(response) {
+                    alert(response);
                     location.reload();
                 },
-                error: function(xhr, status, error) {
-
+                error: function(error) {
+                    console.error(error);
+                    alert("An error occurred while canceling the task.");
                 }
             });
-        });
+        }
     });
+});
+
+$(document).ready(function() {
+    $(".cancel-task").on("click", function() {
+        var taskId = $(this).data("id");
+        if (confirm("Are you sure you want to cancel this task?")) {
+            $.ajax({
+                url: '../../Actions/HeadOffice/CancelTask.php',
+                method: 'POST',
+                data: { task_id: taskId },
+                success: function(response) {
+                    alert(response);
+                    location.reload();
+                },
+                error: function(error) {
+                    console.error(error);
+                    alert("An error occurred while canceling the task.");
+                }
+            });
+        }
+    });
+})
 </script>
