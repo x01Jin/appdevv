@@ -12,16 +12,9 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "headoffice") {
 
 $errorMessage = $successMessage = "";
 
-$sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
-$students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-$sqlOngoing = "SELECT id, description, employee_name, start_date, deadline,
-                status FROM tasks WHERE status IN ('ongoing')";
-$ongoingTasks = $pdo->query($sqlOngoing)->fetchAll(PDO::FETCH_ASSOC);
-
-$sqlFinished = "SELECT id, description, employee_name, start_date, deadline,
-                status FROM tasks WHERE status = 'finished'";
-$finishedTasks = $pdo->query($sqlFinished)->fetchAll(PDO::FETCH_ASSOC);
+$sqlTasks = "SELECT id, description, employee_name, start_date, deadline, status
+              FROM tasks WHERE status IN ('ongoing', 'finished')";
+$allTasks = $pdo->query($sqlTasks)->fetchAll(PDO::FETCH_ASSOC);
 
 include_once "../../Settings/PfpFunc.php";
 
@@ -48,13 +41,13 @@ include_once "../../Settings/PfpFunc.php";
     </nav>
 
     <section id="ongoing-tasks">
-        <hr><h2>Ongoing Tasks</h2><hr></hr>
+        <hr><h2>Requested Tasks</h2><hr></hr>
         <table border="1">
-            <caption>List of ongoing tasks</caption>
+            <caption>List of Requested tasks</caption>
             <tr>
                 <th>Task ID</th>
                 <th>Description</th>
-                <th>Employee Name</th>
+                <th>Student Name</th>
                 <th>Start Date</th>
                 <th>Deadline</th>
                 <th>Status</th>
@@ -63,7 +56,7 @@ include_once "../../Settings/PfpFunc.php";
 
             <?php
 
-            foreach ($ongoingTasks as $task) {
+            foreach ($allTasks as $task) {
                 echo '
                     <tr class="task-row" data-start-date="' .
                     $task['start_date'] . '" data-deadline="' .
@@ -77,8 +70,8 @@ include_once "../../Settings/PfpFunc.php";
                             $task['status'] .
                         '</td>
                         <td>
-                            <button class="cancel-task" data-id="' . $task['id'] . '">Ongoing</button>
-                            <button class="cancel-task" data-id="' . $task['id'] . '">Finalize</button>
+                            <button class="update-task" data-id="' . $task['id'] . '">Ongoing</button>
+                            <button class="update-task" data-id="' . $task['id'] . '">Finalize</button>
                         </td>
                     </tr>';
             }
@@ -207,3 +200,26 @@ include_once "../../Settings/PfpFunc.php";
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="../../script.js"></script>
+<script>
+    $(document).ready(function() {
+        // Add a click event listener to the "Update" buttons in the table
+        $(".update-task").click(function() {
+            var taskId = $(this).data("id");
+            var action = $(this).text(); // "Ongoing" or "Finalize"
+
+            // Send an AJAX request to update the task status
+            $.ajax({
+                url: "../../Actions/HeadOffice/UpdateTaskStatus.php", // Create a PHP script to handle the update
+                method: "POST",
+                data: { taskId: taskId, action: action },
+                success: function(data) {
+                    // Reload the table to show updated data
+                    location.reload();
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors if necessary
+                }
+            });
+        });
+    });
+</script>
