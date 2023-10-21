@@ -8,19 +8,6 @@
             "previewLimit": 50,
             "server": "localhost",
             "port": 3306,
-            "driver": "MariaDB",
-            "database": "appdevdb",
-            "username": "root",
-            "name": "appdev"
-        },
-        {
-            "mysqlOptions": {
-                "authProtocol": "default",
-                "enableSsl": "Disabled"
-            },
-            "previewLimit": 50,
-            "server": "localhost",
-            "port": 3306,
             "driver": "MySQL",
             "database": "appdevdb",
             "username": "root",
