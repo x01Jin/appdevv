@@ -8,10 +8,10 @@
             "previewLimit": 50,
             "server": "localhost",
             "port": 3306,
-            "driver": "MySQL",
+            "driver": "MariaDB",
+            "name": "appdevdb",
             "database": "appdevdb",
             "username": "root",
-            "name": "appdevdb",
             "password": ""
         }
     ]
