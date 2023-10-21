@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2023 at 01:55 PM
+-- Generation Time: Oct 21, 2023 at 11:05 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,8 +32,8 @@ CREATE TABLE `tasks` (
   `description` varchar(255) NOT NULL,
   `start_date` date NOT NULL,
   `deadline` date NOT NULL,
-  `employee_name` varchar(255) NOT NULL,
-  `employee_id` varchar(255) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `student_id` varchar(255) NOT NULL,
   `status` enum('ongoing','finished') NOT NULL DEFAULT 'ongoing',
   `completion_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -42,12 +42,10 @@ CREATE TABLE `tasks` (
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `employee_name`, `employee_id`, `status`, `completion_date`) VALUES
+INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `student_name`, `student_id`, `status`, `completion_date`) VALUES
 (10, 'create stuff', '2023-09-30', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'finished', '2023-10-06'),
-(17, 'adsadzzxcdfgnnhhnhn', '2023-10-07', '2023-10-14', 'Arnaldy Fortin', '12-3456-789', 'ongoing', NULL),
-(25, 'o9o9o9o9o9o', '2023-10-08', '2023-10-24', 'Arnaldy Fortin', '12-3456-789', '', NULL),
-(26, 'kalayaan', '2023-10-08', '2023-10-09', 'employee1', '11-1111-111', 'finished', '2023-10-08'),
-(27, 'katipunan', '2023-10-10', '2023-10-11', 'employee1', '11-1111-111', 'ongoing', NULL);
+(26, 'kalayaan', '2023-10-08', '2023-10-09', 'employee1', '11-1111-111', 'ongoing', '2023-10-08'),
+(27, 'katipunan', '2023-10-10', '2023-10-11', 'employee1', '11-1111-111', 'finished', '2023-10-11');
 
 -- --------------------------------------------------------
 
@@ -74,7 +72,8 @@ INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_nu
 ('student', 'employee1', 'emp1@email.com', '$2y$10$qF0XXoeJYIXn.Lp.uxvBruoV.Egl.32HM7xU1X1QR3SiNJ9qi3GFm', 'emp', '11-1111-111', '6521e72607f5e_emp1.jpg'),
 ('headoffice', 'Mr. Marlo', 'Marlo@reg.com', '$2y$10$DjAEDkHFIAJuFfZZItyFwuWDEmB1OfrzuX4YdTWY8Y6F5MFRdvJZK', 'Registrar', '11-2222-333', '6531041397834_marlo.jpg'),
 ('student', 'Arnaldy', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '652feb9745184_download.jpg'),
-('student', 'employee2', 'emp2@email.com', '$2y$10$p8KwrrcvA7Ai.fT2i/PjV.qhMcj.A4UDXFiN6wX0U/9dn696.0HjW', 'emp', '22-2222-222', '../../profile_pictures/default.jpg');
+('student', 'employee2', 'emp2@email.com', '$2y$10$p8KwrrcvA7Ai.fT2i/PjV.qhMcj.A4UDXFiN6wX0U/9dn696.0HjW', 'emp', '22-2222-222', '../../profile_pictures/default.jpg'),
+('student', 'employee3', 'emp3@email.com', '$2y$10$1uKB67ZICW39zCJLHj8lP.rV7tNJe/KZPdbu9O3MO8j9PspDinf8e', 'bsbs', '98-5466-344', '../../profile_pictures/default.jpg');
 
 --
 -- Indexes for dumped tables
@@ -85,7 +84,7 @@ INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_nu
 --
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `tasks_ibfk_1` (`employee_id`);
+  ADD KEY `tasks_ibfk_1` (`student_id`);
 
 --
 -- Indexes for table `users`
@@ -101,7 +100,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Constraints for dumped tables
@@ -111,7 +110,7 @@ ALTER TABLE `tasks`
 -- Constraints for table `tasks`
 --
 ALTER TABLE `tasks`
-  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`employee_id`) REFERENCES `users` (`id_number`);
+  ADD CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`id_number`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

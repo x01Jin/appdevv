@@ -12,27 +12,27 @@ $errorMessage = $successMessage = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
     $taskDescription = $_POST["task_description"];
-    $StudentID = $_POST["employee_id"];
+    $studentID = $_POST["student_id"];
     $startDate = $_POST["start_date"];
     $deadline = $_POST["deadline"];
 
     $insertTaskSql = "
     INSERT INTO tasks (
         description,
-        employee_name,
+        student_name,
         start_date,
         deadline,
-        employee_id,
+        student_id,
         status) VALUES (?, ?, ?, ?, ?, ?)";
 
     $stmt = $pdo->prepare($insertTaskSql);
 
-    $employeeNameSql = "SELECT full_name FROM users WHERE id_number = ?";
-    $employeeNameStmt = $pdo->prepare($employeeNameSql);
-    $employeeNameStmt->execute([$StudentID]);
-    $StudentName = $employeeNameStmt->fetchColumn();
+    $studentNameSql = "SELECT full_name FROM users WHERE id_number = ?";
+    $studentNameStmt = $pdo->prepare($studentNameSql);
+    $studentNameStmt->execute([$studentID]);
+    $studentName = $studentNameStmt->fetchColumn();
 
-    if ($stmt->execute([$taskDescription, $StudentName, $startDate, $deadline, $StudentID, 'ongoing'])) {
+    if ($stmt->execute([$taskDescription, $studentName, $startDate, $deadline, $studentID, 'ongoing'])) {
         $successMessage = "Task deployed successfully.";
         header("Location: TaskDeployer.php");
     } else {
@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
 $sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
 $students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-include_once "../../Settings/PfpFunc.php" ;
+include_once "../../Settings/PfpFunc.php";
 
 ?>
 
@@ -61,7 +61,7 @@ include_once "../../Settings/PfpFunc.php" ;
         <ul>
             <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
             <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-            <li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+            <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
             <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>
         <form method="POST" action="../../index.php">
@@ -72,8 +72,8 @@ include_once "../../Settings/PfpFunc.php" ;
     <form method="POST" action="TaskDeployer.php">
         <label for="task_description"><h2>Task Description</h2></label>
         <input type="text" id="task_description" name="task_description" required><hr>
-        <label for="employee_id"><h2>Assign to Employee</h2></label>
-        <select id="employee_id" name="employee_id" required>';
+        <label for="student_id"><h2>Assign to Student</h2></label>
+        <select id="student_id" name="student_id" required>';
             <?php
             foreach ($students as $student) {
                 echo '<option value="' . $student['id_number'] . '">' . $student['full_name'] . '</option>';

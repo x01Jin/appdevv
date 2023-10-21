@@ -10,20 +10,20 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "adviser") {
 
 $errorMessage = $successMessage = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
-    $employeeFullName = $_POST["employee_full_name"];
-    $employeeEmail = $_POST["employee_email"];
-    $employeePassword = password_hash($_POST["employee_password"], PASSWORD_DEFAULT);
-    $employeeProgram = $_POST["employee_program"];
-    $employeeIdNumber = $_POST["employee_id_number"];
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_student"])) {
+    $studentFullName = $_POST["student_full_name"];
+    $studentEmail = $_POST["student_email"];
+    $studentPassword = password_hash($_POST["student_password"], PASSWORD_DEFAULT);
+    $studentProgram = $_POST["student_program"];
+    $studentIdNumber = $_POST["student_id_number"];
     
     $profilePictureDirectory = "../../profile_pictures/";
     if (!file_exists($profilePictureDirectory)) {
         mkdir($profilePictureDirectory, 0755, true);
     }
     
-    $profilePictureName = $_FILES["employee_profile_picture"]["name"];
-    $profilePictureTmpName = $_FILES["employee_profile_picture"]["tmp_name"];
+    $profilePictureName = $_FILES["student_profile_picture"]["name"];
+    $profilePictureTmpName = $_FILES["student_profile_picture"]["tmp_name"];
     
     if (!empty($profilePictureName)) {
         $uniqueProfilePictureName = uniqid() . '_' . $profilePictureName;
@@ -39,23 +39,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     
     $checkUserSql = "SELECT COUNT(*) FROM users WHERE full_name = ? OR email = ?";
     $stmt = $pdo->prepare($checkUserSql);
-    $stmt->execute([$employeeFullName, $employeeEmail]);
+    $stmt->execute([$studentFullName, $studentEmail]);
     $count = $stmt->fetchColumn();
     if ($count > 0) {
         $errorMessage = "Full name or email already exists. Please choose a different full name or email.";
     } else {
-        $insertEmployeeSql = "
+        $insertStudentSql = "
         INSERT INTO users (full_name, email, password, role, program, id_number, profile_picture)
         VALUES (?, ?, ?, 'student', ?, ?, ?)";
-        $stmt = $pdo->prepare($insertEmployeeSql);
-        if ($stmt->execute([$employeeFullName, $employeeEmail,
-        $employeePassword, $employeeProgram,
-        $employeeIdNumber, $profilePicturePath])) {
-            $_SESSION["successMessage"] = "Employee added successfully.";
-            header("Location: AddEmployee.php");
+        $stmt = $pdo->prepare($insertStudentSql);
+        if ($stmt->execute([$studentFullName, $studentEmail,
+        $studentPassword, $studentProgram,
+        $studentIdNumber, $profilePicturePath])) {
+            $_SESSION["successMessage"] = "Student added successfully.";
+            header("Location: AddStudent.php");
             exit();
         } else {
-            $errorMessage = "Error adding employee. Please try again.";
+            $errorMessage = "Error adding student. Please try again.";
         }
     }
 }
@@ -64,11 +64,11 @@ include_once "../../Settings/PfpFunc.php";
 
 ?>
 
-<title>(Admin)Add Employee</title>
+<title>(Admin)Add Student</title>
 
 <div class="content">
 <header>
-    <h1>ADD EMPLOYEE</h1>
+    <h1>ADD STUDENT</h1>
 </header>
 <br>
 <nav>
@@ -78,7 +78,7 @@ include_once "../../Settings/PfpFunc.php";
     <ul>
         <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
         <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-        <li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+        <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
         <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
     </ul>
     <form method="POST" action="../../index.php">
@@ -95,20 +95,20 @@ if (isset($_SESSION["successMessage"])) {
 }
 ?>
 
-<form method="POST" action="AddEmployee.php" enctype="multipart/form-data">
-    <label for="employee_full_name">Full Name:</label><br><br>
-    <input type="text" id="employee_full_name" name="employee_full_name" required><br><br>
-    <label for="employee_email">Email:</label><br><br>
-    <input type="email" id="employee_email" name="employee_email" required><br><br>
-    <label for="employee_program">Program:</label><br><br>
-    <input type="text" id="employee_program" name="employee_program" required><br><br>
-    <label for="employee_id_number">ID Number:</label><br><br>
-    <input type="text" id="employee_id_number" name="employee_id_number" required><br><br>
-    <label for="employee_password">Password:</label><br><br>
-    <input type="password" id="employee_password" name="employee_password" required><br><br>
-    <label for="employee_profile_picture">Profile Picture:</label><br><br>
-    <input type="file" id="employee_profile_picture" name="employee_profile_picture"><br><br>
-    <button type="submit" name="add_employee">Add Employee</button>
+<form method="POST" action="AddStudent.php" enctype="multipart/form-data">
+    <label for="student_full_name">Full Name:</label><br><br>
+    <input type="text" id="student_full_name" name="student_full_name" required><br><br>
+    <label for="student_email">Email:</label><br><br>
+    <input type="email" id="student_email" name="student_email" required><br><br>
+    <label for="student_program">Program:</label><br><br>
+    <input type="text" id="student_program" name="student_program" required><br><br>
+    <label for="student_id_number">ID Number:</label><br><br>
+    <input type="text" id="student_id_number" name="student_id_number" required><br><br>
+    <label for="student_password">Password:</label><br><br>
+    <input type="password" id="student_password" name="student_password" required><br><br>
+    <label for="student_profile_picture">Profile Picture:</label><br><br>
+    <input type="file" id="student_profile_picture" name="student_profile_picture"><br><br>
+    <button type="submit" name="add_student">Add Student</button>
 </form>
 
 <footer>

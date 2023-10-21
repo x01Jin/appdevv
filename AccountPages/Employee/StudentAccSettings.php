@@ -4,7 +4,7 @@ include_once "../../db.php";
 
 session_start();
 
-if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "adviser") {
+if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "student") {
     header("Location: ../../index.php");
     exit();
 }
@@ -19,11 +19,11 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute([$user_id]);
 $accountInfo = $stmt->fetch(PDO::FETCH_ASSOC);
 
-include_once "../../Settings/PfpFunc.php";
+include_once "../../Settings/PfpFunc.php" ;
 
 ?>
 
-<title>(Admin)Account Settings</title>
+<title>(Student)Account Settings</title>
 
 <div class="thebox">
     <header>
@@ -37,10 +37,9 @@ include_once "../../Settings/PfpFunc.php";
         <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">'
         ?>
         <ul>
-            <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
-            <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-            <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
-            <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
+            <li><a href="StudentDashboard.php" style="color:white;"><b>Student Dashboard</b></a></li>
+            <li><a href="StudentAccSettings.php" style="color:white;"><b>Account settings</b></a></li>
+            <li><a href="StudentDashboard.php" style="color:white;"><b>Filler</b></a></li>
         </ul>
         <form method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
@@ -49,24 +48,25 @@ include_once "../../Settings/PfpFunc.php";
 
     <hr><h2>Change Profile Picture</h2><hr>
 
-    <form method="POST" action="../../Settings/UpdatePfp.php" enctype="multipart/form-data">
+    <form method="POST" action="../../Settings/UpdatePfpEmp.php" enctype="multipart/form-data">
         <input type="file" name="profile_picture" accept="image/*" required>
         <button type="submit" name="upload">Upload</button>
     </form>
 
-    <div class="UpdatePfp">
+    <div class="UpdatePfpEmp">
+        <?php
+        echo '
         <hr><h2>Update Account Information</h2><hr>
-        <form method="POST" action="../../Settings/UpdateAccount.php">
-            <?php echo '
+        <form method="POST" action="../../Settings/UpdateAccountEmp.php">
             <label for="full_name">Full Name:</label><br><br>
             <input type="text" name="full_name" value="' . $accountInfo["full_name"] . '" required><br>
             <br>
             <label for="email">Email:</label><br><br>
             <input type="email" name="email" value="' . $accountInfo["email"] . '" required><br>
             <br>
-            <button type="submit" name="update_account">Update Account</button>'
-            ?>
-        </form>
+            <button type="submit" name="update_account">Update Account</button>
+        </form>';
+        ?>
     </div>
 
     <?php
@@ -80,25 +80,25 @@ include_once "../../Settings/PfpFunc.php";
     ?>
 
     <footer>
-        &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
+    &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
     </footer>
 </div>
 
 <?php
 echo
 '<div class="account-info">' .
-    '<h2>Current Account Information:</h2><br><br>' .
-    '<p><strong>Role:</strong> ' . $accountInfo["role"] . '</p>' . '<br>' .
-    '<p><strong>ID Number:</strong> ' . $accountInfo["id_number"] . '</p>' . '<br>' .
-    '<p><strong>Full Name:</strong> ' . $accountInfo["full_name"] . '</p>' . '<br>' .
-    '<p><strong>Email:</strong> ' . $accountInfo["email"] . '</p>' . '<br>' .
-    '<p><strong>Program:</strong> ' . $accountInfo["program"] . '</p>' .
+'<h2>Current Account Information:</h2><br><br>' .
+'<p><strong>Role:</strong> ' . $accountInfo["role"] . '</p>' . '<br>' .
+'<p><strong>ID Number:</strong> ' . $accountInfo["id_number"] . '</p>' . '<br>' .
+'<p><strong>Full Name:</strong> ' . $accountInfo["full_name"] . '</p>' . '<br>' .
+'<p><strong>Email:</strong> ' . $accountInfo["email"] . '</p>' . '<br>' .
+'<p><strong>Program:</strong> ' . $accountInfo["program"] . '</p>' .
 '</div>';
 ?>
 
 <style>
     body {
-        background-image: url('../../assets/admin.jpg');
+        background-image: url('../../assets/taskitbg.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         font-family: Arial, sans-serif;

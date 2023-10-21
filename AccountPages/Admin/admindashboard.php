@@ -15,11 +15,11 @@ $errorMessage = $successMessage = "";
 $sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
 $students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-$sqlOngoing = "SELECT id, description, employee_name, start_date, deadline,
+$sqlOngoing = "SELECT id, description, student_name, start_date, deadline,
                 status FROM tasks WHERE status IN ('ongoing')";
 $ongoingTasks = $pdo->query($sqlOngoing)->fetchAll(PDO::FETCH_ASSOC);
 
-$sqlFinished = "SELECT id, description, employee_name, start_date, deadline,
+$sqlFinished = "SELECT id, description, student_name, start_date, deadline,
                 status FROM tasks WHERE status = 'finished'";
 $finishedTasks = $pdo->query($sqlFinished)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -41,7 +41,7 @@ include_once "../../Settings/PfpFunc.php";
         <ul>
             <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
             <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-            <li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+            <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
             <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>
         <form method="POST" action="../../index.php">
@@ -49,9 +49,9 @@ include_once "../../Settings/PfpFunc.php";
         </form>
     </nav>
 
-    <hr><h2>Employee List</h2><hr>
+    <hr><h2>Student List</h2><hr>
     <table border="1">
-        <caption>List of employees</caption>
+        <caption>List of students</caption>
         <tr>
             <th>Full Name</th>
             <th>ID Number</th>
@@ -66,7 +66,7 @@ include_once "../../Settings/PfpFunc.php";
                 <td>' . $student['full_name'] . '</td>
                 <td>' . ($student['id_number'] ? $student['id_number'] : 'N/A') . '</td>
                 <td>
-                <button class="remove-employee" data-id="' . $student['id_number'] . '">Remove</button>
+                <button class="remove-student" data-id="' . $student['id_number'] . '">Remove</button>
                 </td>
                 </tr>';
         }
@@ -81,7 +81,7 @@ include_once "../../Settings/PfpFunc.php";
             <tr>
                 <th>Task ID</th>
                 <th>Description</th>
-                <th>Employee Name</th>
+                <th>Student Name</th>
                 <th>Start Date</th>
                 <th>Deadline</th>
                 <th>Status</th>
@@ -116,7 +116,7 @@ include_once "../../Settings/PfpFunc.php";
             <tr>
                 <th>Task ID</th>
                 <th>Description</th>
-                <th>Employee Name</th>
+                <th>Student Name</th>
                 <th>Start Date</th>
                 <th>Deadline</th>
                 <th>Status</th>
@@ -244,20 +244,20 @@ include_once "../../Settings/PfpFunc.php";
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $(document).ready(function() {
-        $(".remove-employee").on("click", function() {
-            var employeeId = $(this).data("id");
-            if (confirm("Are you sure you want to remove this employee and its tasks?")) {
+        $(".remove-student").on("click", function() {
+            var studentId = $(this).data("id");
+            if (confirm("Are you sure you want to remove this student and its tasks?")) {
                 $.ajax({
-                    url: '../../Actions/Admin/RemoveEmployee.php',
+                    url: '../../Actions/Admin/RemoveStudent.php',
                     method: 'POST',
-                    data: { employee_id: employeeId },
+                    data: { student_id: studentId },
                     success: function(response) {
                         alert(response);
                         location.reload();
                     },
                     error: function(error) {
                         console.error(error);
-                        alert("An error occurred while removing the employee.");
+                        alert("An error occurred while removing the student.");
                     }
                 });
             }

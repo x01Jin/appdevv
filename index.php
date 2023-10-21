@@ -37,7 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: AccountPages/Admin/AdminDashboard.php");
             exit();
         } elseif ($user["role"] == "student") {
-            header("Location: AccountPages/Employee/EmployeeDashboard.php");
+            header("Location: AccountPages/Employee/StudentDashboard.php");
             exit();
         } else {
             header("Location: AccountPages/HeadOffice/HeadOfficeDashboard.php");

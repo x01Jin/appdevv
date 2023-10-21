@@ -31,7 +31,7 @@ Unlimited Blade Works."
   `description` varchar(255) NOT NULL,
   `start_date` date NOT NULL,
   `deadline` date NOT NULL,
-  `employee_name` varchar(255) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
   `employee_id` varchar(255) NOT NULL,
   `status` enum('ongoing','finished') NOT NULL DEFAULT 'ongoing',
   `completion_date` date DEFAULT NULL,
