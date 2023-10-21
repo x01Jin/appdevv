@@ -202,22 +202,19 @@ include_once "../../Settings/PfpFunc.php";
 <script src="../../script.js"></script>
 <script>
     $(document).ready(function() {
-        // Add a click event listener to the "Update" buttons in the table
         $(".update-task").click(function() {
             var taskId = $(this).data("id");
-            var action = $(this).text(); // "Ongoing" or "Finalize"
+            var action = $(this).text();
 
-            // Send an AJAX request to update the task status
             $.ajax({
-                url: "../../Actions/HeadOffice/UpdateTaskStatus.php", // Create a PHP script to handle the update
+                url: "../../Actions/HeadOffice/UpdateTaskStatus.php",
                 method: "POST",
                 data: { taskId: taskId, action: action },
                 success: function(data) {
-                    // Reload the table to show updated data
                     location.reload();
                 },
                 error: function(xhr, status, error) {
-                    // Handle errors if necessary
+                    
                 }
             });
         });
