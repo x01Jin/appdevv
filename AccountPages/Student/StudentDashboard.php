@@ -52,13 +52,8 @@ define('TD_SEPARATOR', '</td><td>');
     </nav>
 
     <hr><h2>Ongoing Tasks</h2><hr>
-    <?php
-    echo '<div style="color: green;">' . $successMessage . '</div>';
-    echo '<div style="color: red;">' . $errorMessage . '</div>';
-    ?>
-
     <table border="1">
-        <caption>List of ongoing tasks</caption>
+        <caption><br><b>CONSULT HEAD OFFICE FOR TASK SUBMISSION</b><br><br></caption>
         <tr>
             <th>Description</th>
             <th>Status</th>
@@ -86,9 +81,9 @@ define('TD_SEPARATOR', '</td><td>');
     </table>
 
     <hr><h2>Finished Tasks</h2><hr>
-
+    
     <table border="1">
-        <caption>List of finished tasks</caption>
+        <caption></caption>
         <tr>
             <th>Description</th>
             <th>Status</th>
