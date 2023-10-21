@@ -18,7 +18,7 @@ Unlimited Blade Works."
 | Table | Create Table
 
 | users | CREATE TABLE `users` (
-  `role` enum('adviser','student','headoffice') NOT NULL DEFAULT 'student',
+  `role` enum('adviser','student','headoffice', 'placeholder') NOT NULL DEFAULT 'student',
   `full_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -37,9 +37,9 @@ Unlimited Blade Works."
   `deadline` date NOT NULL,
   `student_name` varchar(255) NOT NULL,
   `student_id` varchar(255) NOT NULL,
-  `status` enum('ongoing','finished') NOT NULL DEFAULT 'ongoing',
+  `status` enum('requested','ongoing','finished') NOT NULL DEFAULT 'requested',
   `completion_date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `tasks_ibfk_1` (`student_id`),
   CONSTRAINT `tasks_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`id_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci |
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci |

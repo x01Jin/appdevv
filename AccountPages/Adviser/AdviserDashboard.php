@@ -40,7 +40,7 @@ include_once "../../Settings/PfpFunc.php";
         ?>
         <ul>
             <li><a href="AdviserDashboard.php" style="color:white;"><b>Adviser Dashboard</b></a></li>
-            <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
+            <li><a href="TaskAssigner.php" style="color:white;"><b>Assign Task</b></a></li>
             <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
             <li><a href="AdviserAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>

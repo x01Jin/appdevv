@@ -4,7 +4,7 @@ include_once "../../db.php";
 
 session_start();
 
-if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "adviser") {
+if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "headoffice") {
     header("Location: ../../index.php");
     exit();
 }
@@ -23,7 +23,7 @@ include_once "../../Settings/PfpFunc.php";
 
 ?>
 
-<title>(Adviser)Account Settings</title>
+<title>(Head Office)Account Settings</title>
 
 <div class="thebox">
     <header>
@@ -37,10 +37,9 @@ include_once "../../Settings/PfpFunc.php";
         <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">'
         ?>
         <ul>
-            <li><a href="AdviserDashboard.php" style="color:white;"><b>Adviser Dashboard</b></a></li>
-            <li><a href="TaskAssigner.php" style="color:white;"><b>Assign Task</b></a></li>
-            <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
-            <li><a href="AdviserAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
+            <li><a href="HeadOfficeDashboard.php" style="color:white;"><b>Head Office Dashboard</b></a></li>
+            <li><a href="HeadOfficeRequestTask.php" style="color:white;"><b>Request Task</b></a></li>
+            <li><a href="HeadOfficeAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>
         <form method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
@@ -56,7 +55,7 @@ include_once "../../Settings/PfpFunc.php";
 
     <div class="UpdatePfp">
         <hr><h2>Update Account Information</h2><hr>
-        <form method="POST" action="../../Settings/UpdateAccount.php">
+        <form method="POST" action="../../Settings/UpdateAccountHead.php">
             <?php echo '
             <label for="full_name">Full Name:</label><br><br>
             <input type="text" name="full_name" value="' . $accountInfo["full_name"] . '" required><br>

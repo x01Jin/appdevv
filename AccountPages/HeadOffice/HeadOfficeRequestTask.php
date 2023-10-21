@@ -2,6 +2,8 @@
 
 include_once "../../db.php";
 
+define('TD_SEPARATOR', '</td><td');
+
 session_start();
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "headoffice") {
     header("Location: ../../index.php");
@@ -10,81 +12,83 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "headoffice") {
 
 $errorMessage = $successMessage = "";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["deploy_task"])) {
-    $taskDescription = $_POST["task_description"];
-    $StudentID = $_POST["student_id"];
-    $startDate = $_POST["start_date"];
-    $deadline = $_POST["deadline"];
+$premadeTasks = [
+    'kababalaghan',
+    'paiyakin sa darriel',
+    'tanggalin ang lastog ni danyel',
+    'imbestigahan kung bakit lowkey si mahner',
+    'pag naglalaro ng ML',
+];
 
-    $insertTaskSql = "
-    INSERT INTO tasks (
-        description,
-        student_name,
-        start_date,
-        deadline,
-        student_id,
-        status) VALUES (?, ?, ?, ?, ?, ?)";
-
-    $stmt = $pdo->prepare($insertTaskSql);
-
-    $studentNameSql = "SELECT full_name FROM users WHERE id_number = ?";
-    $studentNameStmt = $pdo->prepare($studentNameSql);
-    $studentNameStmt->execute([$StudentID]);
-    $StudentName = $studentNameStmt->fetchColumn();
-
-    if ($stmt->execute([$taskDescription, $StudentName, $startDate, $deadline, $StudentID, 'ongoing'])) {
-        $successMessage = "Task deployed successfully.";
-        header("Location: HeadOfficeRequestTask.php");
-    } else {
-        $errorMessage = "Error deploying task: " . $stmt->errorInfo()[2];
-    }
-}
-
-$sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
-$students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-include_once "../../Settings/PfpFunc.php" ;
-
+include_once "../../Settings/PfpFunc.php";
 ?>
 
-<title>(Head Office)Request Deployer</title>
+<title>(Head Office) Request Tasks</title>
 
 <div class="content">
     <header>
-        <h1>REQUEST TASK</h1>
+        <h1>HEAD OFFICE REQUEST TASKS</h1>
     </header>
 
     <nav>
         <?php
-        echo '<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">';
+        echo '<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">'
         ?>
         <ul>
             <li><a href="HeadOfficeDashboard.php" style="color:white;"><b>Head Office Dashboard</b></a></li>
             <li><a href="HeadOfficeRequestTask.php" style="color:white;"><b>Request Task</b></a></li>
+            <li><a href="HeadOfficeAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>
         <form method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
         </form>
     </nav>
 
-    <form method="POST" action="HeadOfficeRequestTask.php">
-        <label for="task_description"><h2>Task Description</h2></label>
-        <input type="text" id="task_description" name="task_description" required><hr>
-        <label for="student_id"><h2>Assign to Student</h2></label>
-        <select id="student_id" name="student_id" required>';
-            <?php
-            foreach ($students as $student) {
-                echo '<option value="' . $student['id_number'] . '">' . $student['full_name'] . '</option>';
+    <section id="request-tasks">
+        <hr><h2>Available Tasks</h2><hr>
+        <form method="POST">
+            <table border="1">
+                <caption>List of Available Tasks</caption>
+                <tr>
+                    <th>Select</th>
+                    <th>Task Description</th>
+                </tr>
+
+                <?php
+                foreach ($premadeTasks as $index => $description) {
+                    echo '<tr>';
+                    echo '<td><input type="checkbox" name="task[]" value="' . $index . '"></td>';
+                    echo '<td>' . $description . '</td>';
+                    echo '</tr>';
+                }
+                ?>
+            </table>
+            <button type="submit" name="deploy-tasks">Deploy Requests</button>
+        </form>
+    </section>
+
+    <?php
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deploy-tasks'])) {
+        if (isset($_POST['task'])) {
+            $selectedTasks = $_POST['task'];
+
+            foreach ($selectedTasks as $index) {
+                $description = $premadeTasks[$index];
+                $sql = "INSERT INTO tasks (description, student_id, status)
+                        VALUES (:description, 'unassigned', 'requested')";
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([':description' => $description]);
             }
-            ?>
-        </select><hr>
-        <label for="start_date"><h2>Start Date</h2></label>
-        <input type="date" id="start_date" name="start_date" required><br><hr>
-        <label for="deadline"><h2>Deadline</h2></label>
-        <input type="date" id="deadline" name="deadline" required><hr><br>
-        <button type="submit" name="deploy_task">Deploy Task</button>
-    </form>
+
+            echo '<div class="success-message">Tasks have been successfully deployed.</div>';
+        } else {
+            echo '<div class="error-message">No tasks were selected for deployment.</div>';
+        }
+    }
+    ?>
+
     <br><br>
+
     <footer>
         &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
     </footer>
@@ -106,6 +110,21 @@ include_once "../../Settings/PfpFunc.php" ;
         border-radius: 50%;
         margin: 20px auto;
         display: block;
+    }
+
+    table {
+        margin: 0 auto;
+        width: 80%;
+        color: white;
+    }
+
+    table th {
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+    }
+
+    table td {
+        padding: 10px;
     }
 
     header {
@@ -163,5 +182,35 @@ include_once "../../Settings/PfpFunc.php" ;
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="../../script.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#deploy-tasks").click(function() {
+            var selectedTasks = [];
+
+            $('input[name="task[]"]:checked').each(function() {
+                selectedTasks.push($(this).val());
+            });
+
+            if (selectedTasks.length === 0) {
+                alert("Please select at least one task to deploy.");
+                return;
+            }
+
+            $.ajax({
+                url: 'HeadOfficeRequestTasks.php',
+                method: 'POST',
+                data: {
+                    task: selectedTasks
+                },
+                success: function(response) {
+                    // Handle success if needed
+                },
+                error: function(error) {
+                    console.error(error);
+                    alert("An error occurred while deploying the tasks.");
+                }
+            });
+        });
+    });
+</script>

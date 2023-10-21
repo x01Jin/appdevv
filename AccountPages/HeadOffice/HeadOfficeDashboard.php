@@ -34,6 +34,7 @@ include_once "../../Settings/PfpFunc.php";
         <ul>
             <li><a href="HeadOfficeDashboard.php" style="color:white;"><b>Head Office Dashboard</b></a></li>
             <li><a href="HeadOfficeRequestTask.php" style="color:white;"><b>Request Task</b></a></li>
+            <li><a href="HeadOfficeAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>
         <form method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
