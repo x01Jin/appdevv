@@ -47,56 +47,54 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error_message = "Invalid email or password. Please try again.";
     }
 }
+?>
 
-echo '
 <form action="index.php" method="POST">
-<label for="email"><b>Email:</b></label></br>
-<input type="email" id="email" name="email" required>
-</br></br>
-<label for="password"><b>Password:</b></label></br>
-<input type="password" id="password" name="password" required>
-</br></br>
-<button type="submit">Log In</button>
-</form>';
+    <label for="email"><b>Email:</b></label></br>
+    <input type="email" id="email" name="email" required>
+    </br></br>
+    <label for="password"><b>Password:</b></label></br>
+    <input type="password" id="password" name="password" required>
+    </br></br>
+    <button type="submit">Log In</button>
+</form>
 
+<?php
 if (isset($error_message)) {
     echo '<div style="color: red;">' . $error_message . '</div>';
 }
+?>
 
-echo '<a href="registration.php" style="color:white;"><b>No Account? Register</b></br>';
+<a href="registration.php" style="color:white;"><b>No Account? Register</b></br>
 
-print"
 <style>
+    body {
+        background-image: url('assets/taskitbg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+    }
 
-body {
-    background-image: url('assets/taskitbg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: white;
-}
+    header {
+        background-color: white;
+        color: black;
+        text-align: center;
+        padding: 20px;
+    }
 
-header {
-    background-color: white;
-    color: black;
-    text-align: center;
-    padding: 20px;
-}
+    main {
+        padding: 20px;
+    }
 
-main {
-    padding: 20px;
-}
+    .logo {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-.logo {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.logo img {
-    width: 700px;
-    height: auto;
-}
-
+    .logo img {
+        width: 700px;
+        height: auto;
+    }
 </style>
-";
