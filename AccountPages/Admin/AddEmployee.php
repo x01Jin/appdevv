@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
     } else {
         $insertEmployeeSql = "
         INSERT INTO users (full_name, email, password, role, program, id_number, profile_picture)
-        VALUES (?, ?, ?, 'employee', ?, ?, ?)";
+        VALUES (?, ?, ?, 'student', ?, ?, ?)";
         $stmt = $pdo->prepare($insertEmployeeSql);
         if ($stmt->execute([$employeeFullName, $employeeEmail,
         $employeePassword, $employeeProgram,
@@ -62,63 +62,60 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_employee"])) {
 
 include_once "../../Settings/PfpFunc.php";
 
-echo "<title>(Admin)Add Employee</title>";
+?>
 
-echo '
+<title>(Admin)Add Employee</title>
+
 <div class="content">
-
 <header>
-<h1>ADD EMPLOYEE</h1>
+    <h1>ADD EMPLOYEE</h1>
 </header>
-<br>';
-
-echo '
+<br>
 <nav>
-<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">
-<ul>
-<li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
-<li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
-<li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
-<li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
-</ul>
-<form method="POST" action="../../index.php">
-<button type="submit" name="logout">Logout</button>
-</form>
-</nav>';
+    <?php
+    echo '<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">'
+    ?>
+    <ul>
+        <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+        <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
+        <li><a href="AddEmployee.php" style="color:white;"><b>Add Employee</b></a></li>
+        <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
+    </ul>
+    <form method="POST" action="../../index.php">
+        <button type="submit" name="logout">Logout</button>
+    </form>
+</nav>
 
+<?php
 if (isset($_SESSION["successMessage"])) {
     echo '<div style="color: green;">' . $_SESSION["successMessage"] . '</div>';
     unset($_SESSION["successMessage"]);
 } elseif (isset($errorMessage)) {
     echo '<div style="color: red;">' . $errorMessage . '</div>';
 }
-
-echo '
-<form method="POST" action="AddEmployee.php" enctype="multipart/form-data">
-<label for="employee_full_name">Full Name:</label><br><br>
-<input type="text" id="employee_full_name" name="employee_full_name" required><br><br>
-<label for="employee_email">Email:</label><br><br>
-<input type="email" id="employee_email" name="employee_email" required><br><br>
-<label for="employee_program">Program:</label><br><br>
-<input type="text" id="employee_program" name="employee_program" required><br><br>
-<label for="employee_id_number">ID Number:</label><br><br>
-<input type="text" id="employee_id_number" name="employee_id_number" required><br><br>
-<label for="employee_password">Password:</label><br><br>
-<input type="password" id="employee_password" name="employee_password" required><br><br>
-<label for="employee_profile_picture">Profile Picture:</label><br><br>
-<input type="file" id="employee_profile_picture" name="employee_profile_picture"><br><br>
-<button type="submit" name="add_employee">Add Employee</button>
-</form>';
-
 ?>
 
+<form method="POST" action="AddEmployee.php" enctype="multipart/form-data">
+    <label for="employee_full_name">Full Name:</label><br><br>
+    <input type="text" id="employee_full_name" name="employee_full_name" required><br><br>
+    <label for="employee_email">Email:</label><br><br>
+    <input type="email" id="employee_email" name="employee_email" required><br><br>
+    <label for="employee_program">Program:</label><br><br>
+    <input type="text" id="employee_program" name="employee_program" required><br><br>
+    <label for="employee_id_number">ID Number:</label><br><br>
+    <input type="text" id="employee_id_number" name="employee_id_number" required><br><br>
+    <label for="employee_password">Password:</label><br><br>
+    <input type="password" id="employee_password" name="employee_password" required><br><br>
+    <label for="employee_profile_picture">Profile Picture:</label><br><br>
+    <input type="file" id="employee_profile_picture" name="employee_profile_picture"><br><br>
+    <button type="submit" name="add_employee">Add Employee</button>
+</form>
+
 <footer>
-&copy; <?php echo date("Y"); ?> Task Management System By CroixTech
+    &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
 </footer>
+</div>
 
-<?php
-
-echo "
 <style>
 body {
     background-image: url('../../assets/admin.jpg');
@@ -169,7 +166,6 @@ nav ul {
 }
 
 nav ul li {
-    display: ;
     margin-bottom: 10px;
 }
 
@@ -190,6 +186,4 @@ footer {
     text-align: center;
     padding: 10px;
 }
-
 </style>
-";
