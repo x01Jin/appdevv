@@ -226,7 +226,7 @@ include_once "../../Settings/PfpFunc.php";
                 },
                 error: function(error) {
                     console.error(error);
-                    alert("An error occurred while canceling the task.");
+                    alert("An error occurred while updating the status of the task.");
                 }
             });
         }
