@@ -27,11 +27,11 @@ include_once "../../Settings/PfpFunc.php";
 
 ?>
 
-<title>(Admin)Dashboard</title>
+<title>(Adviser)Dashboard</title>
 
 <div class="content">
     <header>
-    <h1>ADMIN DASHBOARD</h1>
+    <h1>ADVISER DASHBOARD</h1>
     </header>
 
     <nav>
@@ -39,10 +39,10 @@ include_once "../../Settings/PfpFunc.php";
         echo '<img src="../../profile_pictures/' . $profilePicture  . '" alt="Profile Picture" class="profile-picture">'
         ?>
         <ul>
-            <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+            <li><a href="AdviserDashboard.php" style="color:white;"><b>Adviser Dashboard</b></a></li>
             <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
             <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
-            <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
+            <li><a href="AdviserAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>
         <form method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
@@ -97,7 +97,7 @@ include_once "../../Settings/PfpFunc.php";
                         <td>' .
                             $task['id'] . TD_SEPARATOR .
                             $task['description'] . TD_SEPARATOR .
-                            $task['employee_name'] . TD_SEPARATOR .
+                            $task['student_name'] . TD_SEPARATOR .
                             $task['start_date'] . TD_SEPARATOR .
                             $task['deadline'] . TD_SEPARATOR .
                             $task['status'] .
@@ -133,7 +133,7 @@ include_once "../../Settings/PfpFunc.php";
                         <td>' .
                             $task['id'] . TD_SEPARATOR .
                             $task['description'] . TD_SEPARATOR .
-                            $task['employee_name'] . TD_SEPARATOR .
+                            $task['student_name'] . TD_SEPARATOR .
                             $task['start_date'] . TD_SEPARATOR .
                             $task['deadline'] . TD_SEPARATOR .
                             $task['status'] .
@@ -155,7 +155,7 @@ include_once "../../Settings/PfpFunc.php";
 
 <style>
     body {
-        background-image: url('../../assets/admin.jpg');
+        background-image: url('../../assets/taskitbg.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         font-family: Arial, sans-serif;
@@ -248,7 +248,7 @@ include_once "../../Settings/PfpFunc.php";
             var studentId = $(this).data("id");
             if (confirm("Are you sure you want to remove this student and its tasks?")) {
                 $.ajax({
-                    url: '../../Actions/Admin/RemoveStudent.php',
+                    url: '../../Actions/Adviser/RemoveStudent.php',
                     method: 'POST',
                     data: { student_id: studentId },
                     success: function(response) {
@@ -269,7 +269,7 @@ include_once "../../Settings/PfpFunc.php";
         var taskId = $(this).data("id");
             if (confirm("Are you sure you want to delete this finished task?")) {
                 $.ajax({
-                    url: '../../Actions/Admin/DeleteFinished.php',
+                    url: '../../Actions/Adviser/DeleteFinished.php',
                     method: 'POST',
                     data: { task_id: taskId },
                     success: function(response) {

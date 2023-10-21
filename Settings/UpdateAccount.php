@@ -19,5 +19,5 @@ if (isset($_POST["update_account"])) {
     }
 }
 
-header("Location: ../AccountPages/Admin/AdminAccSettings.php");
+header("Location: ../AccountPages/Adviser/AdviserAccSettings.php");
 exit();

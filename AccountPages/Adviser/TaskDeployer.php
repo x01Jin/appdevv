@@ -59,10 +59,10 @@ include_once "../../Settings/PfpFunc.php";
         echo '<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">';
         ?>
         <ul>
-            <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+            <li><a href="AdviserDashboard.php" style="color:white;"><b>Adviser Dashboard</b></a></li>
             <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
             <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
-            <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
+            <li><a href="AdviserAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>
         <form method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
@@ -94,7 +94,7 @@ include_once "../../Settings/PfpFunc.php";
 
 <style>
     body {
-        background-image: url('../../assets/admin.jpg');
+        background-image: url('../../assets/taskitbg.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         font-family: Arial, sans-serif;

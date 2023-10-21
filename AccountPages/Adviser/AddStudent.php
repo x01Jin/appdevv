@@ -25,6 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_student"])) {
     $profilePictureName = $_FILES["student_profile_picture"]["name"];
     $profilePictureTmpName = $_FILES["student_profile_picture"]["tmp_name"];
     
+    $profilePicturePath = null;
+
     if (!empty($profilePictureName)) {
         $uniqueProfilePictureName = uniqid() . '_' . $profilePictureName;
         $destinationPath = $profilePictureDirectory . $uniqueProfilePictureName;
@@ -33,8 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_student"])) {
         } else {
             $errorMessage = "Error uploading profile picture.";
         }
-    } else {
-        $profilePicturePath = "../../profile_pictures/default.jpg";
     }
     
     $checkUserSql = "SELECT COUNT(*) FROM users WHERE full_name = ? OR email = ?";
@@ -64,7 +64,7 @@ include_once "../../Settings/PfpFunc.php";
 
 ?>
 
-<title>(Admin)Add Student</title>
+<title>(Adviser)Add Student</title>
 
 <div class="content">
 <header>
@@ -76,10 +76,10 @@ include_once "../../Settings/PfpFunc.php";
     echo '<img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">'
     ?>
     <ul>
-        <li><a href="AdminDashboard.php" style="color:white;"><b>Admin Dashboard</b></a></li>
+        <li><a href="AdviserDashboard.php" style="color:white;"><b>Adviser Dashboard</b></a></li>
         <li><a href="TaskDeployer.php" style="color:white;"><b>Deploy Task</b></a></li>
         <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
-        <li><a href="AdminAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
+        <li><a href="AdviserAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
     </ul>
     <form method="POST" action="../../index.php">
         <button type="submit" name="logout">Logout</button>
@@ -118,7 +118,7 @@ if (isset($_SESSION["successMessage"])) {
 
 <style>
 body {
-    background-image: url('../../assets/admin.jpg');
+    background-image: url('../../assets/taskitbg.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;

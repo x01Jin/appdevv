@@ -19,5 +19,5 @@ if (isset($_POST["update_account"])) {
     }
 }
 
-header("Location: ../AccountPages/Employee/EmployeeAccSettings.php");
+header("Location: ../AccountPages/Student/StudentAccSettings.php");
 exit();

@@ -8,11 +8,8 @@ if (!file_exists($profilePictureDirectory)) {
     mkdir($profilePictureDirectory, 0755, true);
 }
 
-echo '<div class="logo">
-<img src="assets/logo.png" alt="Company Logo">
-</div>';
-
 $errors = [];
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $full_name = $_POST["full_name"];
     $email = $_POST["email"];
@@ -21,23 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $role = $_POST["role"];
     $program = $_POST["program"];
     $id_number = $_POST["id_number"];
-    if (empty($full_name)) {
-        $errors[] = "Full Name is required.";
-    }
-    if (empty($email)) {
-        $errors[] = "Email is required.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Invalid email format.";
-    }
-    if (empty($password)) {
-        $errors[] = "Password is required.";
-    } elseif (strlen($password) < 6) {
-        $errors[] = "Password must be at least 6 characters long.";
-    } elseif ($password !== $confirmPassword) {
-        $errors[] = "Passwords do not match.";
-    }
+    
+    $profilePictureFileName = null;
+
     $profilePictureName = $_FILES["profile_picture"]["name"];
     $profilePictureTmpName = $_FILES["profile_picture"]["tmp_name"];
+    
     if (!empty($profilePictureName)) {
         $uniqueProfilePictureName = uniqid() . '_' . $profilePictureName;
         $destinationPath = $profilePictureDirectory . $uniqueProfilePictureName;
@@ -46,9 +32,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $errors[] = "Failed to upload the profile picture.";
         }
-    } else {
-        $profilePictureFileName = "default.jpg";
     }
+
     if (empty($errors)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $sql = "
@@ -71,9 +56,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
+?>
 
-echo '<h1>Registration</h1>';
 
+<div class="logo">
+<img src="assets/logo.png" alt="Company Logo">
+</div>
+
+<h1>Registration</h1>
+<?php
 if (!empty($errors)) {
     echo '<div style="color: red;">';
     foreach ($errors as $error) {
@@ -81,8 +72,8 @@ if (!empty($errors)) {
     }
     echo '</div>';
 }
+?>
 
-echo '
 <form action="registration.php" method="POST" enctype="multipart/form-data">
     <label for="full_name">Full Name:</label>
     <input type="text" id="full_name" name="full_name" required>
@@ -102,42 +93,38 @@ echo '
     <label for="confirm_password">Confirm Password:</label>
     <input type="password" id="confirm_password" name="confirm_password" required>
     </br></br>
-    <!-- Profile Picture Upload Field (for account settings) -->
     <label for="profile_picture">Profile Picture:</label>
     <input type="file" id="profile_picture" name="profile_picture">
     </br></br>
     <label for="role">Role:</label>
     <select id="role" name="role" required>
-        <option value="employee">Employee</option>
-        <option value="admin">Admin</option>
+        <option value="student">Student</option>
+        <option value="adviser">Adviser</option>
         <option value="headoffice">Head Office</option>
     </select>
     </br></br>
     <button type="submit">Register</button>
 </form>
+
 <a href="index.php" style="color:white;"><b>Have an Account? Log in</b></a>';
 
-echo "
 <style>
+    body {
+        background-image: url('assets/taskitbg.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        color: white;
+    }
 
-body {
-    background-image: url('assets/taskitbg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    color: white;
-}
+    .logo {
+        text-align: center;
+        margin-top: 20px;
+    }
 
-.logo {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.logo img {
-    width: 500px;
-    height: auto;
-}
-
+    .logo img {
+        width: 500px;
+        height: auto;
+    }
 </style>
-";

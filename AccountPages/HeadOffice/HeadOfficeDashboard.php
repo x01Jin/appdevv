@@ -12,7 +12,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "headoffice") {
 
 $errorMessage = $successMessage = "";
 
-$sqlTasks = "SELECT id, description, employee_name, start_date, deadline, status
+$sqlTasks = "SELECT id, description, student_name, start_date, deadline, status
               FROM tasks WHERE status IN ('ongoing', 'finished')";
 $allTasks = $pdo->query($sqlTasks)->fetchAll(PDO::FETCH_ASSOC);
 
@@ -64,7 +64,7 @@ include_once "../../Settings/PfpFunc.php";
                         <td>' .
                             $task['id'] . TD_SEPARATOR .
                             $task['description'] . TD_SEPARATOR .
-                            $task['employee_name'] . TD_SEPARATOR .
+                            $task['student_name'] . TD_SEPARATOR .
                             $task['start_date'] . TD_SEPARATOR .
                             $task['deadline'] . TD_SEPARATOR .
                             $task['status'] .

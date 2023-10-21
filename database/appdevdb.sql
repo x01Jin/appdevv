@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 11:05 AM
+-- Generation Time: Oct 21, 2023 at 12:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -72,8 +72,8 @@ INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_nu
 ('student', 'employee1', 'emp1@email.com', '$2y$10$qF0XXoeJYIXn.Lp.uxvBruoV.Egl.32HM7xU1X1QR3SiNJ9qi3GFm', 'emp', '11-1111-111', '6521e72607f5e_emp1.jpg'),
 ('headoffice', 'Mr. Marlo', 'Marlo@reg.com', '$2y$10$DjAEDkHFIAJuFfZZItyFwuWDEmB1OfrzuX4YdTWY8Y6F5MFRdvJZK', 'Registrar', '11-2222-333', '6531041397834_marlo.jpg'),
 ('student', 'Arnaldy', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '652feb9745184_download.jpg'),
-('student', 'employee2', 'emp2@email.com', '$2y$10$p8KwrrcvA7Ai.fT2i/PjV.qhMcj.A4UDXFiN6wX0U/9dn696.0HjW', 'emp', '22-2222-222', '../../profile_pictures/default.jpg'),
-('student', 'employee3', 'emp3@email.com', '$2y$10$1uKB67ZICW39zCJLHj8lP.rV7tNJe/KZPdbu9O3MO8j9PspDinf8e', 'bsbs', '98-5466-344', '../../profile_pictures/default.jpg');
+('student', 'employee2', 'emp2@email.com', '$2y$10$lrpVHp2jaW2K2lcN6HVIkuhpMTGGDiAlKU/jkqpvYtetyX/n9Z.AS', 'bsbs', '22-2222-222', NULL),
+('student', 'employee3', 'emp3@email.com', '$2y$10$gyKs2o7lh/MjTn0U3VOlcuiYRyEmTvnSLYKvx/IIaXW.g0BxTOlge', 'bsbs', '33-3333-333', NULL);
 
 --
 -- Indexes for dumped tables
