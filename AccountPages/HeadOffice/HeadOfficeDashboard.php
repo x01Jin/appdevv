@@ -13,8 +13,13 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "headoffice") {
 $errorMessage = $successMessage = "";
 
 $sqlTasks = "SELECT id, description, student_name, start_date, deadline, status
-              FROM tasks WHERE status IN ('ongoing', 'finished')";
+             FROM tasks WHERE status IN ('ongoing', 'finished')";
 $allTasks = $pdo->query($sqlTasks)->fetchAll(PDO::FETCH_ASSOC);
+
+$sqlRequestedTasks = "SELECT id, description, status
+                      FROM tasks
+                      WHERE status = 'requested'";
+$requestedTasks = $pdo->query($sqlRequestedTasks)->fetchAll(PDO::FETCH_ASSOC);
 
 include_once "../../Settings/PfpFunc.php";
 
@@ -75,6 +80,33 @@ include_once "../../Settings/PfpFunc.php";
                             <button class="update-task" data-id="' . $task['id'] . '">Finished</button><br><br>
                             <button class="cancel-task" data-id="' . $task['id'] . '">Cancel</button>
                         </td>
+                    </tr>';
+            }
+
+            ?>
+        </table>
+    </section>
+
+    <section id="requested-tasks">
+        <hr><h2>Requested Tasks (Unassigned)</h2><hr></hr>
+        <table border="1">
+            <caption>List of Unassigned Requested tasks</caption>
+            <tr>
+                <th>Task ID</th>
+                <th>Description</th>
+                <th>Status</th>
+            </tr>
+
+            <?php
+
+            foreach ($requestedTasks as $task) {
+                echo '
+                    <tr class="task-row">
+                        <td>' .
+                            $task['id'] . TD_SEPARATOR .
+                            $task['description'] . TD_SEPARATOR .
+                            $task['status'] .
+                        '</td>
                     </tr>';
             }
 
