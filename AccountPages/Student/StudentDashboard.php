@@ -53,7 +53,7 @@ define('TD_SEPARATOR', '</td><td>');
 
     <hr><h2>Ongoing Tasks</h2><hr>
     <table border="1">
-        <caption><br><b>CONSULT HEAD OFFICE FOR TASK SUBMISSION</b><br><br></caption>
+        <caption><br><b>CONSULT REGISTRAR FOR TASK SUBMISSION</b><br><br></caption>
         <tr>
             <th>Description</th>
             <th>Status</th>
@@ -81,7 +81,7 @@ define('TD_SEPARATOR', '</td><td>');
     </table>
 
     <hr><h2>Finished Tasks</h2><hr>
-    
+
     <table border="1">
         <caption></caption>
         <tr>
