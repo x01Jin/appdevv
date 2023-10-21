@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2023 at 12:15 PM
+-- Generation Time: Oct 21, 2023 at 07:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,7 +34,7 @@ CREATE TABLE `tasks` (
   `deadline` date NOT NULL,
   `student_name` varchar(255) NOT NULL,
   `student_id` varchar(255) NOT NULL,
-  `status` enum('ongoing','finished') NOT NULL DEFAULT 'ongoing',
+  `status` enum('requested','ongoing','finished') NOT NULL DEFAULT 'requested',
   `completion_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -43,9 +43,11 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `student_name`, `student_id`, `status`, `completion_date`) VALUES
-(10, 'create stuff', '2023-09-30', '2023-10-07', 'Arnaldy Fortin', '12-3456-789', 'finished', '2023-10-06'),
-(26, 'kalayaan', '2023-10-08', '2023-10-09', 'employee1', '11-1111-111', 'ongoing', '2023-10-08'),
-(27, 'katipunan', '2023-10-10', '2023-10-11', 'employee1', '11-1111-111', 'finished', '2023-10-11');
+(55, 'kababalaghan', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(56, 'paiyakin sa darriel', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(57, 'tanggalin ang lastog ni danyel', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(58, 'imbestigahan kung bakit lowkey si mahner', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(59, 'pag naglalaro ng ML', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL);
 
 -- --------------------------------------------------------
 
@@ -54,7 +56,7 @@ INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `student_nam
 --
 
 CREATE TABLE `users` (
-  `role` enum('adviser','student','headoffice') NOT NULL DEFAULT 'student',
+  `role` enum('adviser','student','headoffice','placeholder') NOT NULL DEFAULT 'student',
   `full_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -71,9 +73,9 @@ INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_nu
 ('adviser', 'Ms. Administrator', 'admin@admin.com', '$2y$10$zxysxERJOxqVibfSe9ltDer/DzTaW6nltjfbB.Sz7LbTaEcuz58Ei', 'Admin', '00-0000-000', '651fed5084197_administrator.jpg'),
 ('student', 'employee1', 'emp1@email.com', '$2y$10$qF0XXoeJYIXn.Lp.uxvBruoV.Egl.32HM7xU1X1QR3SiNJ9qi3GFm', 'emp', '11-1111-111', '6521e72607f5e_emp1.jpg'),
 ('headoffice', 'Mr. Marlo', 'Marlo@reg.com', '$2y$10$DjAEDkHFIAJuFfZZItyFwuWDEmB1OfrzuX4YdTWY8Y6F5MFRdvJZK', 'Registrar', '11-2222-333', '6531041397834_marlo.jpg'),
-('student', 'Arnaldy', 'popoy@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '652feb9745184_download.jpg'),
+('student', 'Hage otoko', 'hage@email.com', '$2y$10$EEWrhCynCshzzwComYwPyOi5FnxDGvTA/jzaizckC27Ohej.WnPrm', 'BSIT', '12-3456-789', '652feb9745184_download.jpg'),
 ('student', 'employee2', 'emp2@email.com', '$2y$10$lrpVHp2jaW2K2lcN6HVIkuhpMTGGDiAlKU/jkqpvYtetyX/n9Z.AS', 'bsbs', '22-2222-222', NULL),
-('student', 'employee3', 'emp3@email.com', '$2y$10$gyKs2o7lh/MjTn0U3VOlcuiYRyEmTvnSLYKvx/IIaXW.g0BxTOlge', 'bsbs', '33-3333-333', NULL);
+('placeholder', 'PlaceHolder', 'place@holder.com', 'placeholder', NULL, 'unassigned', NULL);
 
 --
 -- Indexes for dumped tables
@@ -100,7 +102,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- Constraints for dumped tables
