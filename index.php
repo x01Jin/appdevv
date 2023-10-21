@@ -10,13 +10,6 @@ if (isset($_POST["logout"])) {
     exit();
 }
 
-echo "<title>TASK.it</title><br><br><br><br><br>";
-
-echo '
-<div class="logo">
-<img src="assets/logo.png" alt="Company Logo">
-</div><br><br>';
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
@@ -48,6 +41,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
+<title>TASK.it</title>
+
+<br><br><br><br><br>
+
+<div class="logo">
+    <img src="assets/logo.png" alt="Company Logo">
+</div>
+
+<br><br>
 
 <form action="index.php" method="POST">
     <label for="email"><b>Email:</b></label></br>
