@@ -106,7 +106,7 @@ if (!empty($errors)) {
     <button type="submit">Register</button>
 </form>
 
-<a href="index.php" style="color:white;"><b>Have an Account? Log in</b></a>';
+<a href="index.php" style="color:white;"><b>Have an Account? Log in</b></a>
 
 <style>
     body {
