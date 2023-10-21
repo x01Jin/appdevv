@@ -82,7 +82,7 @@ include_once "../../Settings/PfpFunc.php";
         <hr><h2>Assign Tasks</h2><hr>
         <form method="POST" name="assign-tasks-form">
             <table border="1">
-                <caption>List of Requested Tasks</caption>
+                <caption><br><b>List of Tasks Requested By Registrar</b><br><br></caption>
                 <tr>
                     <th>Select</th>
                     <th>Task Description</th>
@@ -112,6 +112,7 @@ include_once "../../Settings/PfpFunc.php";
                 }
                 ?>
             </table>
+            <br>
             <button type="submit" name="assign-tasks">Assign Tasks</button>
         </form>
     </section>
@@ -124,8 +125,6 @@ include_once "../../Settings/PfpFunc.php";
         echo '<div class="success-message">' . $successMessage . '</div>';
     }
     ?>
-
-    <br><br>
 
     <footer>
         &copy; <?php echo date("Y"); ?> Task Management System By CroixTech

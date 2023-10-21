@@ -13,7 +13,7 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "headoffice") {
 $errorMessage = $successMessage = "";
 
 $premadeTasks = [
-    'kababalaghan',
+    'Kailan kaya ako makakapag pahinga',
     'paiyakin sa darriel',
     'tanggalin ang lastog ni danyel',
     'imbestigahan kung bakit lowkey si mahner',
@@ -48,7 +48,7 @@ include_once "../../Settings/PfpFunc.php";
         <hr><h2>Available Tasks</h2><hr>
         <form method="POST">
             <table border="1">
-                <caption>List of Available Tasks</caption>
+                <caption></caption>
                 <tr>
                     <th>Select</th>
                     <th>Task Description</th>
@@ -63,6 +63,7 @@ include_once "../../Settings/PfpFunc.php";
                 }
                 ?>
             </table>
+            <br>
             <button type="submit" name="deploy-tasks">Deploy Requests</button>
         </form>
     </section>
@@ -86,8 +87,6 @@ include_once "../../Settings/PfpFunc.php";
         }
     }
     ?>
-
-    <br><br>
 
     <footer>
         &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
@@ -204,7 +203,7 @@ include_once "../../Settings/PfpFunc.php";
                     task: selectedTasks
                 },
                 success: function(response) {
-                    // Handle success if needed
+                    // Kahit hindi na to ata
                 },
                 error: function(error) {
                     console.error(error);

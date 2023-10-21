@@ -49,7 +49,7 @@ include_once "../../Settings/PfpFunc.php";
     <section id="ongoing-tasks">
         <hr><h2>Requested Tasks</h2><hr></hr>
         <table border="1">
-            <caption>List of Requested tasks</caption>
+            <caption></caption>
             <tr>
                 <th>Task ID</th>
                 <th>Description</th>
@@ -90,7 +90,7 @@ include_once "../../Settings/PfpFunc.php";
     <section id="requested-tasks">
         <hr><h2>Requested Tasks (Unassigned)</h2><hr></hr>
         <table border="1">
-            <caption>List of Unassigned Requested tasks</caption>
+            <caption></caption>
             <tr>
                 <th>Task ID</th>
                 <th>Description</th>
