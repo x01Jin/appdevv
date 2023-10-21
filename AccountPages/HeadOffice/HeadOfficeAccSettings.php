@@ -25,6 +25,16 @@ include_once "../../Settings/PfpFunc.php";
 
 <title>(Head Office)Account Settings</title>
 
+<?php
+if (!empty($errorMessage)) {
+    echo '<div id="dialog" title="Error">' . $errorMessage . '</div>';
+    unset($_SESSION["errorMessage"]);
+} elseif (!empty($successMessage)) {
+    echo '<div id="dialog" title="Success">' . $successMessage . '</div>';
+    unset($_SESSION["successMessage"]);
+}
+?>
+
 <div class="thebox">
     <header>
         <h1>ACCOUNT SETTINGS</h1>
@@ -46,37 +56,37 @@ include_once "../../Settings/PfpFunc.php";
         </form>
     </nav>
 
-    <hr><h2>Change Profile Picture</h2><hr>
-
-    <form method="POST" action="../../Settings/UpdatePfp.php" enctype="multipart/form-data">
-        <input type="file" name="profile_picture" accept="image/*" required>
-        <button type="submit" name="upload">Upload</button>
-    </form>
-
     <div class="UpdatePfp">
-        <hr><h2>Update Account Information</h2><hr>
-        <form method="POST" action="../../Settings/UpdateAccountHead.php">
-            <?php echo '
-            <label for="full_name">Full Name:</label><br><br>
-            <input type="text" name="full_name" value="' . $accountInfo["full_name"] . '" required><br>
-            <br>
-            <label for="email">Email:</label><br><br>
-            <input type="email" name="email" value="' . $accountInfo["email"] . '" required><br>
-            <br>
-            <button type="submit" name="update_account">Update Account</button>'
-            ?>
+        <hr><h2>Change Profile Picture</h2><hr>
+        <form method="POST" action="../../Settings/UpdatePfp.php" enctype="multipart/form-data">
+            <input type="file" name="profile_picture" accept="image/*" required>
+            <button type="submit" name="upload">Upload</button>
         </form>
     </div>
 
-    <?php
-    if (!empty($errorMessage)) {
-        echo '<div id="dialog" title="Error">' . $errorMessage . '</div>';
-        unset($_SESSION["errorMessage"]);
-    } elseif (!empty($successMessage)) {
-        echo '<div id="dialog" title="Success">' . $successMessage . '</div>';
-        unset($_SESSION["successMessage"]);
-    }
-    ?>
+    <hr><h2>Change Password</h2><hr>
+    <form method="POST" action="../../Settings/ChangePasswordHead.php">
+        <label for="current_password">Current Password:</label><br><br>
+        <input type="password" name="current_password" required><br><br>
+        <label for="new_password">New Password:</label><br><br>
+        <input type="password" name="new_password" required><br><br>
+        <label for="confirm_password">Confirm New Password:</label><br><br>
+        <input type="password" name="confirm_password" required><br><br>
+        <button type="submit" name="change_password">Change Password</button>
+    </form>
+    
+    <hr><h2>Update Account Information</h2><hr>
+    <form method="POST" action="../../Settings/UpdateAccountHead.php">
+        <?php echo '
+        <label for="full_name">Full Name:</label><br><br>
+        <input type="text" name="full_name" value="' . $accountInfo["full_name"] . '" required><br>
+        <br>
+        <label for="email">Email:</label><br><br>
+        <input type="email" name="email" value="' . $accountInfo["email"] . '" required><br>
+        <br>
+        <button type="submit" name="update_account">Update Account</button>'
+        ?>
+    </form>
 
     <footer>
         &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
