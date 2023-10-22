@@ -69,6 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="API/sweetalert2.all.min.js"></script>
+    <link href="API/dark.css" rel="stylesheet">
+    <script src="API/jquery-3.7.1.min.js"></script>
     <title>Registration</title>
     <style>
         body {
@@ -187,16 +190,46 @@ if (!empty($errors)) {
             </td>
         </tr>
         <tr>
-            <div class="button-container">
-                <td colspan="2"><button type="submit">Register</button></td>
-            </div>
+            <td colspan="2">
+                <div class="button-container">
+                    <button type="submit" id="register">Register</button>
+                </div>
+            </td>
         </tr>
     </form>
 </table>
-
-
 
 <br>
 <a href="index.php" style="color:white;"><b>Have an Account? Log in</b></a>
 </body>
 </html>
+
+<script>
+  $('#register').on('click', function(event) {
+    event.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to create an account?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Account Created!',
+          'Your account has been created successfully.',
+          'success'
+        ).then(() => {
+          $('form').submit();
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Cancelled',
+          'Account creation has been cancelled.',
+          'error'
+        );
+      }
+    });
+  });
+</script>
