@@ -3,14 +3,44 @@
 include_once "../../db.php";
 
 define('TD_SEPARATOR', '</td><td>');
+
 session_start();
 
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "adviser") {
     header("Location: ../../index.php");
     exit();
 }
-
 $errorMessage = $successMessage = "";
+
+function deleteTasks($studentId) {
+    global $pdo;
+    $sql = "DELETE FROM tasks WHERE student_id = :studentId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':studentId', $studentId);
+    $stmt->execute();
+}
+
+function deleteStudent($studentId) {
+    global $pdo;
+    $sql = "DELETE FROM users WHERE id_number = :studentId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':studentId', $studentId);
+    $stmt->execute();
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_student"])) {
+    $studentId = $_POST["delete_student"];
+    $sqlCheckTasks = "SELECT COUNT(*) FROM tasks WHERE student_id = :studentId";
+    $stmtCheckTasks = $pdo->prepare($sqlCheckTasks);
+    $stmtCheckTasks->bindParam(':studentId', $studentId);
+    $stmtCheckTasks->execute();
+    $taskCount = $stmtCheckTasks->fetchColumn();
+    if ($taskCount > 0) {
+        deleteTasks($studentId);
+    }
+    deleteStudent($studentId);
+    $successMessage = "Student deleted successfully.";
+}
 
 $sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
 $students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
@@ -230,7 +260,47 @@ include_once "../../Settings/PfpFunc.php";
     </div>
 </body>
 </html>
-
+<script>
+    $(document).ready(function() {
+        $('.remove-student').on('click', function () {
+            const studentId = $(this).data('student-id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Deleting a student will also delete their associated tasks. Do you want to continue?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete',
+                cancelButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('../../Actions/Adviser/RemoveStudent.php', { delete_student: studentId }, function (data) {
+                        if (data.success) {
+                            Swal.fire(
+                                'Student Deleted!',
+                                data.message,
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error',
+                                data.message,
+                                'error'
+                            );
+                        }
+                    }, 'json');
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire(
+                        'Cancelled',
+                        'Student deletion has been cancelled.',
+                        'info'
+                    );
+                }
+            });
+        });
+    });
+</script>
 <script>
     $('.remove-finished-task').on('click', function () {
         const taskId = $(this).data('task-id');
