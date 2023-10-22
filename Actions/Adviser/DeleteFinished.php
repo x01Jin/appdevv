@@ -2,6 +2,8 @@
 
 include_once "../../db.php";
 
+$response = array();
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $taskId = $_POST["task_id"];
 
@@ -10,8 +12,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $deleteTaskStmt->bindParam(':task_id', $taskId);
 
     if ($deleteTaskStmt->execute()) {
-        echo "Finished task deleted successfully.";
+        $response['success'] = true;
+        $response['message'] = "Finished task deleted successfully.";
     } else {
-        echo "An error occurred while deleting the finished task.";
+        $response['success'] = false;
+        $response['message'] = "An error occurred while deleting the finished task.";
     }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
