@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2023 at 02:04 PM
+-- Generation Time: Oct 23, 2023 at 08:49 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,15 +43,15 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `student_name`, `student_id`, `status`, `completion_date`) VALUES
-(58, 'imbestigahan kung bakit lowkey si mahner', '2023-10-22', '2023-10-25', 'Clarence Fuertes', '22-0088-012', 'finished', '2023-10-22'),
 (61, 'paiyakin sa darriel', '2023-10-22', '2023-10-24', 'Danyel Ferrari', '22-9856-345', 'finished', '2023-10-22'),
-(67, 'imbestigahan kung bakit lowkey si mahner', '2023-10-22', '2023-10-25', 'Student1', '11-1111-111', 'finished', '2023-10-22'),
-(68, 'pag naglalaro ng ML', '2023-10-22', '2023-10-24', 'Clarence Fuertes', '22-0088-012', 'finished', '2023-10-22'),
-(69, 'Kailan kaya ako makakapag pahinga', '2023-10-22', '2023-10-25', 'Clarence Fuertes', '22-0088-012', 'ongoing', NULL),
-(70, 'paiyakin sa darriel', '2023-10-22', '2023-10-25', 'Clarence Fuertes', '22-0088-012', 'ongoing', NULL),
-(71, 'tanggalin ang lastog ni danyel', '2023-10-22', '2023-10-26', 'Clarence Fuertes', '22-0088-012', 'ongoing', NULL),
+(69, 'Kailan kaya ako makakapag pahinga', '2023-10-22', '2023-10-25', 'Clarence Fuertes', '22-0088-012', 'finished', '2023-10-23'),
+(70, 'paiyakin sa darriel', '2023-10-22', '2023-10-25', 'Clarence Fuertes', '22-0088-012', 'finished', '2023-10-23'),
+(71, 'tanggalin ang lastog ni danyel', '2023-10-22', '2023-10-26', 'Clarence Fuertes', '22-0088-012', 'finished', '2023-10-23'),
 (72, 'imbestigahan kung bakit lowkey si mahner', '2023-10-22', '2023-10-24', 'Danyel Ferrari', '22-9856-345', 'ongoing', NULL),
-(73, 'pag naglalaro ng ML', '2023-10-22', '2023-10-25', 'Student1', '11-1111-111', 'ongoing', NULL);
+(76, 'paiyakin sa darriel', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(77, 'tanggalin ang lastog ni danyel', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(78, 'imbestigahan kung bakit lowkey si mahner', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(79, 'pag naglalaro ng ML', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL);
 
 -- --------------------------------------------------------
 
@@ -75,9 +75,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_number`, `profile_picture`) VALUES
 ('adviser', 'Ms. Adviser', 'adviser@adviser.com', '$2y$10$BqK4ApNJ/rgccP7CuHUISujfjUFcULZzN46bi7aO2WCOVxlJVebhG', 'Admin', '00-0000-000', '65341dc304b28_administrator.jpg'),
-('student', 'Student1', 'stud1@email.com', '$2y$10$X7VwrQTWq20/a.2S8aetlObUWhWjw7ypP8G0tGzSSEgC6DHFi/7dq', 'emp', '11-1111-111', '6521e72607f5e_emp1.jpg'),
-('headoffice', 'Mr. Marlo', 'Marlo@reg.com', '$2y$10$OUVFQBByMdqt4ax7inGu..RZsJQpRv2lKfJ8Uno6flDy6OJDgJT7G', 'Registrar', '11-2222-333', '6531041397834_marlo.jpg'),
+('headoffice', 'Mr. Marlo', 'marlo@reg.com', '$2y$10$OUVFQBByMdqt4ax7inGu..RZsJQpRv2lKfJ8Uno6flDy6OJDgJT7G', 'Registrar', '11-2222-333', '6531041397834_marlo.jpg'),
 ('student', 'Clarence Fuertes', 'clarence@email.com', '$2y$10$.oWE8C8DyaEW3dR/WTrA4Oxe0Lm2nWRViiMBYOemBgKOH6oxc8C0u', 'BSCS', '22-0088-012', NULL),
+('student', 'darriel abalos', 'dar@email.com', '$2y$10$4K/bF08lcKXq67pEACGbHuay7bSFaNMvFBt1LNK.QdBN5Z8DG3yJy', 'BSCS', '22-4356-564', '6536ba1615bc1_stud1.jpg'),
 ('student', 'Danyel Ferrari', 'danyel@email.com', '$2y$10$qz.GUxHIG3Xmf.NgsmY/P.Vf5Wp3o.ApoJOYZShpxGwC4lj7c4RfC', 'BSCS', '22-9856-345', '65349962ef009_ball.jpg'),
 ('placeholder', 'PlaceHolder', 'place@holder.com', 'placeholder', NULL, 'unassigned', NULL);
 
@@ -106,7 +106,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- Constraints for dumped tables
