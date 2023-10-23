@@ -69,6 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="API/sweetalert2.all.min.js"></script>
     <link href="API/dark.css" rel="stylesheet">
     <script src="API/jquery-3.7.1.min.js"></script>
@@ -82,125 +84,169 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-family: Arial, sans-serif;
             text-align: center;
             color: white;
-        }
-
-        .logo {
-            text-align: center;
-            margin-top: 20px;
+            margin: 0;
+            padding: 0;
         }
 
         .logo img {
-            width: 500px;
+            width: 80%;
+            max-width: 400px;
             height: auto;
-        }
-
-        .error {
-            color: red;
-        }
-
-        .form-table {
-            width: 35%;
+            display: block;
             margin: 0 auto;
         }
 
-        .form-table th, .form-table td {
-            text-align: left;
-            padding: 5px;
+        form {
+            max-width: 300px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        .form-table input {
-            width: 100%;
-            padding: 5px;
+        form label {
+            display: block;
+            text-align: center;
+            font-weight: bold;
         }
 
-        .form-table select {
-            width: 105%;
+        form input {
+            width: 90%;
             padding: 5px;
+            margin: 8px 0;
+            border: 1px solid darkblue;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
         }
 
-        .form-table button {
+        form input:focus {
+            border: 1px solid lightskyblue;
+            outline: none;
+        }
+
+        form button {
             background-color: #007BFF;
             color: white;
-            padding: 5px;
             border: none;
+            padding: 10px;
+            border-radius: 5px;
             cursor: pointer;
-            width: 103%;
+            width: 100%;
         }
-        
-        .button-container {
-            margin: 20px auto;
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .file-button {
+            display: inline-block;
+            background: white;
+            color: black;
+            padding: 5px;
+            border: 1px solid darkblue;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 86%;
+            margin: 9px;
+        }
+
+        .file-button:hover {
+            background: wheat;
+        }
+
+        select {
+            width: 90%;
+            padding: 5px;
+            margin: 8px 0;
+            border: 1px solid darkblue;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            background: white;
+            color: black;
+            appearance: none;
+            outline: none;
+            text-align: center;
+        }
+
+        select:hover {
+            border: 1px solid lightskyblue;
+        }
+
+        .circular-preview {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            border: 1px solid darkblue;
+        }
+
+        .circular-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            display: block;
         }
     </style>
 </head>
 <body>
-<div class="logo">
-    <img src="assets/logo.png" alt="Company Logo">
-</div>
+    <br>
+    <div class="logo">
+        <img src="assets/logo.png" alt="Company Logo">
+    </div>
+    <br><br>
+    <form action="registration.php" method="POST">
+        <label for="full_name"><b>Full Name:</b></label>
+        <input type="text" id="full_name" name="full_name" required>
 
-<h1>Registration</h1>
-<?php
-if (!empty($errors)) {
-    echo '<div class="error">';
-    foreach ($errors as $error) {
-        echo $error . '<br>';
-    }
-    echo '</div>';
-}
-?>
+        <label for="email"><b>Email:</b></label>
+        <input type="email" id="email" name="email" required>
 
-<table class="form-table">
-    <caption></caption>
-    <form action="registration.php" method="POST" enctype="multipart/form-data">
-        <tr>
-            <th scope="row"><label for="full_name">Full Name:</label></th>
-            <td><input type="text" id="full_name" name="full_name" required></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="email">Email:</label></th>
-            <td><input type="email" id="email" name="email" required></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="program">Program:</label></th>
-            <td><input type="text" id="program" name="program"></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="id_number">ID Number:</label></th>
-            <td><input type="text" id="id_number" name="id_number"></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="password">Password:</label></th>
-            <td><input type="password" id="password" name="password" required></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="confirm_password">Confirm Password:</label></th>
-            <td><input type="password" id="confirm_password" name="confirm_password" required></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="profile_picture">Profile Picture:</label></th>
-            <td><input type="file" id="profile_picture" name="profile_picture"></td>
-        </tr>
-        <tr>
-            <th scope="row"><label for="role">Role:</label></th>
-            <td>
-                <select id="role" name="role" required>
-                    <option value="student">Student</option>
-                    <option value="adviser">Adviser</option>
-                    <option value="headoffice">Head Office</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <div class="button-container">
-                    <button type="submit" id="register">Register</button>
-                </div>
-            </td>
-        </tr>
+        <label for="program"><b>Program:</b></label>
+        <input type="text" id="program" name="program">
+
+        <label for="id_number"><b>ID Number:</b></label>
+        <input type="text" id="id_number" name="id_number">
+
+        <label for="password"><b>Password:</b></label>
+        <input type="password" id="password" name="password" required>
+
+        <label for="confirm_password"><b>Confirm Password:</b></label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+
+        <label for="profile_picture"><b>Profile Picture:</b></label>
+        <div class="circular-preview">
+            <img id="image-preview" src="" alt="Profile Picture Preview" style="display: none;">
+        </div>
+        <div class="file-input">
+            <input type="file" id="profile_picture" name="profile_picture" style="display: none;">
+            <label for="profile_picture" class="file-button">Choose File</label>
+        </div>
+
+        <label for="role"><b>Role:</b></label>
+        <select id="role" name="role" required>
+            <option value="student">Student</option>
+            <option value="adviser">Adviser</option>
+            <option value="headoffice">Head Office</option>
+        </select>
+        <br><br>
+        <button type="submit">Register</button>
     </form>
-</table>
+    <br>
+    <?php
+    if (isset($error_message)) {
+        echo '<div class="error-message">' . $error_message . '</div>';
+    }
+    ?>
 
-<br>
-<a href="index.php" style="color:white;"><b>Have an Account? Log in</b></a>
+    <a href="index.php" style="color:white;"><b>Have an Account? Log in</b></a><br><br>
 </body>
 </html>
 
@@ -232,4 +278,22 @@ if (!empty($errors)) {
       }
     });
   });
+</script>
+<script>
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#image-preview').attr('src', e.target.result);
+                $('#image-preview').show();
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#profile_picture').on('change', function() {
+        previewImage(this);
+    });
 </script>
