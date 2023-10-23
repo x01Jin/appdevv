@@ -128,7 +128,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php
 function initializeSession($user) {
-    session_start();
     $_SESSION["user_id"] = $user["id_number"];
     $_SESSION["username"] = $user["full_name"];
     $_SESSION["user_role"] = $user["role"];
