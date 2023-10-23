@@ -126,6 +126,7 @@ include_once "../../Settings/PfpFunc.php";
         background-image: url('../../assets/taskitbg.jpg');
         background-size: cover;
         background-repeat: no-repeat;
+        background-attachment: fixed;
         font-family: Arial, sans-serif;
         text-align: center;
         color: white;
