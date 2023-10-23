@@ -197,7 +197,7 @@ include_once "../../Settings/PfpFunc.php";
 
         <section id="assign-tasks">
             <hr><h2>Assign Tasks</h2><hr>
-            <form method="POST" name="assign-tasks-form">
+            <form method="POST" name="assign-tasks-form" onsubmit="return validateForm();">
                 <table border="1">
                     <caption><br><b>List of Tasks Requested By Registrar</b><br><br></caption>
                     <tr>
@@ -263,3 +263,38 @@ include_once "../../Settings/PfpFunc.php";
         });
     </script>
 <?php endif; ?>
+<script>
+    function validateForm() {
+        const startDateFields = document.querySelectorAll('input[name^="start_date"]');
+        const deadlineFields = document.querySelectorAll('input[name^="deadline"]');
+        const studentFields = document.querySelectorAll('select[name^="student"]');
+
+        for (let i = 0; i < startDateFields.length; i++) {
+            const startDate = startDateFields[i];
+            const deadline = deadlineFields[i];
+            const student = studentFields[i];
+
+            if (!student.value) {
+                Swal.fire({
+                    title: 'Warning',
+                    text: 'Please select the student/s for all selected tasks.',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+                return false;
+            }
+            if ((!startDate.value || !deadline.value) && student.value !== "Unassigned") {
+                Swal.fire({
+                    title: 'Warning',
+                    text: 'Please select both Start Date and Deadline for all selected tasks.',
+                    icon: 'warning',
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK'
+                });
+                return false;
+            }
+        }
+        return true;
+    }
+</script>
