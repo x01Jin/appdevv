@@ -202,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <img src="assets/logo.png" alt="Company Logo">
     </div>
     <br><br>
-    <form action="registration.php" method="POST">
+    <form action="registration.php" method="POST" enctype="multipart/form-data">
         <label for="full_name"><b>Full Name:</b></label>
         <input type="text" id="full_name" name="full_name" required>
 
@@ -240,43 +240,60 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="submit"id="register">Register</button>
     </form>
     <br>
-    <?php
-    if (isset($error_message)) {
-        echo '<div class="error-message">' . $error_message . '</div>';
-    }
-    ?>
 
     <a href="index.php" style="color:white;"><b>Have an Account? Log in</b></a><br><br>
 </body>
 </html>
-
 <script>
   $('#register').on('click', function(event) {
     event.preventDefault();
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you want to create an account?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Confirm',
-      cancelButtonText: 'Cancel',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire(
-          'Account Created!',
-          'Your account has been created successfully.',
-          'success'
-        ).then(() => {
-          $('form').submit();
-        });
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        Swal.fire(
-          'Cancelled',
-          'Account creation has been cancelled.',
-          'error'
-        );
-      }
-    });
+    var fullName = $('#full_name').val();
+    var email = $('#email').val();
+    var password = $('#password').val();
+    var confirmPassword = $('#confirm_password').val();
+
+    if (fullName === '' || email === '' || password === '' || confirmPassword === '') {
+      Swal.fire({
+        title: 'Warning',
+        text: 'Please fill in all required fields.',
+        icon: 'warning'
+      });
+    } else if (password !== confirmPassword) {
+      Swal.fire({
+        title: 'Password Mismatch',
+        text: 'The passwords do not match. Please make sure they match.',
+        icon: 'error'
+      });
+    } else {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to create an account?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Account Created!',
+            'Your account has been created successfully.',
+            'success'
+          ).then(() => {
+            $('form').submit();
+          });
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          Swal.fire(
+            'Cancelled',
+            'Account creation has been cancelled.',
+            'error'
+          );
+        }
+      });
+    }
+  });
+
+  $('#confirm_password').on('keyup', function() {
+    Swal.close();
   });
 </script>
 <script>
