@@ -237,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <option value="headoffice">Head Office</option>
         </select>
         <br><br>
-        <button type="submit">Register</button>
+        <button type="submit"id="register">Register</button>
     </form>
     <br>
     <?php
