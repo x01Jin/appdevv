@@ -1,56 +1,26 @@
 <?php
-
-include_once "../../db.php";
-
+define('DB_PATH', "../../db.php");
+define('SWEETALERT_PATH', "../../API/sweetalert2.all.min.js");
 define('TD_SEPARATOR', '</td><td>');
 
+include_once DB_PATH;
 session_start();
 
 if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "adviser") {
     header("Location: ../../index.php");
     exit();
 }
+
 $errorMessage = $successMessage = "";
-
-function deleteTasks($studentId) {
-    global $pdo;
-    $sql = "DELETE FROM tasks WHERE student_id = :studentId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':studentId', $studentId);
-    $stmt->execute();
-}
-
-function deleteStudent($studentId) {
-    global $pdo;
-    $sql = "DELETE FROM users WHERE id_number = :studentId";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':studentId', $studentId);
-    $stmt->execute();
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_student"])) {
-    $studentId = $_POST["delete_student"];
-    $sqlCheckTasks = "SELECT COUNT(*) FROM tasks WHERE student_id = :studentId";
-    $stmtCheckTasks = $pdo->prepare($sqlCheckTasks);
-    $stmtCheckTasks->bindParam(':studentId', $studentId);
-    $stmtCheckTasks->execute();
-    $taskCount = $stmtCheckTasks->fetchColumn();
-    if ($taskCount > 0) {
-        deleteTasks($studentId);
-    }
-    deleteStudent($studentId);
-    $successMessage = "Student deleted successfully.";
-}
 
 $sql = "SELECT id_number, full_name FROM users WHERE role = 'student'";
 $students = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 
-$sqlOngoing = "SELECT id, description, student_name,
-                start_date, deadline, status FROM tasks WHERE status IN ('ongoing')";
+$sqlOngoing = "SELECT id, description, student_name, start_date, deadline, status FROM tasks WHERE status = 'ongoing'";
 $ongoingTasks = $pdo->query($sqlOngoing)->fetchAll(PDO::FETCH_ASSOC);
 
-$sqlFinished = "SELECT id, description, student_name,
-                start_date, deadline, status FROM tasks WHERE status = 'finished'";
+$sqlFinished = "SELECT id, description, student_name, start_date, deadline,
+                status FROM tasks WHERE status = 'finished'";
 $finishedTasks = $pdo->query($sqlFinished)->fetchAll(PDO::FETCH_ASSOC);
 
 include_once "../../Settings/PfpFunc.php";
@@ -60,7 +30,7 @@ include_once "../../Settings/PfpFunc.php";
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="../../API/sweetalert2.all.min.js"></script>
+    <script src="<?php echo SWEETALERT_PATH; ?>"></script>
     <link href="../../API/dark.css" rel="stylesheet">
     <script src="../../API/jquery-3.7.1.min.js"></script>
     <title>(Adviser) Dashboard</title>
@@ -159,11 +129,9 @@ include_once "../../Settings/PfpFunc.php";
                 <button type="submit" name="logout">Logout</button>
             </form>
         </nav>
-        
         <hr>
         <h2>Student List</h2>
         <hr>
-        
         <table border="1">
             <caption>List of students</caption>
             <tr>
@@ -174,8 +142,7 @@ include_once "../../Settings/PfpFunc.php";
             <?php
             foreach ($students as $student) {
                 $id_number = isset($student['id_number']) ? $student['id_number'] : 'N/A';
-                echo '
-                    <tr>
+                echo '<tr>
                         <td>' . $student['full_name'] . '</td>
                         <td>' . $id_number . '</td>
                         <td>
@@ -185,12 +152,10 @@ include_once "../../Settings/PfpFunc.php";
             }
             ?>
         </table>
-        
         <section id="ongoing-tasks">
             <hr>
             <h2>Ongoing Tasks</h2>
             <hr>
-            
             <table border="1">
                 <caption>List of ongoing tasks</caption>
                 <tr>
@@ -203,8 +168,7 @@ include_once "../../Settings/PfpFunc.php";
                 </tr>
                 <?php
                 foreach ($ongoingTasks as $task) {
-                    echo '
-                        <tr>
+                    echo '<tr>
                             <td>' . $task['id'] . TD_SEPARATOR .
                             $task['description'] . TD_SEPARATOR .
                             $task['student_name'] . TD_SEPARATOR .
@@ -216,12 +180,10 @@ include_once "../../Settings/PfpFunc.php";
                 ?>
             </table>
         </section>
-        
         <section id="finished-tasks">
             <hr>
             <h2>Finished Tasks</h2>
             <hr>
-            
             <table border="1">
                 <caption>List of finished tasks</caption>
                 <tr>
@@ -235,8 +197,7 @@ include_once "../../Settings/PfpFunc.php";
                 </tr>
                 <?php
                 foreach ($finishedTasks as $task) {
-                    echo '
-                        <tr>
+                    echo '<tr>
                             <td>' . $task['id'] . TD_SEPARATOR .
                             $task['description'] . TD_SEPARATOR .
                             $task['student_name'] . TD_SEPARATOR .
@@ -244,16 +205,13 @@ include_once "../../Settings/PfpFunc.php";
                             $task['deadline'] . TD_SEPARATOR .
                             $task['status'] . '</td>
                             <td>
-                                <button class="remove-finished-task" data-task-id="' . $task['id'] . '">
-                                    Remove
-                                </button>
+                                <button class="remove-finished-task" data-task-id="' . $task['id'] . '">Remove</button>
                             </td>
                         </tr>';
                 }
                 ?>
             </table>
         </section>
-        
         <br><br>
         <footer>
             &copy; <?php echo date("Y"); ?> Task Management System By CroixTech
@@ -303,41 +261,43 @@ include_once "../../Settings/PfpFunc.php";
     });
 </script>
 <script>
-    $('.remove-finished-task').on('click', function () {
-        const taskId = $(this).data('task-id');
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'Do you want to remove this finished task?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Confirm',
-            cancelButtonText: 'Cancel',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.post('../../Actions/Adviser/DeleteFinished.php', { task_id: taskId }, function (data) {
-                    if (data.success) {
-                        Swal.fire(
-                            'Task Removed!',
-                            data.message,
-                            'success'
-                        ).then(() => {
-                            location.reload();
-                        });
-                    } else {
-                        Swal.fire(
-                            'Error',
-                            data.message,
-                            'error'
-                        );
-                    }
-                }, 'json');
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                Swal.fire(
-                    'Cancelled',
-                    'Task removal has been cancelled.',
-                    'info'
-                );
-            }
+    $(document).ready(function() {
+        $('.remove-finished-task').on('click', function () {
+            const taskId = $(this).data('task-id');
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'Do you want to remove this finished task?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Confirm',
+                cancelButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.post('../../Actions/Adviser/DeleteFinished.php', { task_id: taskId }, function (data) {
+                        if (data.success) {
+                            Swal.fire(
+                                'Task Removed!',
+                                data.message,
+                                'success'
+                            ).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error',
+                                data.message,
+                                'error'
+                            );
+                        }
+                    }, 'json');
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire(
+                        'Cancelled',
+                        'Task removal has been cancelled.',
+                        'info'
+                    );
+                }
+            });
         });
     });
 </script>

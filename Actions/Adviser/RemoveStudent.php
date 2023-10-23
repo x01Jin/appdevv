@@ -1,5 +1,4 @@
 <?php
-
 include_once "../../db.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_student"])) {
@@ -11,6 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete_student"])) {
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':studentId', $studentId);
         $stmt->execute();
+    }
+
+    $sqlGetPFP = "SELECT profile_picture FROM users WHERE id_number = :studentId";
+    $stmtGetPFP = $pdo->prepare($sqlGetPFP);
+    $stmtGetPFP->bindParam(':studentId', $studentId);
+    $stmtGetPFP->execute();
+    $pfpPath = $stmtGetPFP->fetchColumn();
+
+    if ($pfpPath) {
+        unlink('../../profile_pictures/' . $pfpPath);
     }
 
     function deleteStudent($studentId) {
