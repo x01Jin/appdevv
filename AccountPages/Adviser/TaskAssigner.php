@@ -85,8 +85,9 @@ include_once "../../Settings/PfpFunc.php";
 
         table {
             margin: 0 auto;
-            width: 80%;
+            width: 100%;
             color: white;
+            border-collapse: collapse;
         }
 
         table th {
@@ -103,6 +104,29 @@ include_once "../../Settings/PfpFunc.php";
             color: white;
             text-align: center;
             padding: 20px;
+        }
+
+        #assign-task {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #assign-task:hover {
+            background-color: #45a049;
+        }
+
+        select {
+            padding: 5px;
+        }
+
+        input[type="date"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
 
         .content {
