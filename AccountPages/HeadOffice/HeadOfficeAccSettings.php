@@ -58,7 +58,7 @@ if (!empty($errorMessage)) {
 
     <div class="UpdatePfp">
         <hr><h2>Change Profile Picture</h2><hr>
-        <form method="POST" action="../../Settings/UpdatePfp.php" enctype="multipart/form-data">
+        <form method="POST" action="../../Settings/UpdatePfpHead.php" enctype="multipart/form-data">
             <input type="file" name="profile_picture" accept="image/*" required>
             <button type="submit" name="upload">Upload</button>
         </form>
