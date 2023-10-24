@@ -15,11 +15,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['assign-tasks'])) {
     if (isset($_POST['task'])) {
         $assignedTasks = $_POST['task'];
 
+        // Initialize flags for different conditions
+        $noTasksSelected = true;
+        $unassignedStudent = false;
+        $emptyStartDateOrDeadline = false;
+
         foreach ($assignedTasks as $taskId) {
             $studentId = $_POST['student'][$taskId];
             $startDate = $_POST['start_date'][$taskId];
             $deadline = $_POST['deadline'][$taskId];
 
+            // Check if a task has been selected
+            $noTasksSelected = false;
+
+            if ($studentId === "") {
+                $unassignedStudent = true;
+            } elseif (empty($startDate) || empty($deadline)) {
+                $emptyStartDateOrDeadline = true;
+            }
+
+            // Your existing database update code
             $sql = "UPDATE tasks SET student_id = :studentId, status = 'ongoing',
                 start_date = :startDate, deadline = :deadline
                 WHERE id = :taskId";
@@ -41,7 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['assign-tasks'])) {
             $stmtUpdateName->execute([':studentName' => $studentName, ':taskId' => $taskId]);
         }
 
-        $successMessage = 'Tasks have been successfully assigned.';
+        if ($noTasksSelected) {
+            $errorMessage = 'No tasks were selected for assignment.';
+        } elseif ($unassignedStudent) {
+            $errorMessage = 'One or more tasks have an unassigned student.';
+        } elseif ($emptyStartDateOrDeadline) {
+            $errorMessage = 'One or more tasks have empty start date or deadline.';
+        } else {
+            $successMessage = 'Tasks have been successfully assigned.';
+        }
     } else {
         $errorMessage = 'No tasks were selected for assignment.';
     }
@@ -197,7 +220,7 @@ include_once "../../Settings/PfpFunc.php";
 
         <section id="assign-tasks">
             <hr><h2>Assign Tasks</h2><hr>
-            <form method="POST" name="assign-tasks-form" onsubmit="return validateForm();">
+            <form method="POST" name="assign-tasks-form">
                 <table border="1">
                     <caption><br><b>List of Tasks Requested By Registrar</b><br><br></caption>
                     <tr>
@@ -241,7 +264,6 @@ include_once "../../Settings/PfpFunc.php";
     </div>
 </body>
 </html>
-
 <?php if (!empty($successMessage)) : ?>
     <script>
         Swal.fire({
@@ -264,37 +286,56 @@ include_once "../../Settings/PfpFunc.php";
     </script>
 <?php endif; ?>
 <script>
-    function validateForm() {
-        const startDateFields = document.querySelectorAll('input[name^="start_date"]');
-        const deadlineFields = document.querySelectorAll('input[name^="deadline"]');
-        const studentFields = document.querySelectorAll('select[name^="student"]');
-
-        for (let i = 0; i < startDateFields.length; i++) {
-            const startDate = startDateFields[i];
-            const deadline = deadlineFields[i];
-            const student = studentFields[i];
-
-            if (!student.value) {
-                Swal.fire({
-                    title: 'Warning',
-                    text: 'Please select the student/s for all selected tasks.',
-                    icon: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                });
-                return false;
-            }
-            if ((!startDate.value || !deadline.value) && student.value !== "Unassigned") {
-                Swal.fire({
-                    title: 'Warning',
-                    text: 'Please select both Start Date and Deadline for all selected tasks.',
-                    icon: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK'
-                });
-                return false;
-            }
-        }
-        return true;
+    function showAlert(title, text, icon) {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: icon,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'OK'
+        });
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        <?php if (!empty($successMessage)) : ?>
+            showAlert('Success', '<?= $successMessage ?>', 'success');
+        <?php elseif (!empty($errorMessage)) : ?>
+            showAlert('Error', '<?= $errorMessage ?>', 'error');
+        <?php endif; ?>
+
+        document.querySelector("form[name='assign-tasks-form']").addEventListener('submit', function (event) {
+            const checkboxes = document.querySelectorAll("input[name='task[]']");
+            let atLeastOneSelected = false;
+            let unassignedSelected = false;
+            let emptyDateSelected = false;
+
+            checkboxes.forEach((checkbox) => {
+                if (checkbox.checked) {
+                    atLeastOneSelected = true;
+                    const taskId = checkbox.value;
+                    const studentSelect = document.querySelector(`select[name='student[${taskId}]']`);
+                    const startDateInput = document.querySelector(`input[name='start_date[${taskId}]']`);
+                    const deadlineInput = document.querySelector(`input[name='deadline[${taskId}]']`);
+
+                    if (studentSelect.value === "") {
+                        unassignedSelected = true;
+                    }
+                    if (startDateInput.value === "" || deadlineInput.value === "") {
+                        emptyDateSelected = true;
+                    }
+                }
+            });
+
+            if (!atLeastOneSelected) {
+                showAlert('Warning', 'No tasks were selected for assignment.', 'warning');
+                event.preventDefault();
+            } else if (unassignedSelected) {
+                showAlert('Warning', 'One or more selected tasks are unassigned.', 'warning');
+                event.preventDefault();
+            } else if (emptyDateSelected) {
+                showAlert('Warning', 'One or more selected tasks have empty start date or deadline.', 'warning');
+                event.preventDefault();
+            }
+        });
+    });
 </script>
