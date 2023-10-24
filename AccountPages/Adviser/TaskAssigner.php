@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['assign-tasks'])) {
             $successMessage = 'Tasks have been successfully assigned.';
         }
     } else {
-        $errorMessage = 'No tasks were selected for assignment.';
+        $errorMessage = 'How did we get here?.';
     }
 }
 
