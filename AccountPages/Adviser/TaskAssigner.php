@@ -15,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['assign-tasks'])) {
     if (isset($_POST['task'])) {
         $assignedTasks = $_POST['task'];
 
-        // Initialize flags for different conditions
         $noTasksSelected = true;
         $unassignedStudent = false;
         $emptyStartDateOrDeadline = false;
@@ -25,7 +24,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['assign-tasks'])) {
             $startDate = $_POST['start_date'][$taskId];
             $deadline = $_POST['deadline'][$taskId];
 
-            // Check if a task has been selected
             $noTasksSelected = false;
 
             if ($studentId === "") {
@@ -34,7 +32,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['assign-tasks'])) {
                 $emptyStartDateOrDeadline = true;
             }
 
-            // Your existing database update code
             $sql = "UPDATE tasks SET student_id = :studentId, status = 'ongoing',
                 start_date = :startDate, deadline = :deadline
                 WHERE id = :taskId";
