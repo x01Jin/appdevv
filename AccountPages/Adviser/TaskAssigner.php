@@ -83,6 +83,7 @@ include_once "../../Settings/PfpFunc.php";
     <script src="../../API/sweetalert2.all.min.js"></script>
     <link href="../../API/dark.css" rel="stylesheet">
     <script src="../../API/jquery-3.7.1.min.js"></script>
+    <link href="../../API/Nav.css" rel="stylesheet">
     <title>(Adviser) Task Assigner</title>
     <style>
         body {
@@ -93,14 +94,6 @@ include_once "../../Settings/PfpFunc.php";
             font-family: Arial, sans-serif;
             text-align: center;
             color: white;
-        }
-
-        .profile-picture {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin: 20px auto;
-            display: block;
         }
 
         table {
@@ -156,34 +149,6 @@ include_once "../../Settings/PfpFunc.php";
             color: white;
         }
 
-        nav {
-            background-color: rgba(20, 20, 20, 100);
-            color: white;
-            padding: 10px;
-            float: left;
-            width: 200px;
-            height: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            margin-bottom: 10px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            display: block;
-            padding: 5px;
-        }
-
         main {
             padding: 20px;
         }
@@ -210,7 +175,7 @@ include_once "../../Settings/PfpFunc.php";
                 <li><a href="AddStudent.php" style="color:white;"><b>Add Student</b></a></li>
                 <li><a href="AdviserAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
             </ul>
-            <form method="POST" action="../../index.php">
+            <form class="logout-form" method="POST" action="../../index.php">
                 <button type="submit" name="logout">Logout</button>
             </form>
             </nav>

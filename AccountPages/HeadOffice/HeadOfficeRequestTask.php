@@ -39,7 +39,7 @@ include_once "../../Settings/PfpFunc.php";
             <li><a href="HeadOfficeRequestTask.php" style="color:white;"><b>Request Task</b></a></li>
             <li><a href="HeadOfficeAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
         </ul>
-        <form method="POST" action="../../index.php">
+        <form class="logout-form" method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
         </form>
     </nav>
@@ -104,14 +104,6 @@ include_once "../../Settings/PfpFunc.php";
         color: white;
     }
 
-    .profile-picture {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        margin: 20px auto;
-        display: block;
-    }
-
     table {
         margin: 0 auto;
         width: 80%;
@@ -141,34 +133,6 @@ include_once "../../Settings/PfpFunc.php";
         color: white;
     }
 
-    nav {
-        background-color: rgba(20, 20, 20, 100);
-        color: white;
-        padding: 10px;
-        float: left;
-        width: 200px;
-        height: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
-    }
-
-    nav ul {
-        list-style: none;
-        padding: 0;
-    }
-
-    nav ul li {
-        margin-bottom: 10px;
-    }
-
-    nav ul li a {
-        text-decoration: none;
-        color: #333;
-        display: block;
-        padding: 5px;
-    }
-
     main {
         padding: 20px;
     }
@@ -180,7 +144,7 @@ include_once "../../Settings/PfpFunc.php";
         padding: 10px;
     }
 </style>
-
+<link href="../../API/Nav.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>

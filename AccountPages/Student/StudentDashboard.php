@@ -46,7 +46,7 @@ define('TD_SEPARATOR', '</td><td>');
             <li><a href="StudentAccSettings.php"><b>Account settings</b></a></li>
             <li><a href="StudentDashboard.php"><b>Filler</b></a></li>
         </ul>
-        <form method="POST" action="../../index.php">
+        <form class="logout-form" method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
         </form>
     </nav>
@@ -190,6 +190,6 @@ footer {
     padding: 10px;
 }
 </style>
-
+<link href="../../API/Nav.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
