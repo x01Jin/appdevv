@@ -23,6 +23,7 @@ include_once "../../Settings/PfpFunc.php";
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="../../API/sweetalert2.all.min.js"></script>
     <link href="../../API/dark.css" rel="stylesheet">
     <script src="../../API/jquery-3.7.1.min.js"></script>
     <title>(Adviser)Account Settings</title>
