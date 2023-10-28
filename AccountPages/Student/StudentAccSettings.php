@@ -129,3 +129,28 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+<?php
+if (isset($_SESSION['successMessage'])) {
+    echo '
+    <script>
+    Swal.fire({
+        icon: "success",
+        title: "' . $_SESSION['successMessage'] . '",
+        showConfirmButton: false,
+        timer: 1500
+    });
+    </script>';
+    unset($_SESSION['successMessage']);
+}
+if (isset($_SESSION['errorMessage'])) {
+    echo '
+    <script>
+    Swal.fire({
+        icon: "error",
+        title: "' . $_SESSION['errorMessage'] . '",
+        showConfirmButton: false,
+        timer: 1500
+    });
+    </script>';
+    unset($_SESSION['errorMessage']);
+}
