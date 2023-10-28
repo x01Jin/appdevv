@@ -43,7 +43,7 @@ include_once "../../Settings/PfpFunc.php";
             <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">'
             ?>
             <ul>
-                <li><a href="HeadOfficeDashboard.php" style="color:white;"><b>HeadOffice Dashboard</b></a></li>
+                <li><a href="HeadOfficeDashboard.php" style="color:white;"><b>Head Office Dashboard</b></a></li>
                 <li><a href="HeadOfficeRequestTask.php" style="color:white;"><b>Request Task</b></a></li>
                 <li><a href="HeadOfficeAccSettings.php" style="color:white;"><b>Account Settings</b></a></li>
             </ul>
