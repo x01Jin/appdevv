@@ -33,7 +33,6 @@ include_once "../../Settings/PfpFunc.php";
     <script src="<?php echo SWEETALERT_PATH; ?>"></script>
     <link href="../../API/dark.css" rel="stylesheet">
     <script src="../../API/jquery-3.7.1.min.js"></script>
-    <link href="../../API/Nav.css" rel="stylesheet">
     <title>(Adviser) Dashboard</title>
     <style>
         body {
@@ -85,6 +84,75 @@ include_once "../../Settings/PfpFunc.php";
             text-align: center;
             padding: 10px;
         }
+
+        .profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto;
+            border: 1px solid darkblue;
+            display: flex;
+        }
+
+        .profile-picture img {
+            max-width: 100%;
+            max-height: auto;
+            object-fit: cover;
+        }
+
+        nav {
+            background-color: rgba(20, 20, 20, 100);
+            color: white;
+            padding: 10px;
+            float: left;
+            width: 200px;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-bottom: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+            padding: 5px;
+        }
+
+        .logout-form {
+            background: none;
+            border: none;
+            padding: 0;
+            margin: 0;
+            box-shadow: none;
+        }
+
+        .logout-form button {
+            display: inline-block;
+            background: white;
+            color: black;
+            padding: 5px;
+            border: 1px solid darkblue;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            width: 86%;
+            margin: 9px;
+        }
+
+        .logout-form button:hover {
+            background: wheat;
+        }
     </style>
 </head>
 <body>
@@ -94,7 +162,7 @@ include_once "../../Settings/PfpFunc.php";
         </header>
         <nav>
             <?php echo '
-            <img src="../../profile_pictures/' . $profilePicture . '" alt="Profile Picture" class="profile-picture">';
+            <img src="../../profile_pictures/' . $profilePicture . '" class="profile-picture">';
             ?>
             <ul>
                 <li><a href="AdviserDashboard.php" style="color:white;"><b>Adviser Dashboard</b></a></li>
