@@ -44,7 +44,6 @@ define('TD_SEPARATOR', '</td><td>');
         <ul>
             <li><a href="StudentDashboard.php"><b>Student Dashboard</b></a></li>
             <li><a href="StudentAccSettings.php"><b>Account settings</b></a></li>
-            <li><a href="StudentDashboard.php"><b>Filler</b></a></li>
         </ul>
         <form class="logout-form" method="POST" action="../../index.php">
             <button type="submit" name="logout">Logout</button>
@@ -128,61 +127,36 @@ body {
     text-align: center;
     color: white;
 }
-.profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin: 20px auto;
-    display: block;
-}
+
 table {
     margin: 0 auto;
     width: 80%;
     color: white;
 }
+
 table th {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 10px;
+
 }
 table td {
     padding: 10px;
 }
+
 header {
     background-color: rgba(51, 51, 51, 0.5);
     color: white;
     text-align: center;
     padding: 20px;
 }
+
 .content {
     margin-left: 200px;
     padding: 20px;
     background-color: rgba(51, 51, 51, 0.5);
     color: white;
 }
-nav {
-    background-color: rgba(20, 20, 20, 100);
-    color: white;
-    padding: 10px;
-    float: left;
-    width: 200px;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-nav ul li {
-    margin-bottom: 10px;
-}
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    display: block;
-    padding: 5px;
-}
+
 footer {
     background-color: rgba(51, 51, 51, 0.8);
     color: white;
@@ -190,6 +164,5 @@ footer {
     padding: 10px;
 }
 </style>
+
 <link href="../../API/Nav.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
