@@ -26,9 +26,9 @@ include_once "../../Settings/PfpFunc.php";
     <script src="../../API/sweetalert2.all.min.js"></script>
     <link href="../../API/dark.css" rel="stylesheet">
     <script src="../../API/jquery-3.7.1.min.js"></script>
-    <title>(Adviser)Account Settings</title>
     <link href="../../API/AccSettings.css" rel="stylesheet">
     <link href="../../API/Nav.css" rel="stylesheet">
+    <title>(Adviser)Account Settings</title>
 </head>
 <body>
     <div class="thebox">
