@@ -13,11 +13,11 @@ if (!isset($_SESSION["user_id"]) || $_SESSION["user_role"] !== "headoffice") {
 $errorMessage = $successMessage = "";
 
 $premadeTasks = [
-    'Kailan kaya ako makakapag pahinga',
-    'paiyakin sa darriel',
-    'tanggalin ang lastog ni danyel',
-    'imbestigahan kung bakit lowkey si mahner',
-    'pag naglalaro ng ML',
+    'Get coffee',
+    'Help sort papers',
+    'Get food',
+    'Wala na akong maisip',
+    'Get rest',
 ];
 
 include_once "../../Settings/PfpFunc.php";

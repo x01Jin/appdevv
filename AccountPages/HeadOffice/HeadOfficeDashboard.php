@@ -172,9 +172,10 @@ include_once "../../Settings/PfpFunc.php";
         padding: 10px;
     }
 </style>
+<script src=../../API/sweetalert2.all.min.js"></script>
+<link href="../../API/dark.css" rel="stylesheet">
+<script src="../../API/jquery-3.7.1.min.js"></script>
 <link href="../../API/Nav.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
     $(document).ready(function() {
         $(".update-task").click(function() {
