@@ -53,7 +53,7 @@ include_once "../../Settings/PfpFunc.php";
 
         <div class="UpdatePfp">
         <hr><h2>Change Profile Picture</h2><hr>
-            <form method="POST" action="../../Settings/UpdatePfp.php" enctype="multipart/form-data">
+            <form method="POST" action="../../Settings/UpdatePfpStud.php" enctype="multipart/form-data">
                 <div class="circular-preview">
                     <img id="image-preview" src="
                     <?php echo '../../profile_pictures/' . $accountInfo['profile_picture']; ?>
@@ -68,7 +68,7 @@ include_once "../../Settings/PfpFunc.php";
         </div>
 
         <hr><h2>Change Password</h2><hr>
-        <form method="POST" action="../../Settings/ChangePassword.php">
+        <form method="POST" action="../../Settings/ChangePasswordStud.php">
             <label for="current_password">Current Password:</label>
             <input type="password" name="current_password" required><br><br>
             <label for="new_password">New Password:</label>
@@ -79,7 +79,7 @@ include_once "../../Settings/PfpFunc.php";
         </form>
         
         <hr><h2>Update Account Information</h2><hr>
-        <form method="POST" action="../../Settings/UpdateAccount.php">
+        <form method="POST" action="../../Settings/UpdateAccountStud.php">
             <?php echo '
             <label for="full_name">Full Name:</label>
             <input type="text" name="full_name" value="' . $accountInfo["full_name"] . '" required><br>
