@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2023 at 08:49 PM
+-- Generation Time: Jan 10, 2024 at 01:23 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -43,15 +43,10 @@ CREATE TABLE `tasks` (
 --
 
 INSERT INTO `tasks` (`id`, `description`, `start_date`, `deadline`, `student_name`, `student_id`, `status`, `completion_date`) VALUES
-(61, 'paiyakin sa darriel', '2023-10-22', '2023-10-24', 'Danyel Ferrari', '22-9856-345', 'finished', '2023-10-22'),
-(69, 'Kailan kaya ako makakapag pahinga', '2023-10-22', '2023-10-25', 'Clarence Fuertes', '22-0088-012', 'finished', '2023-10-23'),
-(70, 'paiyakin sa darriel', '2023-10-22', '2023-10-25', 'Clarence Fuertes', '22-0088-012', 'finished', '2023-10-23'),
-(71, 'tanggalin ang lastog ni danyel', '2023-10-22', '2023-10-26', 'Clarence Fuertes', '22-0088-012', 'finished', '2023-10-23'),
-(72, 'imbestigahan kung bakit lowkey si mahner', '2023-10-22', '2023-10-24', 'Danyel Ferrari', '22-9856-345', 'ongoing', NULL),
-(76, 'paiyakin sa darriel', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
-(77, 'tanggalin ang lastog ni danyel', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
-(78, 'imbestigahan kung bakit lowkey si mahner', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
-(79, 'pag naglalaro ng ML', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL);
+(86, 'Help in encoding of TES', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(87, 'Help in encoding of ISO', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(88, 'Help organizing papers', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL),
+(89, 'Request personal Help', '0000-00-00', '0000-00-00', '', 'unassigned', 'requested', NULL);
 
 -- --------------------------------------------------------
 
@@ -75,10 +70,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`role`, `full_name`, `email`, `password`, `program`, `id_number`, `profile_picture`) VALUES
 ('adviser', 'Ms. Adviser', 'adviser@adviser.com', '$2y$10$BqK4ApNJ/rgccP7CuHUISujfjUFcULZzN46bi7aO2WCOVxlJVebhG', 'Admin', '00-0000-000', '65341dc304b28_administrator.jpg'),
+('student', 'employee1', 'emp1@email.com', '$2y$10$xUgb9rZ4v5doeaa/trbAluhGGlgpCAQlI/RDbydsNH.DEvR/58pCe', 'BSCS', '10-8210-821', '659e85d191492_default.jpg'),
 ('headoffice', 'Mr. Marlo', 'marlo@reg.com', '$2y$10$OUVFQBByMdqt4ax7inGu..RZsJQpRv2lKfJ8Uno6flDy6OJDgJT7G', 'Registrar', '11-2222-333', '6531041397834_marlo.jpg'),
-('student', 'Clarence Fuertes', 'clarence@email.com', '$2y$10$.oWE8C8DyaEW3dR/WTrA4Oxe0Lm2nWRViiMBYOemBgKOH6oxc8C0u', 'BSCS', '22-0088-012', NULL),
-('student', 'darriel abalos', 'dar@email.com', '$2y$10$4K/bF08lcKXq67pEACGbHuay7bSFaNMvFBt1LNK.QdBN5Z8DG3yJy', 'BSCS', '22-4356-564', '6536ba1615bc1_stud1.jpg'),
-('student', 'Danyel Ferrari', 'danyel@email.com', '$2y$10$qz.GUxHIG3Xmf.NgsmY/P.Vf5Wp3o.ApoJOYZShpxGwC4lj7c4RfC', 'BSCS', '22-9856-345', '65349962ef009_ball.jpg'),
+('student', 'Clarence Fuertes', 'clarence@email.com', '$2y$10$Gb5S64vr.amA9ELDUYf5E.ywjsg2eFs7t.8/3dbmDJFC0Iy0WjLha', 'BSCS', '69-6699-420', NULL),
 ('placeholder', 'PlaceHolder', 'place@holder.com', 'placeholder', NULL, 'unassigned', NULL);
 
 --
@@ -106,7 +100,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- Constraints for dumped tables
